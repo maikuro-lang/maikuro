@@ -1,1 +1,58 @@
-var a = 1.100_f32;
+package demo.showcase;
+
+import maikuro.Delay;
+import platform.avr.atmega328;
+
+class Runner {
+    Int8 counter = 0;
+
+    fun increaseCounter() {
+        this.counter++;
+    }
+
+    fun run(): Int32 {
+        Pin11.mode(OUTPUT);
+
+        loop {
+            if (this.counter % 10 == 0) {
+               Pin11.level(HIGH);
+            } else {
+               Pin11.level(LOW);
+            }
+
+            this.increaseCounter();
+
+            Delay.ms(100);
+
+
+            var a = match (true) {
+                counter >= 100 => "Long",
+                counter < 50 => "Short",
+                default => "Bad",
+            };
+
+            Serial.println(a);
+        }
+
+        switch (foo) {
+
+            default:
+                foo = true;
+            break;
+            case bar:
+            case foo:
+                foo = true;
+            break;
+
+        }
+
+
+        return 0;
+    }
+}
+
+fun main(Int32 argc, String[] argv): Int32 {
+    var runner = new Runner();
+
+    return runner.run();
+}

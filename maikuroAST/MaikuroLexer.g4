@@ -91,7 +91,7 @@ ESCAPE_SEQUENCE
     | '\\u{' (HEX_LITERAL HEX_LITERAL? HEX_LITERAL? HEX_LITERAL? HEX_LITERAL? HEX_LITERAL?) '}'
     ;
 
-ARRAY_TYPE : '[]';
+//ARRAY_TYPE : '[]';
 ATTRIBUTE_PREFIX : '#[';
 
 // Separators
@@ -123,6 +123,9 @@ AND:                '&&';
 OR:                 '||';
 INC:                '++';
 DEC:                '--';
+LEFT_SHIFT:         '<<';
+RIGHT_SHIGT:        '>>';
+URIGHT_SHIGT:       '>>>';
 ADD:                '+';
 SUB:                '-';
 MUL:                '*';
