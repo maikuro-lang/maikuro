@@ -426,7 +426,7 @@ namespace MaikuroAst {
                 _updateExpressionList = Utils::create<ExpressionList>(ctx->expressionList(0));
             }
         } else {
-            _expressionList = Utils::create<ExpressionList>(ctx->expressionList(0));
+            _expressionList       = Utils::create<ExpressionList>(ctx->expressionList(0));
             _updateExpressionList = Utils::create<ExpressionList>(ctx->expressionList(1));
         }
     }

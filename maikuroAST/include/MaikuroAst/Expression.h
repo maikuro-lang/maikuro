@@ -30,6 +30,7 @@ namespace MaikuroAst {
     class ExpressionStatement : public Statement {
      public:
         ExpressionStatement(ExpressionPtr expression, TokenPtr semicolon);
+
         explicit ExpressionStatement(MaikuroParser::StatementContext* ctx);
 
         TokenPtrVec getTokens() override;

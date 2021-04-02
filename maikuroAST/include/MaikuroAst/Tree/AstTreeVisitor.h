@@ -21,76 +21,147 @@ namespace MaikuroAst::Tree {
         }
 
         virtual ReturnType visit(AliasDeclarationPtr node) = 0;
+
         virtual ReturnType visit(AnnotationPtr node) = 0;
+
         virtual ReturnType visit(AnnotationsPtr node) = 0;
+
         virtual ReturnType visit(ArgumentPtr node) = 0;
+
         virtual ReturnType visit(ArgumentsPtr node) = 0;
+
         virtual ReturnType visit(BlockPtr node) = 0;
+
         virtual ReturnType visit(SuperClassPtr node) = 0;
+
         virtual ReturnType visit(SuperInterfacesPtr node) = 0;
+
         virtual ReturnType visit(PropertyDeclarationPtr node) = 0;
+
         virtual ReturnType visit(MethodDeclarationPtr node) = 0;
+
         virtual ReturnType visit(AnnotationMemberPtr node) = 0;
+
         virtual ReturnType visit(ClassBodyPtr node) = 0;
+
         virtual ReturnType visit(ClassDeclarationPtr node) = 0;
+
         virtual ReturnType visit(ExpressionListPtr node) = 0;
+
         virtual ReturnType visit(PrimaryExpressionPtr node) = 0;
+
         virtual ReturnType visit(VariableNameExpressionPtr node) = 0;
+
         virtual ReturnType visit(ParExpresionPtr node) = 0;
+
         virtual ReturnType visit(MethodCallPtr node) = 0;
+
         virtual ReturnType visit(DotExpressionPtr node) = 0;
+
         virtual ReturnType visit(MethodCallExpressionPtr node) = 0;
+
         virtual ReturnType visit(NewDeclaratorExpressionPtr node) = 0;
+
         virtual ReturnType visit(SuffixExpressionPtr node) = 0;
+
         virtual ReturnType visit(PrefixExpressionPtr node) = 0;
+
         virtual ReturnType visit(BopExpressionPtr node) = 0;
+
         virtual ReturnType visit(TernaryExpressionPtr node) = 0;
+
         virtual ReturnType visit(MatchExpressionCasePtr node) = 0;
+
         virtual ReturnType visit(MatchExpressionPtr node) = 0;
+
         virtual ReturnType visit(FormalParameterPtr node) = 0;
+
         virtual ReturnType visit(FormalParameterListPtr node) = 0;
+
         virtual ReturnType visit(FormalParametersPtr node) = 0;
+
         virtual ReturnType visit(FunctionHeaderPtr node) = 0;
+
         virtual ReturnType visit(FunctionDeclarationPtr node) = 0;
+
         virtual ReturnType visit(NullLiteralPtr node) = 0;
+
         virtual ReturnType visit(BoolLiteralPtr node) = 0;
+
         virtual ReturnType visit(NumberLiteralPtr node) = 0;
+
         virtual ReturnType visit(CharLiteralPtr node) = 0;
+
         virtual ReturnType visit(StringLiteralPtr node) = 0;
+
         virtual ReturnType visit(IdentifierPtr node) = 0;
+
         virtual ReturnType visit(TypeIdentifierPtr node) = 0;
+
         virtual ReturnType visit(VisibilityModifierPtr node) = 0;
+
         virtual ReturnType visit(PackageNamePtr node) = 0;
+
         virtual ReturnType visit(PackageDeclarationPtr node) = 0;
+
         virtual ReturnType visit(ImportDeclarationPtr node) = 0;
+
         virtual ReturnType visit(SourceFilePtr node) = 0;
+
         virtual ReturnType visit(ReturnStatementPtr node) = 0;
+
         virtual ReturnType visit(ThrowStatementPtr node) = 0;
+
         virtual ReturnType visit(BreakStatementPtr node) = 0;
+
         virtual ReturnType visit(ContinueStatementPtr node) = 0;
+
         virtual ReturnType visit(IfStatementPtr node) = 0;
+
         virtual ReturnType visit(UnlessStatementPtr node) = 0;
+
         virtual ReturnType visit(WhileStatementPtr node) = 0;
+
         virtual ReturnType visit(UntilStatementPtr node) = 0;
+
         virtual ReturnType visit(LoopStatementPtr node) = 0;
+
         virtual ReturnType visit(DoWhileStatementPtr node) = 0;
+
         virtual ReturnType visit(ForControlPtr node) = 0;
+
         virtual ReturnType visit(ForStatementPtr node) = 0;
+
         virtual ReturnType visit(ForeachControlPtr node) = 0;
+
         virtual ReturnType visit(ForeachStatementPtr node) = 0;
+
         virtual ReturnType visit(CatchClausePtr node) = 0;
+
         virtual ReturnType visit(FinallyBlockPtr node) = 0;
+
         virtual ReturnType visit(TryStatementPtr node) = 0;
+
         virtual ReturnType visit(SwitchLabelPtr node) = 0;
+
         virtual ReturnType visit(SwitchBlockStatementGroupPtr node) = 0;
+
         virtual ReturnType visit(SwitchStatementPtr node) = 0;
+
         virtual ReturnType visit(TokenPtr node) = 0;
+
         virtual ReturnType visit(TypePtr node) = 0;
+
         virtual ReturnType visit(TypeDeclarationPtr node) = 0;
+
         virtual ReturnType visit(VariableNamePtr node) = 0;
+
         virtual ReturnType visit(VariableNameDeclarationPtr node) = 0;
+
         virtual ReturnType visit(VariableDeclarationExpressionPtr node) = 0;
+
         virtual ReturnType visit(VariableDeclarationPtr node) = 0;
+
         virtual ReturnType visit(ExpressionStatementPtr node) = 0;
 
         ReturnType visit(ClassMemberPtr node) {

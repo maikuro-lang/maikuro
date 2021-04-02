@@ -116,6 +116,7 @@ namespace MaikuroAst {
         const ExpressionPtr& getExpression() const;
 
         const TokenPtr& getColon() const;
+
      private:
         AnnotationsPtrVec     _annotations;
         VisibilityModifierPtr _visibility;

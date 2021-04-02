@@ -3,6 +3,7 @@
 #include "MaikuroAst/ExpressionBuilder.h"
 #include "MaikuroAst/Literals.h"
 #include "MaikuroAst/Token.h"
+
 namespace MaikuroAst {
     Argument::Argument(IdentifierPtr identifier, TokenPtr colon, ExpressionPtr expression)
         : _identifier(identifier), _colon(colon), _expression(expression) {

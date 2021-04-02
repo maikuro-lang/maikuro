@@ -10,7 +10,7 @@ namespace MaikuroAst {
     using antlr4::tree::ParseTree;
     using antlr4::tree::TerminalNode;
 
- class Token : public AstNode, std::enable_shared_from_this<Token> {
+    class Token : public AstNode, std::enable_shared_from_this<Token> {
      public:
         enum Type {
             PACKAGE                = 1,
@@ -122,6 +122,16 @@ namespace MaikuroAst {
             IDENTIFIER             = 107
         };
 
+        enum TokenType {
+            T_KEYWORD,
+            T_LITERAL,
+            T_SEPARATOR,
+            T_OPERATOR,
+            T_WHITESPACE,
+            T_IDENTIFIER,
+            T_UNKNOWN,
+        };
+
         Token(
             Type type,
             const string& text,
@@ -131,11 +141,13 @@ namespace MaikuroAst {
 
         Type getType() const;
 
-        const char* getTypeString();
+        const char* getTokenName();
 
         int getPosition() const;
 
         NodeType getNodeType() override;
+
+        TokenType getTokenType();
 
         string toString() override;
 
@@ -143,11 +155,9 @@ namespace MaikuroAst {
 
         const string& getValue() const;
 
-     string getNodeName() override;
+        int getLine() override;
 
-     int getLine() override;
-
-     static void mergeTokens(vector<shared_ptr<Token>>* left, vector<shared_ptr<Token>> right);
+        static void mergeTokens(vector<shared_ptr<Token>>* left, vector<shared_ptr<Token>> right);
 
         static shared_ptr<Token> createToken(TerminalNode* token);
 

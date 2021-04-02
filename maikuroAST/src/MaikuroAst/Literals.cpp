@@ -1,5 +1,6 @@
 #include "MaikuroAst/Literals.h"
 #include "MaikuroAst/Token.h"
+
 namespace MaikuroAst {
 
     Literal::Literal(TokenPtr token) : _token(token) {

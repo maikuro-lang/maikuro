@@ -130,7 +130,7 @@ namespace MaikuroAst {
     }
 
     TokenPtrVec ImportDeclaration::getTokens() {
-        TokenPtrVec tokens = { _importToken };
+        TokenPtrVec tokens          = { _importToken };
         TokenPtrVec statementTokens = Statement::getTokens();
 
         Token::mergeTokens(&tokens, _packageName->getTokens());

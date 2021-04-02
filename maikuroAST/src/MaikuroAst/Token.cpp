@@ -10,7 +10,7 @@ namespace MaikuroAst {
         return _type;
     }
 
-    const char* Token::getTypeString() {
+    const char* Token::getTokenName() {
         switch (_type) {
             case Type::PACKAGE:
                 return "PACKAGE";
@@ -352,14 +352,132 @@ namespace MaikuroAst {
     }
 
     TokenPtrVec Token::getTokens() {
-        return TokenPtrVec({shared_from_this()});
+        return TokenPtrVec({ shared_from_this() });
     }
 
-    string Token::getNodeName() {
-//        string nodeName = "TOKEN[";
-//        nodeName += getTypeString();
-//        nodeName += "]";
+    Token::TokenType Token::getTokenType() {
+        switch (getType()) {
+            case Token::Type::PACKAGE:
+            case Token::Type::IMPORT:
+            case Token::Type::AS:
+            case Token::Type::CLASS:
+            case Token::Type::INTERFACE:
+            case Token::Type::EXTENDS:
+            case Token::Type::IMPLEMENTS:
+            case Token::Type::FUN:
+            case Token::Type::VAR:
+            case Token::Type::CONST:
+            case Token::Type::IF:
+            case Token::Type::UNLESS:
+            case Token::Type::ELSE:
+            case Token::Type::ELSEIF:
+            case Token::Type::ENUM:
+            case Token::Type::NEW:
+            case Token::Type::FOR:
+            case Token::Type::FOREACH:
+            case Token::Type::LOOP:
+            case Token::Type::UNTIL:
+            case Token::Type::WHILE:
+            case Token::Type::SWITCH:
+            case Token::Type::MATCH:
+            case Token::Type::CASE:
+            case Token::Type::DEFAULT:
+            case Token::Type::DO:
+            case Token::Type::PUBLIC:
+            case Token::Type::PROTECTED:
+            case Token::Type::PRIVATE:
+            case Token::Type::ABSTRACT:
+            case Token::Type::STATIC:
+            case Token::Type::FINAL:
+            case Token::Type::ALIAS:
+            case Token::Type::THIS:
+            case Token::Type::SUPER:
+            case Token::Type::RETURN:
+            case Token::Type::THROW:
+            case Token::Type::BREAK:
+            case Token::Type::CONTINUE:
+            case Token::Type::TRY:
+            case Token::Type::CATCH:
+            case Token::Type::FINALLY:
+                return TokenType::T_KEYWORD;
 
-        return AstNode::getNodeName();
+            case Token::Type::NULL_LITERAL:
+            case Token::Type::BOOL_LITERAL:
+            case Token::Type::NUMBER_LITERAL:
+            case Token::Type::CHAR_LITERAL:
+            case Token::Type::STRING_LITERAL:
+            case Token::Type::ESCAPE_SEQUENCE_CHAR:
+            case Token::Type::ESCAPE_SEQUENCE_STRING:
+            case Token::Type::ESCAPE_SEQUENCE:
+                return TokenType::T_LITERAL;
+
+            case Token::Type::ATTRIBUTE_PREFIX:
+            case Token::Type::LPAREN:
+            case Token::Type::RPAREN:
+            case Token::Type::LBRACE:
+            case Token::Type::RBRACE:
+            case Token::Type::LBRACK:
+            case Token::Type::RBRACK:
+            case Token::Type::SEMI:
+            case Token::Type::COMMA:
+            case Token::Type::DOT:
+                return TokenType::T_SEPARATOR;
+
+            case Token::Type::ASSIGN:
+            case Token::Type::GT:
+            case Token::Type::LT:
+            case Token::Type::BANG:
+            case Token::Type::TILDE:
+            case Token::Type::QUESTION:
+            case Token::Type::COLON:
+            case Token::Type::EQUAL:
+            case Token::Type::LE:
+            case Token::Type::GE:
+            case Token::Type::NOTEQUAL:
+            case Token::Type::AND:
+            case Token::Type::OR:
+            case Token::Type::INC:
+            case Token::Type::DEC:
+            case Token::Type::LEFT_SHIFT:
+            case Token::Type::RIGHT_SHIGT:
+            case Token::Type::URIGHT_SHIGT:
+            case Token::Type::ADD:
+            case Token::Type::SUB:
+            case Token::Type::MUL:
+            case Token::Type::DIV:
+            case Token::Type::BITAND:
+            case Token::Type::BITOR:
+            case Token::Type::CARET:
+            case Token::Type::MOD:
+            case Token::Type::ADD_ASSIGN:
+            case Token::Type::SUB_ASSIGN:
+            case Token::Type::MUL_ASSIGN:
+            case Token::Type::DIV_ASSIGN:
+            case Token::Type::AND_ASSIGN:
+            case Token::Type::OR_ASSIGN:
+            case Token::Type::XOR_ASSIGN:
+            case Token::Type::MOD_ASSIGN:
+            case Token::Type::LSHIFT_ASSIGN:
+            case Token::Type::RSHIFT_ASSIGN:
+            case Token::Type::URSHIFT_ASSIGN:
+            case Token::Type::DOUBLE_ARROW:
+            case Token::Type::ARROW:
+            case Token::Type::COLONCOLON:
+            case Token::Type::AT:
+            case Token::Type::ELLIPSIS:
+                return TokenType::T_OPERATOR;
+
+            case Token::Type::WS:
+            case Token::Type::COMMENT:
+            case Token::Type::LINE_COMMENT:
+                return TokenType::T_WHITESPACE;
+
+            case Token::Type::IDENTIFIER:
+            case Token::Type::TYPE_IDENTIFIER:
+                return TokenType::T_IDENTIFIER;
+
+            default:
+                return T_UNKNOWN;
+        }
     }
 }

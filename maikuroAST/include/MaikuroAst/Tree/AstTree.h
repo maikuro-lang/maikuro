@@ -7,12 +7,16 @@ namespace MaikuroAst::Tree {
 
     class AstTree;
     typedef shared_ptr<AstTree> AstTreePtr;
-    typedef vector<AstTreePtr> AstTreePtrVec;
+    typedef vector<AstTreePtr>  AstTreePtrVec;
 
     class AstTree {
      public:
-        AstTree(AstNodePtr head, AstTreePtrVec children) : _head(head), _children(children) {}
-        AstTree(AstNodePtr head) : AstTree(head, AstTreePtrVec{}) {}
+        AstTree(AstNodePtr head, AstTreePtrVec children) : _head(head), _children(children) {
+        }
+
+        AstTree(AstNodePtr head) : AstTree(head, AstTreePtrVec{}) {
+        }
+
         AstTree(AstNodePtr head, AstTreePtr children) : AstTree(head) {
             add(children);
         }
@@ -44,8 +48,9 @@ namespace MaikuroAst::Tree {
         AstTreePtrVec getChildren() {
             return _children;
         }
+
      private:
-        AstNodePtr _head;
+        AstNodePtr    _head;
         AstTreePtrVec _children;
     };
 }
