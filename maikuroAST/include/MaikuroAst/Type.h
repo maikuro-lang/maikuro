@@ -6,7 +6,12 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class Type : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
+    class Type : public AstNode {
      public:
         Type(
             TypeIdentifierPtr typeIdentifier,
@@ -30,6 +35,18 @@ namespace MaikuroAst {
 
         bool hasArraySize();
 
+        AstNode::NodeType getNodeType() override;
+
+        const TypeIdentifierPtr& getTypeIdentifier() const;
+
+        const TokenPtr& getOpenBrace() const;
+
+        const NumberLiteralPtr& getArraySize() const;
+
+        const TokenPtr& getCloseBrace() const;
+
+        const TokenPtr& getQuestionMark() const;
+
      private:
         TypeIdentifierPtr _typeIdentifier;
         TokenPtr          _openBrace;
@@ -38,23 +55,29 @@ namespace MaikuroAst {
         TokenPtr          _questionMark;
     };
 
-    typedef shared_ptr<Type>            TypePtr;
-    typedef vector<TypePtr>             TypePtrVec;
+    typedef shared_ptr<Type> TypePtr;
+    typedef vector<TypePtr>  TypePtrVec;
 
-    class TypeDeclaration : public MaikuroAst::AstNode {
+    class TypeDeclaration : public AstNode {
      public:
         TypeDeclaration(TypePtrVec types, TokenPtrVec pipes);
 
         explicit TypeDeclaration(MaikuroParser::TypeDeclarationContext* ctx);
 
-        TokenPtrVec getTokens() override;
-
         int getLine() override;
 
         string toString() override;
 
+        TokenPtrVec getTokens() override;
+
+        NodeType getNodeType() override;
+
+        const TypePtrVec& getTypes() const;
+
+        const TokenPtrVec& getPipes() const;
+
      private:
-        TypePtrVec              _types;
+        TypePtrVec  _types;
         TokenPtrVec _pipes;
     };
 

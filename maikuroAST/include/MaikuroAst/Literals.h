@@ -5,7 +5,12 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class Literal : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
+    class Literal : public AstNode {
      public:
         explicit Literal(TokenPtr token);
 
@@ -14,6 +19,8 @@ namespace MaikuroAst {
         TokenPtrVec getTokens() override;
 
         TokenPtr getToken();
+
+        NodeType getNodeType() override;
 
         string getValue();
 
@@ -33,6 +40,8 @@ namespace MaikuroAst {
         explicit NullLiteral(TokenPtr token);
 
         explicit NullLiteral(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<NullLiteral> NullLiteralPtr;
@@ -42,6 +51,8 @@ namespace MaikuroAst {
         explicit BoolLiteral(TokenPtr token);
 
         explicit BoolLiteral(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<BoolLiteral> BoolLiteralPtr;
@@ -51,6 +62,8 @@ namespace MaikuroAst {
         explicit NumberLiteral(TokenPtr token);
 
         explicit NumberLiteral(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<NumberLiteral> NumberLiteralPtr;
@@ -60,6 +73,8 @@ namespace MaikuroAst {
         explicit CharLiteral(TokenPtr token);
 
         explicit CharLiteral(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<CharLiteral> CharLiteralPtr;
@@ -69,6 +84,8 @@ namespace MaikuroAst {
         explicit StringLiteral(TokenPtr token);
 
         explicit StringLiteral(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<StringLiteral> StringLiteralPtr;
@@ -78,6 +95,8 @@ namespace MaikuroAst {
         explicit Identifier(TokenPtr token);
 
         explicit Identifier(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<Identifier> IdentifierPtr;
@@ -88,6 +107,8 @@ namespace MaikuroAst {
         explicit TypeIdentifier(TokenPtr token);
 
         explicit TypeIdentifier(antlr4::tree::TerminalNode* node);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<TypeIdentifier> TypeIdentifierPtr;
@@ -98,6 +119,8 @@ namespace MaikuroAst {
         explicit VisibilityModifier(TokenPtr token);
 
         explicit VisibilityModifier(MaikuroParser::VisibilityModifierContext* ctx);
+
+        NodeType getNodeType() override;
     };
 
     typedef shared_ptr<VisibilityModifier> VisibilityModifierPtr;

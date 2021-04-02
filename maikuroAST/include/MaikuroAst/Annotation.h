@@ -6,9 +6,14 @@
 #include "Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
     class Arguments;
 
-    typedef shared_ptr<Arguments>   ArgumentsPtr;
+    typedef shared_ptr<Arguments> ArgumentsPtr;
 
     class Annotation : public AstNode {
      public:
@@ -22,13 +27,19 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TypeIdentifierPtr& getTypeIdentifier() const;
+
+        const ArgumentsPtr& getArguments() const;
+
      private:
         TypeIdentifierPtr _typeIdentifier;
         ArgumentsPtr      _arguments;
     };
 
-    typedef shared_ptr<Annotation>  AnnotationPtr;
-    typedef vector<AnnotationPtr>   AnnotationPtrVec;
+    typedef shared_ptr<Annotation> AnnotationPtr;
+    typedef vector<AnnotationPtr>  AnnotationPtrVec;
 
     class Annotations : public AstNode {
      public:
@@ -41,6 +52,16 @@ namespace MaikuroAst {
         string toString() override;
 
         TokenPtrVec getTokens() override;
+
+        NodeType getNodeType() override;
+
+        const TokenPtr& getPrefix() const;
+
+        const AnnotationPtrVec& getAnnotations() const;
+
+        const TokenPtrVec& getCommas() const;
+
+        const TokenPtr& getCloseBracket() const;
 
      private:
         TokenPtr         _prefix;

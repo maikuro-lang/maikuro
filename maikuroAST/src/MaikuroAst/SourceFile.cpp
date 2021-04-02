@@ -60,4 +60,24 @@ namespace MaikuroAst {
 
         return out;
     }
+
+    const AnnotationsPtrVec& SourceFile::getAnnotations() const {
+        return _annotations;
+    }
+
+    const PackageDeclarationPtr& SourceFile::getPackageDeclaration() const {
+        return _packageDeclaration;
+    }
+
+    const ImportDeclarationPtrVec& SourceFile::getImportDeclarations() const {
+        return _importDeclarations;
+    }
+
+    const StatementPtrVec& SourceFile::getStatements() const {
+        return _statements;
+    }
+
+    AstNode::NodeType SourceFile::getNodeType() {
+        return NodeType::SOURCE_FILE;
+    }
 }

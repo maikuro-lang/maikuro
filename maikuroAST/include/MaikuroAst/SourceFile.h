@@ -8,7 +8,12 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class SourceFile : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
+    class SourceFile : public AstNode {
      public:
         SourceFile(
             AnnotationsPtrVec annotations,
@@ -19,17 +24,27 @@ namespace MaikuroAst {
 
         explicit SourceFile(MaikuroParser::SourceFileContext* ctx);
 
-        TokenPtrVec getTokens() override;
-
         int getLine() override;
 
         string toString() override;
+
+        TokenPtrVec getTokens() override;
+
+        NodeType getNodeType() override;
+
+        const AnnotationsPtrVec& getAnnotations() const;
+
+        const PackageDeclarationPtr& getPackageDeclaration() const;
+
+        const ImportDeclarationPtrVec& getImportDeclarations() const;
+
+        const StatementPtrVec& getStatements() const;
 
      private:
         AnnotationsPtrVec       _annotations;
         PackageDeclarationPtr   _packageDeclaration;
         ImportDeclarationPtrVec _importDeclarations;
-        StatementPtrVec                     _statements;
+        StatementPtrVec         _statements;
     };
 
     typedef shared_ptr<SourceFile> SourceFilePtr;

@@ -72,7 +72,7 @@ namespace MaikuroAst {
         }
 
         if (ctx->statementExpression) {
-            return MaikuroAst::eb_createExpression(ctx->statementExpression);
+            return Utils::create<ExpressionStatement>(ctx);
         }
 
         if (ctx->variableDeclaration()) {

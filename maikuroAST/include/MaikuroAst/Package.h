@@ -7,25 +7,38 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class PackageName : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
+    class PackageName : public AstNode {
      public:
         PackageName(IdentifierPtrVec identifiers, TypeIdentifierPtr typeIdentifier, TokenPtrVec dots);
 
         explicit PackageName(MaikuroParser::PackageNameContext* ctx);
 
-        TokenPtrVec getTokens() override;
-
         int getLine() override;
 
         string toString() override;
 
+        TokenPtrVec getTokens() override;
+
+        NodeType getNodeType() override;
+
+        const IdentifierPtrVec& getIdentifiers() const;
+
+        const TypeIdentifierPtr& getTypeIdentifier() const;
+
+        const TokenPtrVec& getDots() const;
+
      private:
         IdentifierPtrVec  _identifiers;
         TypeIdentifierPtr _typeIdentifier;
-        TokenPtrVec                   _dots;
+        TokenPtrVec       _dots;
     };
 
-    typedef shared_ptr<PackageName>        PackageNamePtr;
+    typedef shared_ptr<PackageName> PackageNamePtr;
 
     class PackageDeclaration : public Statement {
      public:
@@ -33,15 +46,17 @@ namespace MaikuroAst {
 
         PackageDeclaration(MaikuroParser::PackageDeclarationContext* ctx);
 
-        TokenPtrVec getTokens() override;
-
-        TokenPtr getPackageToken() const;
-
-        PackageNamePtr getPackageName() const;
-
         int getLine() override;
 
         string toString() override;
+
+        TokenPtrVec getTokens() override;
+
+        NodeType getNodeType() override;
+
+        const TokenPtr& getPackageToken() const;
+
+        const PackageNamePtr& getPackageName() const;
 
      private:
         TokenPtr       _packageToken;
@@ -62,24 +77,30 @@ namespace MaikuroAst {
 
         explicit ImportDeclaration(MaikuroParser::ImportDeclarationContext* ctx);
 
-        TokenPtrVec getTokens() override;
-
-        PackageNamePtr getPackageName() const;
-
-        TypeIdentifierPtr getAlias() const;
-
         int getLine() override;
 
         string toString() override;
 
+        TokenPtrVec getTokens() override;
+
+        const TokenPtr& getImportToken() const;
+
+        const TokenPtr& getAsToken() const;
+
+        NodeType getNodeType() override;
+
+        const PackageNamePtr& getPackageName() const;
+
+        const TypeIdentifierPtr& getAlias() const;
+
      private:
         TokenPtr          _importToken;
         PackageNamePtr    _packageName;
-        TokenPtr                      _asToken;
+        TokenPtr          _asToken;
         TypeIdentifierPtr _alias;
     };
 
-    typedef shared_ptr<ImportDeclaration>  ImportDeclarationPtr;
-    typedef vector<ImportDeclarationPtr>   ImportDeclarationPtrVec;
+    typedef shared_ptr<ImportDeclaration> ImportDeclarationPtr;
+    typedef vector<ImportDeclarationPtr>  ImportDeclarationPtrVec;
 }
 

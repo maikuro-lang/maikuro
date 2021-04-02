@@ -57,4 +57,28 @@ namespace MaikuroAst {
     string AliasDeclaration::toString() {
         return Token::toString(getTokens());
     }
+
+    const AnnotationsPtrVec& AliasDeclaration::getAnnotations() const {
+        return _annotations;
+    }
+
+    const TokenPtr& AliasDeclaration::getAliasToken() const {
+        return _aliasToken;
+    }
+
+    const TypePtr& AliasDeclaration::getType() const {
+        return _type;
+    }
+
+    const TokenPtr& AliasDeclaration::getAssignToken() const {
+        return _assignToken;
+    }
+
+    const TypeDeclarationPtr& AliasDeclaration::getTypeDeclaration() const {
+        return _typeDeclaration;
+    }
+
+    AstNode::NodeType AliasDeclaration::getNodeType() {
+        return NodeType::ALIAS_DECLARATION;
+    }
 }

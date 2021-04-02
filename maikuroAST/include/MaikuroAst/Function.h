@@ -10,7 +10,12 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class FormalParameter : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
+    class FormalParameter : public AstNode {
      public:
         FormalParameter(TypePtr type, TokenPtr variadic, IdentifierPtr identifier);
 
@@ -24,16 +29,24 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TypePtr& getType() const;
+
+        const TokenPtr& getVariadic() const;
+
+        const IdentifierPtr& getIdentifier() const;
+
      private:
         TypePtr       _type;
         TokenPtr      _variadic;
         IdentifierPtr _identifier;
     };
 
-    typedef shared_ptr<FormalParameter>     FormalParameterPtr;
-    typedef vector<FormalParameterPtr>      FormalParameterPtrVec;
+    typedef shared_ptr<FormalParameter> FormalParameterPtr;
+    typedef vector<FormalParameterPtr>  FormalParameterPtrVec;
 
-    class FormalParameterList : public MaikuroAst::AstNode {
+    class FormalParameterList : public AstNode {
      public:
         FormalParameterList(FormalParameterPtrVec parameters, TokenPtrVec commas);
 
@@ -47,6 +60,12 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const FormalParameterPtrVec& getParameters() const;
+
+        const TokenPtrVec& getCommas() const;
+
      private:
         FormalParameterPtrVec _parameters;
         TokenPtrVec           _commas;
@@ -55,7 +74,7 @@ namespace MaikuroAst {
     typedef shared_ptr<FormalParameterList> FormalParameterListPtr;
     typedef vector<FormalParameterListPtr>  FormalParameterListPtrVec;
 
-    class FormalParameters : public MaikuroAst::AstNode {
+    class FormalParameters : public AstNode {
      public:
         FormalParameters(TokenPtr leftPar, FormalParameterListPtr parameters, TokenPtr rightPar);
 
@@ -69,16 +88,24 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TokenPtr& getLeftPar() const;
+
+        const FormalParameterListPtr& getParameters() const;
+
+        const TokenPtr& getRightPar() const;
+
      private:
         TokenPtr               _leftPar;
         FormalParameterListPtr _parameters;
         TokenPtr               _rightPar;
     };
 
-    typedef shared_ptr<FormalParameters>    FormalParametersPtr;
-    typedef vector<FormalParametersPtr>     FormalParametersPtrVec;
+    typedef shared_ptr<FormalParameters> FormalParametersPtr;
+    typedef vector<FormalParametersPtr>  FormalParametersPtrVec;
 
-    class FunctionHeader : public MaikuroAst::AstNode {
+    class FunctionHeader : public AstNode {
      public:
         FunctionHeader(
             TokenPtr fun,
@@ -96,6 +123,18 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TokenPtr& getFun() const;
+
+        const IdentifierPtr& getIdentifier() const;
+
+        const FormalParametersPtr& getParameters() const;
+
+        const TokenPtr& getColon() const;
+
+        const TypePtr& getReturnType() const;
+
      private:
         TokenPtr            _fun;
         IdentifierPtr       _identifier;
@@ -104,8 +143,8 @@ namespace MaikuroAst {
         TypePtr             _returnType;
     };
 
-    typedef shared_ptr<FunctionHeader>      FunctionHeaderPtr;
-    typedef vector<FunctionHeaderPtr>       FunctionHeaderPtrVec;
+    typedef shared_ptr<FunctionHeader> FunctionHeaderPtr;
+    typedef vector<FunctionHeaderPtr>  FunctionHeaderPtrVec;
 
     class FunctionDeclaration : public Statement {
      public:
@@ -119,13 +158,21 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const AnnotationsPtrVec& getAnnotations() const;
+
+        const FunctionHeaderPtr& getFunctionHeader() const;
+
+        const BlockPtr& getBlock() const;
+
      private:
         AnnotationsPtrVec _annotations;
-        FunctionHeaderPtr    _functionHeader;
-        BlockPtr _block;
+        FunctionHeaderPtr _functionHeader;
+        BlockPtr          _block;
     };
 
-    typedef shared_ptr<FunctionDeclaration> FunctionPtr;
-    typedef vector<FunctionPtr>             FunctionPtrVec;
+    typedef shared_ptr<FunctionDeclaration> FunctionDeclarationPtr;
+    typedef vector<FunctionDeclarationPtr>  FunctionDeclarationPtrVec;
 }
 

@@ -40,6 +40,18 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& VariableName::getAtSign() const {
+        return _atSign;
+    }
+
+    const IdentifierPtr& VariableName::getIdentifier() const {
+        return _identifier;
+    }
+
+    AstNode::NodeType VariableName::getNodeType() {
+        return NodeType::VARIABLE_NAME;
+    }
+
     VariableNameDeclaration::VariableNameDeclaration(
         TypeDeclarationPtr typeDeclaration,
         VariableNamePtr variableName
@@ -75,6 +87,18 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, _variableName->getTokens());
 
         return tokens;
+    }
+
+    const TypeDeclarationPtr& VariableNameDeclaration::getTypeDeclaration() const {
+        return _typeDeclaration;
+    }
+
+    const VariableNamePtr& VariableNameDeclaration::getVariableName() const {
+        return _variableName;
+    }
+
+    AstNode::NodeType VariableNameDeclaration::getNodeType() {
+        return NodeType::VARIABLE_NAME_DECLARATION;
     }
 
     VariableDeclarationExpression::VariableDeclarationExpression(
@@ -120,6 +144,26 @@ namespace MaikuroAst {
         }
 
         return tokens;
+    }
+
+    const TokenPtr& VariableDeclarationExpression::getSemicolon() const {
+        return _semicolon;
+    }
+
+    const TokenPtr& VariableDeclarationExpression::getAssign() const {
+        return _assign;
+    }
+
+    const ExpressionPtrVec& VariableDeclarationExpression::getExpressions() const {
+        return _expressions;
+    }
+
+    const TokenPtrVec& VariableDeclarationExpression::getCommas() const {
+        return _commas;
+    }
+
+    AstNode::NodeType VariableDeclarationExpression::getNodeType() {
+        return NodeType::VARIABLE_DECLARATION_EXPRESSION;
     }
 
     VariableDeclaration::VariableDeclaration(
@@ -177,5 +221,29 @@ namespace MaikuroAst {
 
     string VariableDeclaration::toString() {
         return Token::toString(getTokens());
+    }
+
+    const AnnotationsPtrVec& VariableDeclaration::getAnnotations() const {
+        return _annotations;
+    }
+
+    const TokenPtr& VariableDeclaration::getVar() const {
+        return _var;
+    }
+
+    const VariableNameDeclarationPtrVec& VariableDeclaration::getVariableNames() const {
+        return _variableNames;
+    }
+
+    const TokenPtrVec& VariableDeclaration::getSeparators() const {
+        return _separators;
+    }
+
+    const VariableDeclarationExpressionPtr& VariableDeclaration::getExpressions() const {
+        return _expressions;
+    }
+
+    AstNode::NodeType VariableDeclaration::getNodeType() {
+        return NodeType::VARIABLE_DECLARATION;
     }
 }

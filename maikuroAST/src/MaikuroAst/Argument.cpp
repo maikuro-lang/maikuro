@@ -4,8 +4,8 @@
 #include "MaikuroAst/Literals.h"
 #include "MaikuroAst/Token.h"
 namespace MaikuroAst {
-    Argument::Argument(IdentifierPtr identifier, TokenPtr semicolon, ExpressionPtr expression)
-        : _identifier(identifier), _semicolon(semicolon), _expression(expression) {
+    Argument::Argument(IdentifierPtr identifier, TokenPtr colon, ExpressionPtr expression)
+        : _identifier(identifier), _colon(colon), _expression(expression) {
     }
 
     Argument::Argument(MaikuroParser::ArgumentContext* ctx) : Argument(
@@ -28,12 +28,28 @@ namespace MaikuroAst {
 
         if (_identifier) {
             tokens.push_back(_identifier->getToken());
-            tokens.push_back(_semicolon);
+            tokens.push_back(_colon);
         }
 
         Token::mergeTokens(&tokens, _expression->getTokens());
 
         return tokens;
+    }
+
+    const IdentifierPtr& Argument::getIdentifier() const {
+        return _identifier;
+    }
+
+    const TokenPtr& Argument::getColon() const {
+        return _colon;
+    }
+
+    const ExpressionPtr& Argument::getExpression() const {
+        return _expression;
+    }
+
+    AstNode::NodeType Argument::getNodeType() {
+        return NodeType::ARGUMENT;
     }
 
     Arguments::Arguments(
@@ -78,5 +94,25 @@ namespace MaikuroAst {
         tokens.push_back(_closeBrace);
 
         return tokens;
+    }
+
+    const TokenPtr& Arguments::getOpenBrace() const {
+        return _openBrace;
+    }
+
+    const ArgumentPtrVec& Arguments::getArguments() const {
+        return _arguments;
+    }
+
+    const TokenPtrVec& Arguments::getCommas() const {
+        return _commas;
+    }
+
+    const TokenPtr& Arguments::getCloseBrace() const {
+        return _closeBrace;
+    }
+
+    AstNode::NodeType Arguments::getNodeType() {
+        return NodeType::ARGUMENTS;
     }
 }

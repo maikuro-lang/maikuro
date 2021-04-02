@@ -48,6 +48,22 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const IdentifierPtrVec& PackageName::getIdentifiers() const {
+        return _identifiers;
+    }
+
+    const TypeIdentifierPtr& PackageName::getTypeIdentifier() const {
+        return _typeIdentifier;
+    }
+
+    const TokenPtrVec& PackageName::getDots() const {
+        return _dots;
+    }
+
+    AstNode::NodeType PackageName::getNodeType() {
+        return NodeType::PACKAGE_NAME;
+    }
+
     PackageDeclaration::PackageDeclaration(
         TokenPtr packageToken,
         PackageNamePtr packageName,
@@ -74,11 +90,11 @@ namespace MaikuroAst {
         return tokens;
     }
 
-    TokenPtr PackageDeclaration::getPackageToken() const {
+    const TokenPtr& PackageDeclaration::getPackageToken() const {
         return _packageToken;
     }
 
-    PackageNamePtr PackageDeclaration::getPackageName() const {
+    const PackageNamePtr& PackageDeclaration::getPackageName() const {
         return _packageName;
     }
 
@@ -88,6 +104,10 @@ namespace MaikuroAst {
 
     string PackageDeclaration::toString() {
         return _packageToken->toString() + " " + _packageName->toString() + Statement::toString();
+    }
+
+    AstNode::NodeType PackageDeclaration::getNodeType() {
+        return NodeType::PACKAGE_DECLARATION;
     }
 
     ImportDeclaration::ImportDeclaration(
@@ -126,11 +146,11 @@ namespace MaikuroAst {
         return tokens;
     }
 
-    PackageNamePtr ImportDeclaration::getPackageName() const {
+    const PackageNamePtr& ImportDeclaration::getPackageName() const {
         return _packageName;
     }
 
-    TypeIdentifierPtr ImportDeclaration::getAlias() const {
+    const TypeIdentifierPtr& ImportDeclaration::getAlias() const {
         return _alias;
     }
 
@@ -146,5 +166,17 @@ namespace MaikuroAst {
         }
 
         return out + Statement::toString();
+    }
+
+    AstNode::NodeType ImportDeclaration::getNodeType() {
+        return NodeType::IMPORT_DECLARATION;
+    }
+
+    const TokenPtr& ImportDeclaration::getImportToken() const {
+        return _importToken;
+    }
+
+    const TokenPtr& ImportDeclaration::getAsToken() const {
+        return _asToken;
     }
 }

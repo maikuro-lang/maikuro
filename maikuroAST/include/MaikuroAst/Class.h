@@ -13,7 +13,12 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class SuperClass : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+    using MaikuroGrammar::MaikuroParser;
+
+    class SuperClass : public AstNode {
      public:
         SuperClass(TokenPtr extendsToken, TypeIdentifierPtr className);
 
@@ -25,14 +30,20 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TokenPtr& getExtendsToken() const;
+
+        const TypeIdentifierPtr& getClassName() const;
+
      private:
         TokenPtr          _extendsToken;
         TypeIdentifierPtr _className;
     };
 
-    typedef shared_ptr<SuperClass>      SuperClassPtr;
+    typedef shared_ptr<SuperClass> SuperClassPtr;
 
-    class SuperInterfaces : public MaikuroAst::AstNode {
+    class SuperInterfaces : public AstNode {
      public:
         SuperInterfaces(
             TokenPtr implementsToken,
@@ -48,6 +59,14 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TokenPtr& getImplementsToken() const;
+
+        const TypeIdentifierPtrVec& getInterfaceNames() const;
+
+        const TokenPtrVec& getCommas() const;
+
      private:
         TokenPtr             _implementsToken;
         TypeIdentifierPtrVec _interfaceNames;
@@ -56,11 +75,11 @@ namespace MaikuroAst {
 
     typedef shared_ptr<SuperInterfaces> SuperInterfacesPtr;
 
-    class ClassMember : public MaikuroAst::AstNode {
+    class ClassMember : public AstNode {
     };
 
-    typedef shared_ptr<ClassMember>         ClassMemberPtr;
-    typedef vector<ClassMemberPtr>          ClassMemberPtrVec;
+    typedef shared_ptr<ClassMember> ClassMemberPtr;
+    typedef vector<ClassMemberPtr>  ClassMemberPtrVec;
 
     class PropertyDeclaration : public ClassMember {
      public:
@@ -82,14 +101,29 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const AnnotationsPtrVec& getAnnotations() const;
+
+        const VisibilityModifierPtr& getVisibility() const;
+
+        const TypeDeclarationPtr& getTypeDeclaration() const;
+
+        const IdentifierPtr& getIdentifier() const;
+
+        const TokenPtr& getAssignToken() const;
+
+        const ExpressionPtr& getExpression() const;
+
+        const TokenPtr& getColon() const;
      private:
-        AnnotationsPtrVec _annotations;
-        VisibilityModifierPtr         _visibility;
+        AnnotationsPtrVec     _annotations;
+        VisibilityModifierPtr _visibility;
         TypeDeclarationPtr    _typeDeclaration;
         IdentifierPtr         _identifier;
-        TokenPtr                  _assignToken;
-        ExpressionPtr _expression;
-        TokenPtr                  _colon;
+        TokenPtr              _assignToken;
+        ExpressionPtr         _expression;
+        TokenPtr              _colon;
     };
 
     typedef shared_ptr<PropertyDeclaration> PropertyDeclarationPtr;
@@ -111,14 +145,24 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const AnnotationsPtrVec& getAnnotations() const;
+
+        const VisibilityModifierPtr& getVisibility() const;
+
+        const FunctionHeaderPtr& getFunctionHeader() const;
+
+        const BlockPtr& getBlock() const;
+
      private:
-        AnnotationsPtrVec _annotations;
-        VisibilityModifierPtr         _visibility;
-        FunctionHeaderPtr    _functionHeader;
-        BlockPtr _block;
+        AnnotationsPtrVec     _annotations;
+        VisibilityModifierPtr _visibility;
+        FunctionHeaderPtr     _functionHeader;
+        BlockPtr              _block;
     };
 
-    typedef shared_ptr<MethodDeclaration>   MethodDeclarationPtr;
+    typedef shared_ptr<MethodDeclaration> MethodDeclarationPtr;
 
     class AnnotationMember : public ClassMember {
      public:
@@ -132,13 +176,17 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const AnnotationsPtr& getAnnotations() const;
+
      private:
         AnnotationsPtr _annotations;
     };
 
-    typedef shared_ptr<AnnotationMember>    AnnotationMemberPtr;
+    typedef shared_ptr<AnnotationMember> AnnotationMemberPtr;
 
-    class ClassBody : public MaikuroAst::AstNode {
+    class ClassBody : public AstNode {
      public:
         ClassBody(TokenPtr leftBra, ClassMemberPtrVec classMembers, TokenPtr rightBra);
 
@@ -150,13 +198,21 @@ namespace MaikuroAst {
 
         TokenPtrVec getTokens() override;
 
+        NodeType getNodeType() override;
+
+        const TokenPtr& getLeftBra() const;
+
+        const ClassMemberPtrVec& getClassMembers() const;
+
+        const TokenPtr& getRightBra() const;
+
      private:
         TokenPtr          _leftBra;
         ClassMemberPtrVec _classMembers;
         TokenPtr          _rightBra;
     };
 
-    typedef shared_ptr<ClassBody>           ClassBodyPtr;
+    typedef shared_ptr<ClassBody> ClassBodyPtr;
 
     class ClassDeclaration : public Statement {
      public:
@@ -171,22 +227,36 @@ namespace MaikuroAst {
 
         explicit ClassDeclaration(MaikuroParser::ClassDeclarationContext* ctx);
 
-        TokenPtrVec getTokens() override;
-
         int getLine() override;
 
         string toString() override;
 
+        TokenPtrVec getTokens() override;
+
+        NodeType getNodeType() override;
+
+        const AnnotationsPtrVec& getAnnotations() const;
+
+        const TokenPtr& getClassToken() const;
+
+        const TypeIdentifierPtr& getClassName() const;
+
+        const SuperClassPtr& getSuperClass() const;
+
+        const SuperInterfacesPtr& getSuperInterfaces() const;
+
+        const ClassBodyPtr& getClassBody() const;
+
      private:
-        AnnotationsPtrVec _annotations;
-        TokenPtr                      _classToken;
+        AnnotationsPtrVec  _annotations;
+        TokenPtr           _classToken;
         TypeIdentifierPtr  _className;
         SuperClassPtr      _superClass;
         SuperInterfacesPtr _superInterfaces;
         ClassBodyPtr       _classBody;
     };
 
-    typedef shared_ptr<ClassDeclaration>    ClassDeclarationPtr;
+    typedef shared_ptr<ClassDeclaration> ClassDeclarationPtr;
 }
 
 

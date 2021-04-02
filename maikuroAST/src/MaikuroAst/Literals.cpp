@@ -28,10 +28,18 @@ namespace MaikuroAst {
         return _token->toString();
     }
 
+    AstNode::NodeType Literal::getNodeType() {
+        return NodeType::LITERAL;
+    }
+
     NullLiteral::NullLiteral(TokenPtr token) : Literal(token) {
     }
 
     NullLiteral::NullLiteral(antlr4::tree::TerminalNode* node) : Literal(node) {
+    }
+
+    AstNode::NodeType NullLiteral::getNodeType() {
+        return NodeType::NULL_LITERAL;
     }
 
     BoolLiteral::BoolLiteral(TokenPtr token) : Literal(token) {
@@ -40,10 +48,18 @@ namespace MaikuroAst {
     BoolLiteral::BoolLiteral(antlr4::tree::TerminalNode* node) : Literal(node) {
     }
 
+    AstNode::NodeType BoolLiteral::getNodeType() {
+        return NodeType::BOOL_LITERAL;
+    }
+
     NumberLiteral::NumberLiteral(TokenPtr token) : Literal(token) {
     }
 
     NumberLiteral::NumberLiteral(antlr4::tree::TerminalNode* node) : Literal(node) {
+    }
+
+    AstNode::NodeType NumberLiteral::getNodeType() {
+        return NodeType::NUMBER_LITERAL;
     }
 
     CharLiteral::CharLiteral(TokenPtr token) : Literal(token) {
@@ -52,10 +68,18 @@ namespace MaikuroAst {
     CharLiteral::CharLiteral(antlr4::tree::TerminalNode* node) : Literal(node) {
     }
 
+    AstNode::NodeType CharLiteral::getNodeType() {
+        return NodeType::CHAR_LITERAL;
+    }
+
     StringLiteral::StringLiteral(TokenPtr token) : Literal(token) {
     }
 
     StringLiteral::StringLiteral(antlr4::tree::TerminalNode* node) : Literal(node) {
+    }
+
+    AstNode::NodeType StringLiteral::getNodeType() {
+        return NodeType::STRING_LITERAL;
     }
 
     Identifier::Identifier(TokenPtr token) : Literal(token) {
@@ -64,10 +88,18 @@ namespace MaikuroAst {
     Identifier::Identifier(antlr4::tree::TerminalNode* node) : Literal(node) {
     }
 
+    AstNode::NodeType Identifier::getNodeType() {
+        return NodeType::IDENTIFIER;
+    }
+
     TypeIdentifier::TypeIdentifier(TokenPtr token) : Literal(token) {
     }
 
     TypeIdentifier::TypeIdentifier(antlr4::tree::TerminalNode* node) : Literal(node) {
+    }
+
+    AstNode::NodeType TypeIdentifier::getNodeType() {
+        return NodeType::TYPE_IDENTIFIER;
     }
 
     VisibilityModifier::VisibilityModifier(TokenPtr token) : Literal(token) {
@@ -78,5 +110,9 @@ namespace MaikuroAst {
         Token::createToken((ctx->PUBLIC() ?: ctx->PROTECTED() ?:
                                              ctx->PRIVATE() ?: ctx->ABSTRACT() ?: ctx->STATIC() ?: ctx->FINAL()
                                                                                                    ?: nullptr))) {
+    }
+
+    AstNode::NodeType VisibilityModifier::getNodeType() {
+        return NodeType::VISIBILITY_MODIFIER;
     }
 }

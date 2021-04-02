@@ -46,7 +46,6 @@ class Runner {
 
         }
 
-
         return 0;
     }
 }
@@ -56,3 +55,6 @@ fun main(Int32 argc, String[] argv): Int32 {
 
     return runner.run();
 }
+
+
+var foo, bar = 1, 20_2.22_f32;

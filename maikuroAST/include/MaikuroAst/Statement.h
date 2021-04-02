@@ -5,7 +5,11 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class Statement : public MaikuroAst::AstNode {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+
+    class Statement : public AstNode {
      public:
         explicit Statement(TokenPtr semicolon);
 
@@ -15,10 +19,12 @@ namespace MaikuroAst {
 
         string toString() override;
 
-        TokenPtr getSemicolonToken();
+        const TokenPtr& getSemicolonToken();
+
+        NodeType getNodeType() override;
 
      protected:
-        TokenPtr _semicolon;
+        TokenPtr _semicolonToken;
     };
 
     typedef shared_ptr<Statement> StatementPtr;

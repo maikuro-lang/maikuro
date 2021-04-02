@@ -241,7 +241,7 @@ namespace MaikuroAst {
         return _text;
     }
 
-    const string& Token::toString() const {
+    string Token::toString() {
         return _text;
     }
 
@@ -347,4 +347,19 @@ namespace MaikuroAst {
         return out;
     }
 
+    AstNode::NodeType Token::getNodeType() {
+        return NodeType::TOKEN;
+    }
+
+    TokenPtrVec Token::getTokens() {
+        return TokenPtrVec({shared_from_this()});
+    }
+
+    string Token::getNodeName() {
+//        string nodeName = "TOKEN[";
+//        nodeName += getTypeString();
+//        nodeName += "]";
+
+        return AstNode::getNodeName();
+    }
 }

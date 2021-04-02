@@ -84,6 +84,11 @@ add_library(
         src/MaikuroAst/ExpressionBuilder.cpp
         src/MaikuroAst/Statements.cpp
         include/MaikuroAst/Statements.h
+        include/MaikuroAst/Tree/AstTree.h
+        include/MaikuroAst/Tree/AstTreeBuilder.h
+        src/MaikuroAst/Tree/AstTreeBuilder.cpp
+        include/MaikuroAst/Tree/AstTreeVisitor.h
+        include/MaikuroAst/Tree/AstTreeBaseVisitor.h
 )
 
 target_include_directories(maikuroAST PUBLIC ${ANTLR4_INCLUDE_DIRS} ${ANTLR_MaikuroLexer_OUTPUT_DIR} ${ANTLR_MaikuroParser_OUTPUT_DIR} ${PROJECT_SOURCE_DIR}/include)

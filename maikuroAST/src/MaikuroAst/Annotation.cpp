@@ -36,6 +36,18 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TypeIdentifierPtr& Annotation::getTypeIdentifier() const {
+        return _typeIdentifier;
+    }
+
+    const ArgumentsPtr& Annotation::getArguments() const {
+        return _arguments;
+    }
+
+    AstNode::NodeType Annotation::getNodeType() {
+        return NodeType::ANNOTATION;
+    }
+
     Annotations::Annotations(
         TokenPtr prefix,
         AnnotationPtrVec annotations,
@@ -76,5 +88,25 @@ namespace MaikuroAst {
         tokens.push_back(_closeBracket);
 
         return tokens;
+    }
+
+    const TokenPtr& Annotations::getPrefix() const {
+        return _prefix;
+    }
+
+    const AnnotationPtrVec& Annotations::getAnnotations() const {
+        return _annotations;
+    }
+
+    const TokenPtrVec& Annotations::getCommas() const {
+        return _commas;
+    }
+
+    const TokenPtr& Annotations::getCloseBracket() const {
+        return _closeBracket;
+    }
+
+    AstNode::NodeType Annotations::getNodeType() {
+        return NodeType::ANNOTATIONS;
     }
 }

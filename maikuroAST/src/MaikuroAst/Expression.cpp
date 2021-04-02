@@ -10,7 +10,11 @@
 
 namespace MaikuroAst {
 
-    Expression::Expression() : Statement(nullptr) {
+    Expression::Expression() {
+    }
+
+    AstNode::NodeType Expression::getNodeType() {
+        return NodeType::EXPRESSION;
     }
 
     ExpressionList::ExpressionList(const ExpressionPtrVec& expressions, const TokenPtrVec& commas)
@@ -47,6 +51,18 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const ExpressionPtrVec& ExpressionList::getExpressions() const {
+        return _expressions;
+    }
+
+    const TokenPtrVec& ExpressionList::getCommas() const {
+        return _commas;
+    }
+
+    AstNode::NodeType ExpressionList::getNodeType() {
+        return NodeType::EXPRESSION_LIST;
+    }
+
     PrimaryExpression::PrimaryExpression(TokenPtr token) : _token(token) {
     }
 
@@ -65,6 +81,14 @@ namespace MaikuroAst {
 
     TokenPtrVec PrimaryExpression::getTokens() {
         return { _token };
+    }
+
+    const TokenPtr& PrimaryExpression::getToken() const {
+        return _token;
+    }
+
+    AstNode::NodeType PrimaryExpression::getNodeType() {
+        return NodeType::PRIMARY_EXPRESSION;
     }
 
     VariableNameExpression::VariableNameExpression(VariableNamePtr variableName) : _variableName(
@@ -88,6 +112,14 @@ namespace MaikuroAst {
 
     TokenPtrVec VariableNameExpression::getTokens() {
         return _variableName->getTokens();
+    }
+
+    const VariableNamePtr& VariableNameExpression::getVariableName() const {
+        return _variableName;
+    }
+
+    AstNode::NodeType VariableNameExpression::getNodeType() {
+        return NodeType::VARIABLE_NAME;
     }
 
     ParExpresion::ParExpresion(TokenPtr leftPar, ExpressionPtr expression, TokenPtr rightPar)
@@ -119,6 +151,22 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& ParExpresion::getLeftPar() const {
+        return _leftPar;
+    }
+
+    const ExpressionPtr& ParExpresion::getExpression() const {
+        return _expression;
+    }
+
+    const TokenPtr& ParExpresion::getRightPar() const {
+        return _rightPar;
+    }
+
+    AstNode::NodeType ParExpresion::getNodeType() {
+        return NodeType::PAR_EXPRESION;
+    }
+
     MethodCall::MethodCall(TokenPtr identifier, ArgumentsPtr arguments)
         : _identifier(identifier), _arguments(arguments) {
     }
@@ -143,6 +191,18 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, _arguments->getTokens());
 
         return tokens;
+    }
+
+    const TokenPtr& MethodCall::getIdentifier() const {
+        return _identifier;
+    }
+
+    const ArgumentsPtr& MethodCall::getArguments() const {
+        return _arguments;
+    }
+
+    AstNode::NodeType MethodCall::getNodeType() {
+        return NodeType::METHOD_CALL;
     }
 
     DotExpression::DotExpression(
@@ -186,6 +246,26 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const ExpressionPtr& DotExpression::getExpression() const {
+        return _expression;
+    }
+
+    const TokenPtr& DotExpression::getDot() const {
+        return _dot;
+    }
+
+    const TokenPtr& DotExpression::getIdentifier() const {
+        return _identifier;
+    }
+
+    const MethodCallPtr& DotExpression::getMethodCall() const {
+        return _methodCall;
+    }
+
+    AstNode::NodeType DotExpression::getNodeType() {
+        return NodeType::DOT_EXPRESSION;
+    }
+
     MethodCallExpression::MethodCallExpression(const MethodCallPtr& methodCall) : _methodCall(methodCall) {
     }
 
@@ -205,6 +285,14 @@ namespace MaikuroAst {
 
     TokenPtrVec MethodCallExpression::getTokens() {
         return _methodCall->getTokens();
+    }
+
+    const MethodCallPtr& MethodCallExpression::getMethodCall() const {
+        return _methodCall;
+    }
+
+    AstNode::NodeType MethodCallExpression::getNodeType() {
+        return NodeType::METHOD_CALL_EXPRESSION;
     }
 
     NewDeclaratorExpression::NewDeclaratorExpression(
@@ -241,6 +329,22 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& NewDeclaratorExpression::getNewToken() const {
+        return _newToken;
+    }
+
+    const TypePtr& NewDeclaratorExpression::getType() const {
+        return _type;
+    }
+
+    const ArgumentsPtr& NewDeclaratorExpression::getArguments() const {
+        return _arguments;
+    }
+
+    AstNode::NodeType NewDeclaratorExpression::getNodeType() {
+        return NodeType::NEW_DECLARATOR_EXPRESSION;
+    }
+
     SuffixExpression::SuffixExpression(const ExpressionPtr& expression, const TokenPtr& suffix)
         : _expression(expression), _suffix(suffix) {
     }
@@ -267,6 +371,18 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const ExpressionPtr& SuffixExpression::getExpression() const {
+        return _expression;
+    }
+
+    const TokenPtr& SuffixExpression::getSuffix() const {
+        return _suffix;
+    }
+
+    AstNode::NodeType SuffixExpression::getNodeType() {
+        return NodeType::SUFFIX_EXPRESSION;
+    }
+
     PrefixExpression::PrefixExpression(const TokenPtr& prefix, const ExpressionPtr& expression)
         : _prefix(prefix), _expression(expression) {
     }
@@ -291,6 +407,18 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, _expression->getTokens());
 
         return tokens;
+    }
+
+    const TokenPtr& PrefixExpression::getPrefix() const {
+        return _prefix;
+    }
+
+    const ExpressionPtr& PrefixExpression::getExpression() const {
+        return _expression;
+    }
+
+    AstNode::NodeType PrefixExpression::getNodeType() {
+        return NodeType::PREFIX_EXPRESSION;
     }
 
     BopExpression::BopExpression(
@@ -326,6 +454,22 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const ExpressionPtr& BopExpression::getLeftExpresion() const {
+        return _leftExpresion;
+    }
+
+    const TokenPtr& BopExpression::getBop() const {
+        return _bop;
+    }
+
+    const ExpressionPtr& BopExpression::getRightExpresion() const {
+        return _rightExpresion;
+    }
+
+    AstNode::NodeType BopExpression::getNodeType() {
+        return NodeType::BOP_EXPRESSION;
+    }
+
     TernaryExpression::TernaryExpression(
         const ExpressionPtr& leftExpression,
         const TokenPtr& bop,
@@ -351,7 +495,7 @@ namespace MaikuroAst {
         if (ctx->expression().size() == 2) {
             _falseExpression = eb_createExpression(ctx->expression(1));
         } else {
-            _trueExpression = eb_createExpression(ctx->expression(1));
+            _trueExpression  = eb_createExpression(ctx->expression(1));
             _falseExpression = eb_createExpression(ctx->expression(2));
         }
     }
@@ -378,6 +522,30 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, _falseExpression->getTokens());
 
         return tokens;
+    }
+
+    const ExpressionPtr& TernaryExpression::getLeftExpression() const {
+        return _leftExpression;
+    }
+
+    const TokenPtr& TernaryExpression::getBop() const {
+        return _bop;
+    }
+
+    const ExpressionPtr& TernaryExpression::getTrueExpression() const {
+        return _trueExpression;
+    }
+
+    const TokenPtr& TernaryExpression::getColon() const {
+        return _colon;
+    }
+
+    const ExpressionPtr& TernaryExpression::getFalseExpression() const {
+        return _falseExpression;
+    }
+
+    AstNode::NodeType TernaryExpression::getNodeType() {
+        return NodeType::TERNARY_EXPRESSION;
     }
 
     MatchExpressionCase::MatchExpressionCase(
@@ -426,6 +594,26 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const ExpressionListPtr& MatchExpressionCase::getExpressionList() const {
+        return _expressionList;
+    }
+
+    const TokenPtr& MatchExpressionCase::getDefaultToken() const {
+        return _defaultToken;
+    }
+
+    const TokenPtr& MatchExpressionCase::getDoubleArrowToken() const {
+        return _doubleArrowToken;
+    }
+
+    const ExpressionPtr& MatchExpressionCase::getExpression() const {
+        return _expression;
+    }
+
+    AstNode::NodeType MatchExpressionCase::getNodeType() {
+        return NodeType::MATCH_EXPRESSION_CASE;
+    }
+
     MatchExpression::MatchExpression(
         const TokenPtr& matchToken,
         const ParExpresionPtr& parExpresion,
@@ -472,5 +660,67 @@ namespace MaikuroAst {
         tokens.push_back(_rightBra);
 
         return tokens;
+    }
+
+    const TokenPtr& MatchExpression::getMatchToken() const {
+        return _matchToken;
+    }
+
+    const ParExpresionPtr& MatchExpression::getParExpresion() const {
+        return _parExpresion;
+    }
+
+    const TokenPtr& MatchExpression::getLeftBra() const {
+        return _leftBra;
+    }
+
+    const MatchExpressionCasePtrVec& MatchExpression::getMatchExpressionCases() const {
+        return _matchExpressionCases;
+    }
+
+    const TokenPtrVec& MatchExpression::getCommas() const {
+        return _commas;
+    }
+
+    const TokenPtr& MatchExpression::getRightBra() const {
+        return _rightBra;
+    }
+
+    AstNode::NodeType MatchExpression::getNodeType() {
+        return NodeType::MATCH_EXPRESSION;
+    }
+
+    ExpressionStatement::ExpressionStatement(ExpressionPtr expression, TokenPtr semicolon) : _expression(expression),
+                                                                                             Statement(semicolon) {
+    }
+
+    ExpressionStatement::ExpressionStatement(MaikuroParser::StatementContext* ctx) : ExpressionStatement(
+        eb_createExpression(ctx->statementExpression),
+        Token::createToken(ctx->SEMI())
+    ) {
+    }
+
+    TokenPtrVec ExpressionStatement::getTokens() {
+        TokenPtrVec tokens = { _expression->getTokens() };
+
+        Token::mergeTokens(&tokens, Statement::getTokens());
+
+        return tokens;
+    }
+
+    int ExpressionStatement::getLine() {
+        return _expression->getLine();
+    }
+
+    string ExpressionStatement::toString() {
+        return Token::toString(getTokens());
+    }
+
+    AstNode::NodeType ExpressionStatement::getNodeType() {
+        return NodeType::EXPRESSION_STATEMENT;
+    }
+
+    const ExpressionPtr& ExpressionStatement::getExpression() const {
+        return _expression;
     }
 }

@@ -4,6 +4,10 @@
 #include "Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::shared_ptr;
+    using std::vector;
+
     class Utils {
      public:
         template<typename T>

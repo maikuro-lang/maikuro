@@ -36,6 +36,18 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& SuperClass::getExtendsToken() const {
+        return _extendsToken;
+    }
+
+    const TypeIdentifierPtr& SuperClass::getClassName() const {
+        return _className;
+    }
+
+    AstNode::NodeType SuperClass::getNodeType() {
+        return NodeType::SUPER_CLASS;
+    }
+
     SuperInterfaces::SuperInterfaces(
         TokenPtr implementsToken,
         TypeIdentifierPtrVec interfaceNames,
@@ -73,6 +85,22 @@ namespace MaikuroAst {
         }
 
         return tokens;
+    }
+
+    const TokenPtr& SuperInterfaces::getImplementsToken() const {
+        return _implementsToken;
+    }
+
+    const TypeIdentifierPtrVec& SuperInterfaces::getInterfaceNames() const {
+        return _interfaceNames;
+    }
+
+    const TokenPtrVec& SuperInterfaces::getCommas() const {
+        return _commas;
+    }
+
+    AstNode::NodeType SuperInterfaces::getNodeType() {
+        return NodeType::SUPER_INTERFACES;
     }
 
     PropertyDeclaration::PropertyDeclaration(
@@ -139,6 +167,38 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const AnnotationsPtrVec& PropertyDeclaration::getAnnotations() const {
+        return _annotations;
+    }
+
+    const VisibilityModifierPtr& PropertyDeclaration::getVisibility() const {
+        return _visibility;
+    }
+
+    const TypeDeclarationPtr& PropertyDeclaration::getTypeDeclaration() const {
+        return _typeDeclaration;
+    }
+
+    const IdentifierPtr& PropertyDeclaration::getIdentifier() const {
+        return _identifier;
+    }
+
+    const TokenPtr& PropertyDeclaration::getAssignToken() const {
+        return _assignToken;
+    }
+
+    const ExpressionPtr& PropertyDeclaration::getExpression() const {
+        return _expression;
+    }
+
+    const TokenPtr& PropertyDeclaration::getColon() const {
+        return _colon;
+    }
+
+    AstNode::NodeType PropertyDeclaration::getNodeType() {
+        return NodeType::PROPERTY_DECLARATION;
+    }
+
     MethodDeclaration::MethodDeclaration(
         AnnotationsPtrVec annotations,
         VisibilityModifierPtr visibility,
@@ -184,6 +244,26 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const AnnotationsPtrVec& MethodDeclaration::getAnnotations() const {
+        return _annotations;
+    }
+
+    const VisibilityModifierPtr& MethodDeclaration::getVisibility() const {
+        return _visibility;
+    }
+
+    const FunctionHeaderPtr& MethodDeclaration::getFunctionHeader() const {
+        return _functionHeader;
+    }
+
+    const BlockPtr& MethodDeclaration::getBlock() const {
+        return _block;
+    }
+
+    AstNode::NodeType MethodDeclaration::getNodeType() {
+        return NodeType::METHOD_DECLARATION;
+    }
+
     AnnotationMember::AnnotationMember(AnnotationsPtr annotations)
         : _annotations(annotations), ClassMember() {
     }
@@ -204,6 +284,14 @@ namespace MaikuroAst {
 
     TokenPtrVec AnnotationMember::getTokens() {
         return _annotations->getTokens();
+    }
+
+    const AnnotationsPtr& AnnotationMember::getAnnotations() const {
+        return _annotations;
+    }
+
+    AstNode::NodeType AnnotationMember::getNodeType() {
+        return NodeType::ANNOTATION_MEMBER;
     }
 
     ClassBody::ClassBody(TokenPtr leftBra, ClassMemberPtrVec classMembers, TokenPtr rightBra)
@@ -252,6 +340,22 @@ namespace MaikuroAst {
         tokens.push_back(_rightBra);
 
         return tokens;
+    }
+
+    const TokenPtr& ClassBody::getLeftBra() const {
+        return _leftBra;
+    }
+
+    const ClassMemberPtrVec& ClassBody::getClassMembers() const {
+        return _classMembers;
+    }
+
+    const TokenPtr& ClassBody::getRightBra() const {
+        return _rightBra;
+    }
+
+    AstNode::NodeType ClassBody::getNodeType() {
+        return NodeType::CLASS_BODY;
     }
 
     ClassDeclaration::ClassDeclaration(
@@ -312,5 +416,33 @@ namespace MaikuroAst {
 
     string ClassDeclaration::toString() {
         return Token::toString(getTokens());
+    }
+
+    const AnnotationsPtrVec& ClassDeclaration::getAnnotations() const {
+        return _annotations;
+    }
+
+    const TokenPtr& ClassDeclaration::getClassToken() const {
+        return _classToken;
+    }
+
+    const TypeIdentifierPtr& ClassDeclaration::getClassName() const {
+        return _className;
+    }
+
+    const SuperClassPtr& ClassDeclaration::getSuperClass() const {
+        return _superClass;
+    }
+
+    const SuperInterfacesPtr& ClassDeclaration::getSuperInterfaces() const {
+        return _superInterfaces;
+    }
+
+    const ClassBodyPtr& ClassDeclaration::getClassBody() const {
+        return _classBody;
+    }
+
+    AstNode::NodeType ClassDeclaration::getNodeType() {
+        return NodeType::CLASS_DECLARATION;
     }
 }

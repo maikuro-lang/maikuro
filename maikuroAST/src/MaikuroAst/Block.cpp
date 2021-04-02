@@ -29,4 +29,20 @@ namespace MaikuroAst {
     string Block::toString() {
         return Token::toString(getTokens());
     }
+
+    const TokenPtr& Block::getLeftBra() const {
+        return _leftBra;
+    }
+
+    const StatementPtrVec& Block::getStatements() const {
+        return _statements;
+    }
+
+    const TokenPtr& Block::getRightBra() const {
+        return _rightBra;
+    }
+
+    AstNode::NodeType Block::getNodeType() {
+        return NodeType::BLOCK;
+    }
 }

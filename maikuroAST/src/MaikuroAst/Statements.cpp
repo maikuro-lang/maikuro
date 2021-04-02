@@ -39,6 +39,18 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const TokenPtr& TokenExpressionStatement::getToken() const {
+        return _token;
+    }
+
+    const ExpressionPtr& TokenExpressionStatement::getExpression() const {
+        return _expression;
+    }
+
+    AstNode::NodeType TokenExpressionStatement::getNodeType() {
+        return NodeType::TOKEN_EXPRESSION_STATEMENT;
+    }
+
     ReturnStatement::ReturnStatement(
         const TokenPtr& token,
         const ExpressionPtr& expression,
@@ -54,6 +66,10 @@ namespace MaikuroAst {
     ) {
     }
 
+    AstNode::NodeType ReturnStatement::getNodeType() {
+        return NodeType::RETURN_STATEMENT;
+    }
+
     ThrowStatement::ThrowStatement(
         const TokenPtr& token,
         const ExpressionPtr& expression,
@@ -67,6 +83,10 @@ namespace MaikuroAst {
         eb_createExpression(ctx->expression()),
         Token::createToken(ctx->SEMI())
     ) {
+    }
+
+    AstNode::NodeType ThrowStatement::getNodeType() {
+        return NodeType::THROW_STATEMENT;
     }
 
     TokenNumberLiteralStatement::TokenNumberLiteralStatement(
@@ -97,6 +117,18 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const TokenPtr& TokenNumberLiteralStatement::getToken() const {
+        return _token;
+    }
+
+    const NumberLiteralPtr& TokenNumberLiteralStatement::getNumberLiteral() const {
+        return _numberLiteral;
+    }
+
+    AstNode::NodeType TokenNumberLiteralStatement::getNodeType() {
+        return NodeType::TOKEN_NUMBER_LITERAL_STATEMENT;
+    }
+
     BreakStatement::BreakStatement(
         const TokenPtr& token,
         const NumberLiteralPtr& numberLiteral,
@@ -112,6 +144,10 @@ namespace MaikuroAst {
     ) {
     }
 
+    AstNode::NodeType BreakStatement::getNodeType() {
+        return NodeType::BREAK_STATEMENT;
+    }
+
     ContinueStatement::ContinueStatement(
         const TokenPtr& token,
         const NumberLiteralPtr& numberLiteral,
@@ -125,6 +161,10 @@ namespace MaikuroAst {
         ctx->NUMBER_LITERAL() ? Utils::create<NumberLiteral>(ctx->NUMBER_LITERAL()) : nullptr,
         Token::createToken(ctx->SEMI())
     ) {
+    }
+
+    AstNode::NodeType ContinueStatement::getNodeType() {
+        return NodeType::CONTINUE_STATEMENT;
     }
 
     IfStatement::IfStatement(
@@ -175,6 +215,30 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const TokenPtr& IfStatement::getToken() const {
+        return _token;
+    }
+
+    const ParExpresionPtr& IfStatement::getExpresion() const {
+        return _expresion;
+    }
+
+    const StatementPtr& IfStatement::getStatement() const {
+        return _statement;
+    }
+
+    const TokenPtr& IfStatement::getElseToken() const {
+        return _elseToken;
+    }
+
+    const StatementPtr& IfStatement::getElseStatement() const {
+        return _elseStatement;
+    }
+
+    AstNode::NodeType IfStatement::getNodeType() {
+        return NodeType::IF_STATEMENT;
+    }
+
     UnlessStatement::UnlessStatement(
         const TokenPtr& token,
         const ParExpresionPtr& expresion,
@@ -191,6 +255,10 @@ namespace MaikuroAst {
         Token::createToken(ctx->ELSE()),
         ctx->statement().size() == 2 ? sb_createStatement(ctx->statement(1)) : nullptr
     ) {
+    }
+
+    AstNode::NodeType UnlessStatement::getNodeType() {
+        return NodeType::UNLESS_STATEMENT;
     }
 
     WhileStatement::WhileStatement(
@@ -228,6 +296,22 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const TokenPtr& WhileStatement::getToken() const {
+        return _token;
+    }
+
+    const ParExpresionPtr& WhileStatement::getExpresion() const {
+        return _expresion;
+    }
+
+    const BlockPtr& WhileStatement::getBlock() const {
+        return _block;
+    }
+
+    AstNode::NodeType WhileStatement::getNodeType() {
+        return NodeType::WHILE_STATEMENT;
+    }
+
     UntilStatement::UntilStatement(
         const TokenPtr& token,
         const ParExpresionPtr& expresion,
@@ -241,6 +325,10 @@ namespace MaikuroAst {
         Utils::create<ParExpresion>(ctx->parExpression()),
         Utils::create<Block>(ctx->block())
     ) {
+    }
+
+    AstNode::NodeType UntilStatement::getNodeType() {
+        return NodeType::UNTIL_STATEMENT;
     }
 
     LoopStatement::LoopStatement(
@@ -258,6 +346,10 @@ namespace MaikuroAst {
     ) {
     }
 
+    AstNode::NodeType LoopStatement::getNodeType() {
+        return NodeType::LOOP_STATEMENT;
+    }
+
     DoWhileStatement::DoWhileStatement(
         const TokenPtr& doToken,
         const BlockPtr& block,
@@ -265,7 +357,7 @@ namespace MaikuroAst {
         const ParExpresionPtr& expresion,
         const TokenPtr& semicolon
     ) : _doToken(doToken), WhileStatement(token, expresion, block) {
-        _semicolon = semicolon;
+        _semicolonToken = semicolon;
     }
 
     DoWhileStatement::DoWhileStatement(MaikuroParser::StatementContext* ctx) : DoWhileStatement(
@@ -285,13 +377,21 @@ namespace MaikuroAst {
         tokens.push_back(_token);
         Token::mergeTokens(&tokens, _expresion->getTokens());
 
-        tokens.push_back(_semicolon);
+        tokens.push_back(_semicolonToken);
 
         return tokens;
     }
 
     int DoWhileStatement::getLine() {
         return _doToken->getLine();
+    }
+
+    const TokenPtr& DoWhileStatement::getDoToken() const {
+        return _doToken;
+    }
+
+    AstNode::NodeType DoWhileStatement::getNodeType() {
+        return NodeType::DO_WHILE_STATEMENT;
     }
 
     ForControl::ForControl(
@@ -365,6 +465,30 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const VariableDeclarationPtr& ForControl::getVariableDeclaration() const {
+        return _variableDeclaration;
+    }
+
+    const ExpressionListPtr& ForControl::getExpressionList() const {
+        return _expressionList;
+    }
+
+    const ExpressionPtr& ForControl::getExpression() const {
+        return _expression;
+    }
+
+    const ExpressionListPtr& ForControl::getUpdateExpressionList() const {
+        return _updateExpressionList;
+    }
+
+    const TokenPtrVec& ForControl::getSemicolons() const {
+        return _semicolons;
+    }
+
+    AstNode::NodeType ForControl::getNodeType() {
+        return NodeType::FOR_CONTROL;
+    }
+
     ForStatement::ForStatement(
         const TokenPtr& forToken,
         const TokenPtr& leftPar,
@@ -410,6 +534,30 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const TokenPtr& ForStatement::getForToken() const {
+        return _forToken;
+    }
+
+    const TokenPtr& ForStatement::getLeftPar() const {
+        return _leftPar;
+    }
+
+    const ForControlPtr& ForStatement::getControl() const {
+        return _control;
+    }
+
+    const TokenPtr& ForStatement::getRightPar() const {
+        return _rightPar;
+    }
+
+    const StatementPtr& ForStatement::getStatement() const {
+        return _statement;
+    }
+
+    AstNode::NodeType ForStatement::getNodeType() {
+        return NodeType::FOR_STATEMENT;
+    }
+
     ForeachControl::ForeachControl(
         const ExpressionPtr& expression,
         const TokenPtr& asToken,
@@ -447,6 +595,26 @@ namespace MaikuroAst {
         }
 
         return tokens;
+    }
+
+    const ExpressionPtr& ForeachControl::getExpression() const {
+        return _expression;
+    }
+
+    const TokenPtr& ForeachControl::getAsToken() const {
+        return _asToken;
+    }
+
+    const IdentifierPtrVec& ForeachControl::getIdentifiers() const {
+        return _identifiers;
+    }
+
+    const TokenPtr& ForeachControl::getDoubleArrow() const {
+        return _doubleArrow;
+    }
+
+    AstNode::NodeType ForeachControl::getNodeType() {
+        return NodeType::FOREACH_CONTROL;
     }
 
     ForeachStatement::ForeachStatement(
@@ -495,6 +663,30 @@ namespace MaikuroAst {
         return Token::toString(getTokens());
     }
 
+    const TokenPtr& ForeachStatement::getForeachToken() const {
+        return _foreachToken;
+    }
+
+    const TokenPtr& ForeachStatement::getLeftPar() const {
+        return _leftPar;
+    }
+
+    const ForeachControlPtr& ForeachStatement::getControl() const {
+        return _control;
+    }
+
+    const TokenPtr& ForeachStatement::getRightPar() const {
+        return _rightPar;
+    }
+
+    const StatementPtr& ForeachStatement::getStatement() const {
+        return _statement;
+    }
+
+    AstNode::NodeType ForeachStatement::getNodeType() {
+        return NodeType::FOREACH_STATEMENT;
+    }
+
     FinallyBlock::FinallyBlock(const TokenPtr& finallyToken, const BlockPtr& block)
         : _finallyToken(finallyToken), _block(block) {
     }
@@ -519,6 +711,18 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, _block->getTokens());
 
         return tokens;
+    }
+
+    const TokenPtr& FinallyBlock::getFinallyToken() const {
+        return _finallyToken;
+    }
+
+    const BlockPtr& FinallyBlock::getBlock() const {
+        return _block;
+    }
+
+    AstNode::NodeType FinallyBlock::getNodeType() {
+        return NodeType::FINALLY_BLOCK;
     }
 
     CatchClause::CatchClause(
@@ -581,6 +785,38 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& CatchClause::getCatchToken() const {
+        return _catchToken;
+    }
+
+    const TokenPtr& CatchClause::getLeftPar() const {
+        return _leftPar;
+    }
+
+    const TypeIdentifierPtrVec& CatchClause::getTypeIdentifiers() const {
+        return _typeIdentifiers;
+    }
+
+    const TokenPtrVec& CatchClause::getPipes() const {
+        return _pipes;
+    }
+
+    const IdentifierPtr& CatchClause::getIdentifier() const {
+        return _identifier;
+    }
+
+    const TokenPtr& CatchClause::getRightPar() const {
+        return _rightPar;
+    }
+
+    const BlockPtr& CatchClause::getBlock() const {
+        return _block;
+    }
+
+    AstNode::NodeType CatchClause::getNodeType() {
+        return NodeType::CATCH_CLAUSE;
+    }
+
     TryStatement::TryStatement(
         const TokenPtr& tryToken,
         const BlockPtr& block,
@@ -615,6 +851,26 @@ namespace MaikuroAst {
         Utils::create<CatchClause>(ctx->catchClause()),
         ctx->finallyBlock() ? Utils::create<FinallyBlock>(ctx->finallyBlock()) : nullptr
     ) {
+    }
+
+    const TokenPtr& TryStatement::getTryToken() const {
+        return _tryToken;
+    }
+
+    const BlockPtr& TryStatement::getBlock() const {
+        return _block;
+    }
+
+    const CatchClausePtrVec& TryStatement::getCatches() const {
+        return _catches;
+    }
+
+    const FinallyBlockPtr& TryStatement::getFinallyBlock() const {
+        return _finallyBlock;
+    }
+
+    AstNode::NodeType TryStatement::getNodeType() {
+        return NodeType::TRY_STATEMENT;
     }
 
     SwitchLabel::SwitchLabel(
@@ -672,6 +928,30 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& SwitchLabel::getCaseToken() const {
+        return _caseToken;
+    }
+
+    const TokenPtr& SwitchLabel::getDefaultToken() const {
+        return _defaultToken;
+    }
+
+    const ExpressionPtr& SwitchLabel::getExpression() const {
+        return _expression;
+    }
+
+    const IdentifierPtr& SwitchLabel::getIdentifier() const {
+        return _identifier;
+    }
+
+    const TokenPtr& SwitchLabel::getColon() const {
+        return _colon;
+    }
+
+    AstNode::NodeType SwitchLabel::getNodeType() {
+        return NodeType::SWITCH_LABEL;
+    }
+
     SwitchBlockStatementGroup::SwitchBlockStatementGroup(
         const SwitchLabelPtrVec& switchLabels,
         const StatementPtrVec& statements
@@ -700,6 +980,18 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, Utils::getTokens<Statement>(_statements));
 
         return tokens;
+    }
+
+    const SwitchLabelPtrVec& SwitchBlockStatementGroup::getSwitchLabels() const {
+        return _switchLabels;
+    }
+
+    const StatementPtrVec& SwitchBlockStatementGroup::getStatements() const {
+        return _statements;
+    }
+
+    AstNode::NodeType SwitchBlockStatementGroup::getNodeType() {
+        return NodeType::SWITCH_BLOCK_STATEMENT_GROUP;
     }
 
     SwitchStatement::SwitchStatement(
@@ -752,5 +1044,33 @@ namespace MaikuroAst {
 
     string SwitchStatement::toString() {
         return Token::toString(getTokens());
+    }
+
+    const TokenPtr& SwitchStatement::getSwitchToken() const {
+        return _switchToken;
+    }
+
+    const ParExpresionPtr& SwitchStatement::getExpresion() const {
+        return _expresion;
+    }
+
+    const TokenPtr& SwitchStatement::getLeftBra() const {
+        return _leftBra;
+    }
+
+    const SwitchBlockStatementGroupPtrVec& SwitchStatement::getSwitchBlockStatementGroups() const {
+        return _switchBlockStatementGroups;
+    }
+
+    const SwitchLabelPtrVec& SwitchStatement::getSwitchLabels() const {
+        return _switchLabels;
+    }
+
+    const TokenPtr& SwitchStatement::getRightBra() const {
+        return _rightBra;
+    }
+
+    AstNode::NodeType SwitchStatement::getNodeType() {
+        return NodeType::SWITCH_STATEMENT;
     }
 }

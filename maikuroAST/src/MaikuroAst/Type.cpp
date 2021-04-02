@@ -94,6 +94,30 @@ namespace MaikuroAst {
         return false;
     }
 
+    const TypeIdentifierPtr& Type::getTypeIdentifier() const {
+        return _typeIdentifier;
+    }
+
+    const TokenPtr& Type::getOpenBrace() const {
+        return _openBrace;
+    }
+
+    const NumberLiteralPtr& Type::getArraySize() const {
+        return _arraySize;
+    }
+
+    const TokenPtr& Type::getCloseBrace() const {
+        return _closeBrace;
+    }
+
+    const TokenPtr& Type::getQuestionMark() const {
+        return _questionMark;
+    }
+
+    AstNode::NodeType Type::getNodeType() {
+        return NodeType::TYPE;
+    }
+
     TypeDeclaration::TypeDeclaration(TypePtrVec types, TokenPtrVec pipes) : _types(
         types
     ), _pipes(pipes) {
@@ -126,5 +150,17 @@ namespace MaikuroAst {
 
     string TypeDeclaration::toString() {
         return Token::toString(getTokens());
+    }
+
+    const TypePtrVec& TypeDeclaration::getTypes() const {
+        return _types;
+    }
+
+    const TokenPtrVec& TypeDeclaration::getPipes() const {
+        return _pipes;
+    }
+
+    AstNode::NodeType TypeDeclaration::getNodeType() {
+        return NodeType::TYPE_DECLARATION;
     }
 }

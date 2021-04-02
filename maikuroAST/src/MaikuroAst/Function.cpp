@@ -51,6 +51,22 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TypePtr& FormalParameter::getType() const {
+        return _type;
+    }
+
+    const TokenPtr& FormalParameter::getVariadic() const {
+        return _variadic;
+    }
+
+    const IdentifierPtr& FormalParameter::getIdentifier() const {
+        return _identifier;
+    }
+
+    AstNode::NodeType FormalParameter::getNodeType() {
+        return NodeType::FORMAL_PARAMETER;
+    }
+
     FormalParameterList::FormalParameterList(
         FormalParameterPtrVec parameters,
         TokenPtrVec commas
@@ -89,6 +105,18 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const FormalParameterPtrVec& FormalParameterList::getParameters() const {
+        return _parameters;
+    }
+
+    const TokenPtrVec& FormalParameterList::getCommas() const {
+        return _commas;
+    }
+
+    AstNode::NodeType FormalParameterList::getNodeType() {
+        return NodeType::FORMAL_PARAMETER_LIST;
+    }
+
     FormalParameters::FormalParameters(
         TokenPtr leftPar,
         FormalParameterListPtr parameters,
@@ -121,6 +149,22 @@ namespace MaikuroAst {
         tokens.push_back(_rightPar);
 
         return tokens;
+    }
+
+    const TokenPtr& FormalParameters::getLeftPar() const {
+        return _leftPar;
+    }
+
+    const FormalParameterListPtr& FormalParameters::getParameters() const {
+        return _parameters;
+    }
+
+    const TokenPtr& FormalParameters::getRightPar() const {
+        return _rightPar;
+    }
+
+    AstNode::NodeType FormalParameters::getNodeType() {
+        return NodeType::FORMAL_PARAMETERS;
     }
 
     FunctionHeader::FunctionHeader(
@@ -163,6 +207,30 @@ namespace MaikuroAst {
         return tokens;
     }
 
+    const TokenPtr& FunctionHeader::getFun() const {
+        return _fun;
+    }
+
+    const IdentifierPtr& FunctionHeader::getIdentifier() const {
+        return _identifier;
+    }
+
+    const FormalParametersPtr& FunctionHeader::getParameters() const {
+        return _parameters;
+    }
+
+    const TokenPtr& FunctionHeader::getColon() const {
+        return _colon;
+    }
+
+    const TypePtr& FunctionHeader::getReturnType() const {
+        return _returnType;
+    }
+
+    AstNode::NodeType FunctionHeader::getNodeType() {
+        return NodeType::FUNCTION_HEADER;
+    }
+
     FunctionDeclaration::FunctionDeclaration(
         AnnotationsPtrVec annotations,
         FunctionHeaderPtr functionHeader,
@@ -195,5 +263,21 @@ namespace MaikuroAst {
         Token::mergeTokens(&tokens, _block->getTokens());
 
         return tokens;
+    }
+
+    const AnnotationsPtrVec& FunctionDeclaration::getAnnotations() const {
+        return _annotations;
+    }
+
+    const FunctionHeaderPtr& FunctionDeclaration::getFunctionHeader() const {
+        return _functionHeader;
+    }
+
+    const BlockPtr& FunctionDeclaration::getBlock() const {
+        return _block;
+    }
+
+    AstNode::NodeType FunctionDeclaration::getNodeType() {
+        return NodeType::FUNCTION_DECLARATION;
     }
 }
