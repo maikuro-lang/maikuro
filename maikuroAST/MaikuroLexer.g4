@@ -1,6 +1,7 @@
 lexer grammar MaikuroLexer;
 
 // Keywords
+
 PACKAGE : 'package';
 IMPORT : 'import';
 AS : 'as';
@@ -91,11 +92,10 @@ ESCAPE_SEQUENCE
     | '\\u{' (HEX_LITERAL HEX_LITERAL? HEX_LITERAL? HEX_LITERAL? HEX_LITERAL? HEX_LITERAL?) '}'
     ;
 
-//ARRAY_TYPE : '[]';
-ATTRIBUTE_PREFIX : '#[';
 
 // Separators
 
+ATTRIBUTE_PREFIX : '#[';
 LPAREN:             '(';
 RPAREN:             ')';
 LBRACE:             '{';
@@ -105,8 +105,6 @@ RBRACK:             ']';
 SEMI:               ';';
 COMMA:              ',';
 DOT:                '.';
-
-// Operators
 
 ASSIGN:             '=';
 GT:                 '>';
@@ -150,9 +148,6 @@ URSHIFT_ASSIGN:     '>>>=';
 DOUBLE_ARROW:       '=>';
 ARROW:              '->';
 COLONCOLON:         '::';
-
-// Additional symbols not defined in the lexical specification
-
 AT:                 '@';
 ELLIPSIS:           '...';
 
@@ -162,6 +157,7 @@ WS:                 [ \t\r\n\u000C]+ -> channel(HIDDEN);
 COMMENT:            '/*' .*? '*/'    -> channel(HIDDEN);
 LINE_COMMENT:       '//' ~[\r\n]*    -> channel(HIDDEN);
 
+// Identifier
 
 TYPE_IDENTIFIER : UPPERCASE_LETTER IDENTIFIER*;
 IDENTIFIER      : LETTER LETTER_OR_DIGIT*;
