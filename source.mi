@@ -28,7 +28,7 @@ class Runner {
             var a = match (true) {
                 counter >= 100 => "Long",
                 counter < 50 => "Short",
-                default => "Bad",
+                default => "Bad"
             };
 
             Serial.println(a);

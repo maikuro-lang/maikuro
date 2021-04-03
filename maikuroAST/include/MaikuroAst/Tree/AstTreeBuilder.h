@@ -6,6 +6,9 @@
 namespace MaikuroAst::Tree {
     using std::make_shared;
 
+    class AstTree;
+    typedef shared_ptr<AstTree> AstTreePtr;
+
     class AstTreeBuilder : public AstTreeVisitor<AstTreePtr> {
      public:
         static AstTreePtr build(MaikuroAst::SourceFilePtr sourceFile);

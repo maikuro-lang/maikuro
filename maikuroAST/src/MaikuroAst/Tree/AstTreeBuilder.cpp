@@ -41,7 +41,7 @@ namespace MaikuroAst::Tree {
             }
         }
 
-        tree->add(node->getCloseBracket());
+        tree->add(visit(node->getCloseBracket()));
 
         return tree;
     }
@@ -716,7 +716,7 @@ namespace MaikuroAst::Tree {
 
         tree->add(visit(node->getIdentifier()));
         tree->add(visit(node->getRightPar()));
-        tree->add(node->getBlock());
+        tree->add(visit(node->getBlock()));
 
         return tree;
     }
@@ -734,7 +734,7 @@ namespace MaikuroAst::Tree {
         tree->add(AstTreeVisitor::visit<CatchClausePtr>(node->getCatches()));
 
         if (node->getFinallyBlock()) {
-            tree->add(node->getFinallyBlock());
+            tree->add(visit(node->getFinallyBlock()));
         }
 
         return tree;

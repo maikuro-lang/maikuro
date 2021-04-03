@@ -24,6 +24,7 @@
 #include "MaikuroAst/Tree/AstTreeBuilder.h"
 #include "MaikuroAst/Tree/AstTreeVisitor.h"
 #include "MaikuroAst/Tree/AstTreeBaseVisitor.h"
+#include "MaikuroAst/Tree/AstTreeCodeGenerator.h"
 
 namespace MaikuroAst {
 
