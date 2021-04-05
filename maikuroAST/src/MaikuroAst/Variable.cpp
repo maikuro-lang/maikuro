@@ -9,6 +9,10 @@
 #include "MaikuroAst/Type.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     VariableName::VariableName(TokenPtr atSign, IdentifierPtr identifier) : _atSign(
         atSign
@@ -50,6 +54,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType VariableName::getNodeType() {
         return NodeType::VARIABLE_NAME;
+    }
+
+    void VariableName::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     VariableNameDeclaration::VariableNameDeclaration(
@@ -99,6 +107,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType VariableNameDeclaration::getNodeType() {
         return NodeType::VARIABLE_NAME_DECLARATION;
+    }
+
+    void VariableNameDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     VariableDeclarationExpression::VariableDeclarationExpression(
@@ -164,6 +176,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType VariableDeclarationExpression::getNodeType() {
         return NodeType::VARIABLE_DECLARATION_EXPRESSION;
+    }
+
+    void VariableDeclarationExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     VariableDeclaration::VariableDeclaration(
@@ -245,5 +261,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType VariableDeclaration::getNodeType() {
         return NodeType::VARIABLE_DECLARATION;
+    }
+
+    void VariableDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

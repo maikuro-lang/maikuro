@@ -6,28 +6,25 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Arguments;
-
-    typedef shared_ptr<Arguments> ArgumentsPtr;
+    typedef std::shared_ptr<Arguments> ArgumentsPtr;
 
     class Annotation : public AstNode {
      public:
         Annotation(TypeIdentifierPtr typeIdentifier, ArgumentsPtr arguments);
 
-        explicit Annotation(MaikuroParser::AnnotationContext* ctx);
+        explicit Annotation(MaikuroGrammar::MaikuroParser::AnnotationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TypeIdentifierPtr& getTypeIdentifier() const;
 
@@ -38,22 +35,24 @@ namespace MaikuroAst {
         ArgumentsPtr      _arguments;
     };
 
-    typedef shared_ptr<Annotation> AnnotationPtr;
-    typedef vector<AnnotationPtr>  AnnotationPtrVec;
+    typedef std::shared_ptr<Annotation> AnnotationPtr;
+    typedef std::vector<AnnotationPtr>  AnnotationPtrVec;
 
     class Annotations : public AstNode {
      public:
         Annotations(TokenPtr prefix, AnnotationPtrVec annotations, TokenPtrVec commas, TokenPtr closeBracket);
 
-        explicit Annotations(MaikuroParser::AnnotationsContext* ctx);
+        explicit Annotations(MaikuroGrammar::MaikuroParser::AnnotationsContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getPrefix() const;
 
@@ -70,7 +69,7 @@ namespace MaikuroAst {
         TokenPtr         _closeBracket;
     };
 
-    typedef shared_ptr<Annotations> AnnotationsPtr;
-    typedef vector<AnnotationsPtr>  AnnotationsPtrVec;
+    typedef std::shared_ptr<Annotations> AnnotationsPtr;
+    typedef std::vector<AnnotationsPtr>  AnnotationsPtrVec;
 }
 

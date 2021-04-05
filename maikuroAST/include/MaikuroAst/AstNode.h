@@ -3,12 +3,9 @@
 #include "common.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
 
     class Token;
-    typedef vector<shared_ptr<Token>> TokenPtrVec;
+    typedef std::vector<std::shared_ptr<Token>> TokenPtrVec;
 
     class AstNode {
      public:
@@ -95,7 +92,7 @@ namespace MaikuroAst {
 
         virtual NodeType getNodeType() = 0;
 
-        virtual string getNodeName() {
+        virtual std::string getNodeName() {
             switch (getNodeType()) {
                 case NodeType::ANNOTATION:
                     return "ANNOTATION";
@@ -260,12 +257,14 @@ namespace MaikuroAst {
 
         virtual int getLine() = 0;
 
-        virtual string toString() = 0;
+        virtual std::string toString() = 0;
 
         virtual TokenPtrVec getTokens() = 0;
+
+        virtual void accept(AstNodeVisitor *visitor) = 0;
     };
 
-    typedef shared_ptr<AstNode> AstNodePtr;
-    typedef vector<AstNodePtr>  AstNodePtrVec;
+    typedef std::shared_ptr<AstNode> AstNodePtr;
+    typedef std::vector<AstNodePtr>  AstNodePtrVec;
 }
 

@@ -5,6 +5,11 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
+
     Argument::Argument(IdentifierPtr identifier, TokenPtr colon, ExpressionPtr expression)
         : _identifier(identifier), _colon(colon), _expression(expression) {
     }
@@ -51,6 +56,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType Argument::getNodeType() {
         return NodeType::ARGUMENT;
+    }
+
+    void Argument::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     Arguments::Arguments(
@@ -115,5 +124,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType Arguments::getNodeType() {
         return NodeType::ARGUMENTS;
+    }
+
+    void Arguments::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

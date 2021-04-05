@@ -2,8 +2,9 @@
 #include "MaikuroAst/Utils.h"
 
 namespace MaikuroAst {
+    using MaikuroGrammar::MaikuroParser;
 
-    SourceFilePtr Parser::parse(const string& sourceCode) {
+    SourceFilePtr Parser::parse(const std::string& sourceCode) {
         antlr4::ANTLRInputStream input(sourceCode);
 
         MaikuroGrammar::MaikuroLexer lexer(&input);

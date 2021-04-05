@@ -9,6 +9,10 @@
 #include "MaikuroAst/Variable.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     Expression::Expression() {
     }
@@ -63,6 +67,10 @@ namespace MaikuroAst {
         return NodeType::EXPRESSION_LIST;
     }
 
+    void ExpressionList::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     PrimaryExpression::PrimaryExpression(TokenPtr token) : _token(token) {
     }
 
@@ -89,6 +97,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType PrimaryExpression::getNodeType() {
         return NodeType::PRIMARY_EXPRESSION;
+    }
+
+    void PrimaryExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     VariableNameExpression::VariableNameExpression(VariableNamePtr variableName) : _variableName(
@@ -120,6 +132,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType VariableNameExpression::getNodeType() {
         return NodeType::VARIABLE_NAME;
+    }
+
+    void VariableNameExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     ParExpresion::ParExpresion(TokenPtr leftPar, ExpressionPtr expression, TokenPtr rightPar)
@@ -167,6 +183,10 @@ namespace MaikuroAst {
         return NodeType::PAR_EXPRESION;
     }
 
+    void ParExpresion::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     MethodCall::MethodCall(TokenPtr identifier, ArgumentsPtr arguments)
         : _identifier(identifier), _arguments(arguments) {
     }
@@ -203,6 +223,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType MethodCall::getNodeType() {
         return NodeType::METHOD_CALL;
+    }
+
+    void MethodCall::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     DotExpression::DotExpression(
@@ -266,6 +290,10 @@ namespace MaikuroAst {
         return NodeType::DOT_EXPRESSION;
     }
 
+    void DotExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     MethodCallExpression::MethodCallExpression(const MethodCallPtr& methodCall) : _methodCall(methodCall) {
     }
 
@@ -293,6 +321,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType MethodCallExpression::getNodeType() {
         return NodeType::METHOD_CALL_EXPRESSION;
+    }
+
+    void MethodCallExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     NewDeclaratorExpression::NewDeclaratorExpression(
@@ -345,6 +377,10 @@ namespace MaikuroAst {
         return NodeType::NEW_DECLARATOR_EXPRESSION;
     }
 
+    void NewDeclaratorExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     SuffixExpression::SuffixExpression(const ExpressionPtr& expression, const TokenPtr& suffix)
         : _expression(expression), _suffix(suffix) {
     }
@@ -383,6 +419,10 @@ namespace MaikuroAst {
         return NodeType::SUFFIX_EXPRESSION;
     }
 
+    void SuffixExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     PrefixExpression::PrefixExpression(const TokenPtr& prefix, const ExpressionPtr& expression)
         : _prefix(prefix), _expression(expression) {
     }
@@ -419,6 +459,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType PrefixExpression::getNodeType() {
         return NodeType::PREFIX_EXPRESSION;
+    }
+
+    void PrefixExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     BopExpression::BopExpression(
@@ -468,6 +512,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType BopExpression::getNodeType() {
         return NodeType::BOP_EXPRESSION;
+    }
+
+    void BopExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     TernaryExpression::TernaryExpression(
@@ -548,6 +596,10 @@ namespace MaikuroAst {
         return NodeType::TERNARY_EXPRESSION;
     }
 
+    void TernaryExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     MatchExpressionCase::MatchExpressionCase(
         const ExpressionListPtr& expressionList,
         const TokenPtr& defaultToken,
@@ -612,6 +664,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType MatchExpressionCase::getNodeType() {
         return NodeType::MATCH_EXPRESSION_CASE;
+    }
+
+    void MatchExpressionCase::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     MatchExpression::MatchExpression(
@@ -690,6 +746,10 @@ namespace MaikuroAst {
         return NodeType::MATCH_EXPRESSION;
     }
 
+    void MatchExpression::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     ExpressionStatement::ExpressionStatement(ExpressionPtr expression, TokenPtr semicolon) : _expression(expression),
                                                                                              Statement(semicolon) {
     }
@@ -722,5 +782,9 @@ namespace MaikuroAst {
 
     const ExpressionPtr& ExpressionStatement::getExpression() const {
         return _expression;
+    }
+
+    void ExpressionStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

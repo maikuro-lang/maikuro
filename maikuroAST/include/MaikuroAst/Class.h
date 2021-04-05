@@ -13,24 +13,22 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class SuperClass : public AstNode {
      public:
         SuperClass(TokenPtr extendsToken, TypeIdentifierPtr className);
 
-        explicit SuperClass(MaikuroParser::SuperClassContext* ctx);
+        explicit SuperClass(MaikuroGrammar::MaikuroParser::SuperClassContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getExtendsToken() const;
 
@@ -41,7 +39,7 @@ namespace MaikuroAst {
         TypeIdentifierPtr _className;
     };
 
-    typedef shared_ptr<SuperClass> SuperClassPtr;
+    typedef std::shared_ptr<SuperClass> SuperClassPtr;
 
     class SuperInterfaces : public AstNode {
      public:
@@ -51,15 +49,17 @@ namespace MaikuroAst {
             TokenPtrVec commas
         );
 
-        explicit SuperInterfaces(MaikuroParser::SuperInterfacesContext* ctx);
+        explicit SuperInterfaces(MaikuroGrammar::MaikuroParser::SuperInterfacesContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getImplementsToken() const;
 
@@ -73,13 +73,15 @@ namespace MaikuroAst {
         TokenPtrVec          _commas;
     };
 
-    typedef shared_ptr<SuperInterfaces> SuperInterfacesPtr;
+    typedef std::shared_ptr<SuperInterfaces> SuperInterfacesPtr;
 
     class ClassMember : public AstNode {
+     public:
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<ClassMember> ClassMemberPtr;
-    typedef vector<ClassMemberPtr>  ClassMemberPtrVec;
+    typedef std::shared_ptr<ClassMember> ClassMemberPtr;
+    typedef std::vector<ClassMemberPtr>  ClassMemberPtrVec;
 
     class PropertyDeclaration : public ClassMember {
      public:
@@ -93,15 +95,17 @@ namespace MaikuroAst {
             TokenPtr colon
         );
 
-        explicit PropertyDeclaration(MaikuroParser::PropertyDeclarationContext* ctx);
+        explicit PropertyDeclaration(MaikuroGrammar::MaikuroParser::PropertyDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtrVec& getAnnotations() const;
 
@@ -127,7 +131,7 @@ namespace MaikuroAst {
         TokenPtr              _colon;
     };
 
-    typedef shared_ptr<PropertyDeclaration> PropertyDeclarationPtr;
+    typedef std::shared_ptr<PropertyDeclaration> PropertyDeclarationPtr;
 
     class MethodDeclaration : public ClassMember {
      public:
@@ -138,15 +142,17 @@ namespace MaikuroAst {
             BlockPtr block
         );
 
-        explicit MethodDeclaration(MaikuroParser::MethodDeclarationContext* ctx);
+        explicit MethodDeclaration(MaikuroGrammar::MaikuroParser::MethodDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtrVec& getAnnotations() const;
 
@@ -163,21 +169,23 @@ namespace MaikuroAst {
         BlockPtr              _block;
     };
 
-    typedef shared_ptr<MethodDeclaration> MethodDeclarationPtr;
+    typedef std::shared_ptr<MethodDeclaration> MethodDeclarationPtr;
 
     class AnnotationMember : public ClassMember {
      public:
         explicit AnnotationMember(AnnotationsPtr annotations);
 
-        explicit AnnotationMember(MaikuroParser::AnnotationsContext* ctx);
+        explicit AnnotationMember(MaikuroGrammar::MaikuroParser::AnnotationsContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtr& getAnnotations() const;
 
@@ -185,21 +193,23 @@ namespace MaikuroAst {
         AnnotationsPtr _annotations;
     };
 
-    typedef shared_ptr<AnnotationMember> AnnotationMemberPtr;
+    typedef std::shared_ptr<AnnotationMember> AnnotationMemberPtr;
 
     class ClassBody : public AstNode {
      public:
         ClassBody(TokenPtr leftBra, ClassMemberPtrVec classMembers, TokenPtr rightBra);
 
-        explicit ClassBody(MaikuroParser::ClassBodyContext* ctx);
+        explicit ClassBody(MaikuroGrammar::MaikuroParser::ClassBodyContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getLeftBra() const;
 
@@ -213,7 +223,7 @@ namespace MaikuroAst {
         TokenPtr          _rightBra;
     };
 
-    typedef shared_ptr<ClassBody> ClassBodyPtr;
+    typedef std::shared_ptr<ClassBody> ClassBodyPtr;
 
     class ClassDeclaration : public Statement {
      public:
@@ -226,15 +236,17 @@ namespace MaikuroAst {
             ClassBodyPtr classBody
         );
 
-        explicit ClassDeclaration(MaikuroParser::ClassDeclarationContext* ctx);
+        explicit ClassDeclaration(MaikuroGrammar::MaikuroParser::ClassDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtrVec& getAnnotations() const;
 
@@ -257,7 +269,7 @@ namespace MaikuroAst {
         ClassBodyPtr       _classBody;
     };
 
-    typedef shared_ptr<ClassDeclaration> ClassDeclarationPtr;
+    typedef std::shared_ptr<ClassDeclaration> ClassDeclarationPtr;
 }
 
 

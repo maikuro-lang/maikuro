@@ -7,8 +7,8 @@ namespace MaikuroAst::Tree {
 
     class AstTree;
 
-    typedef shared_ptr<AstTree> AstTreePtr;
-    typedef vector<AstTreePtr>  AstTreePtrVec;
+    typedef std::shared_ptr<AstTree> AstTreePtr;
+    typedef std::vector<AstTreePtr>  AstTreePtrVec;
 
     class AstTree {
      public:

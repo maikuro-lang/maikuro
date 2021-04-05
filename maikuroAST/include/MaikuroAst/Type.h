@@ -6,10 +6,6 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Type : public AstNode {
      public:
@@ -21,13 +17,13 @@ namespace MaikuroAst {
             TokenPtr questionMark
         );
 
-        explicit Type(MaikuroParser::TypeContext* ctx);
+        explicit Type(MaikuroGrammar::MaikuroParser::TypeContext* ctx);
 
         TokenPtrVec getTokens() override;
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         bool isNullable();
 
@@ -35,7 +31,9 @@ namespace MaikuroAst {
 
         bool hasArraySize();
 
-        AstNode::NodeType getNodeType() override;
+        NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TypeIdentifierPtr& getTypeIdentifier() const;
 
@@ -55,22 +53,24 @@ namespace MaikuroAst {
         TokenPtr          _questionMark;
     };
 
-    typedef shared_ptr<Type> TypePtr;
-    typedef vector<TypePtr>  TypePtrVec;
+    typedef std::shared_ptr<Type> TypePtr;
+    typedef std::vector<TypePtr>  TypePtrVec;
 
     class TypeDeclaration : public AstNode {
      public:
         TypeDeclaration(TypePtrVec types, TokenPtrVec pipes);
 
-        explicit TypeDeclaration(MaikuroParser::TypeDeclarationContext* ctx);
+        explicit TypeDeclaration(MaikuroGrammar::MaikuroParser::TypeDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TypePtrVec& getTypes() const;
 
@@ -81,7 +81,7 @@ namespace MaikuroAst {
         TokenPtrVec _pipes;
     };
 
-    typedef shared_ptr<TypeDeclaration> TypeDeclarationPtr;
-    typedef vector<TypeDeclarationPtr>  TypeDeclarationPtrVec;
+    typedef std::shared_ptr<TypeDeclaration> TypeDeclarationPtr;
+    typedef std::vector<TypeDeclarationPtr>  TypeDeclarationPtrVec;
 }
 

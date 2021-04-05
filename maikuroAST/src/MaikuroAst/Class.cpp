@@ -10,6 +10,10 @@
 #include "MaikuroAst/Type.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     SuperClass::SuperClass(TokenPtr extendsToken, TypeIdentifierPtr className)
         : _extendsToken(extendsToken), _className(className) {
@@ -46,6 +50,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType SuperClass::getNodeType() {
         return NodeType::SUPER_CLASS;
+    }
+
+    void SuperClass::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     SuperInterfaces::SuperInterfaces(
@@ -101,6 +109,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType SuperInterfaces::getNodeType() {
         return NodeType::SUPER_INTERFACES;
+    }
+
+    void SuperInterfaces::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     PropertyDeclaration::PropertyDeclaration(
@@ -199,6 +211,10 @@ namespace MaikuroAst {
         return NodeType::PROPERTY_DECLARATION;
     }
 
+    void PropertyDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     MethodDeclaration::MethodDeclaration(
         AnnotationsPtrVec annotations,
         VisibilityModifierPtr visibility,
@@ -264,6 +280,10 @@ namespace MaikuroAst {
         return NodeType::METHOD_DECLARATION;
     }
 
+    void MethodDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     AnnotationMember::AnnotationMember(AnnotationsPtr annotations)
         : _annotations(annotations), ClassMember() {
     }
@@ -292,6 +312,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType AnnotationMember::getNodeType() {
         return NodeType::ANNOTATION_MEMBER;
+    }
+
+    void AnnotationMember::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     ClassBody::ClassBody(TokenPtr leftBra, ClassMemberPtrVec classMembers, TokenPtr rightBra)
@@ -356,6 +380,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType ClassBody::getNodeType() {
         return NodeType::CLASS_BODY;
+    }
+
+    void ClassBody::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     ClassDeclaration::ClassDeclaration(
@@ -444,5 +472,13 @@ namespace MaikuroAst {
 
     AstNode::NodeType ClassDeclaration::getNodeType() {
         return NodeType::CLASS_DECLARATION;
+    }
+
+    void ClassDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
+    void ClassMember::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

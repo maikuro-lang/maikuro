@@ -8,6 +8,10 @@
 #include "MaikuroAst/Type.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     FormalParameter::FormalParameter(TypePtr type, TokenPtr variadic, IdentifierPtr identifier)
         : _type(type), _variadic(variadic), _identifier(identifier) {
@@ -67,6 +71,10 @@ namespace MaikuroAst {
         return NodeType::FORMAL_PARAMETER;
     }
 
+    void FormalParameter::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     FormalParameterList::FormalParameterList(
         FormalParameterPtrVec parameters,
         TokenPtrVec commas
@@ -117,6 +125,10 @@ namespace MaikuroAst {
         return NodeType::FORMAL_PARAMETER_LIST;
     }
 
+    void FormalParameterList::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     FormalParameters::FormalParameters(
         TokenPtr leftPar,
         FormalParameterListPtr parameters,
@@ -165,6 +177,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType FormalParameters::getNodeType() {
         return NodeType::FORMAL_PARAMETERS;
+    }
+
+    void FormalParameters::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     FunctionHeader::FunctionHeader(
@@ -231,6 +247,10 @@ namespace MaikuroAst {
         return NodeType::FUNCTION_HEADER;
     }
 
+    void FunctionHeader::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     FunctionDeclaration::FunctionDeclaration(
         AnnotationsPtrVec annotations,
         FunctionHeaderPtr functionHeader,
@@ -279,5 +299,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType FunctionDeclaration::getNodeType() {
         return NodeType::FUNCTION_DECLARATION;
+    }
+
+    void FunctionDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

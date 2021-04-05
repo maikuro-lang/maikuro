@@ -7,6 +7,11 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
+
     SourceFile::SourceFile(
         AnnotationsPtrVec annotations,
         PackageDeclarationPtr packageDeclaration,
@@ -79,5 +84,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType SourceFile::getNodeType() {
         return NodeType::SOURCE_FILE;
+    }
+
+    void SourceFile::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

@@ -10,29 +10,27 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Expression;
 
-    typedef shared_ptr<Expression> ExpressionPtr;
-    typedef vector<ExpressionPtr>  ExpressionPtrVec;
+    typedef std::shared_ptr<Expression> ExpressionPtr;
+    typedef std::vector<ExpressionPtr>  ExpressionPtrVec;
 
     class VariableName : public AstNode {
      public:
         VariableName(TokenPtr atSign, IdentifierPtr identifier);
 
-        explicit VariableName(MaikuroParser::VariableNameContext* ctx);
+        explicit VariableName(MaikuroGrammar::MaikuroParser::VariableNameContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getAtSign() const;
 
@@ -43,22 +41,24 @@ namespace MaikuroAst {
         IdentifierPtr _identifier;
     };
 
-    typedef shared_ptr<VariableName> VariableNamePtr;
-    typedef vector<VariableNamePtr>  VariableNamePtrVec;
+    typedef std::shared_ptr<VariableName> VariableNamePtr;
+    typedef std::vector<VariableNamePtr>  VariableNamePtrVec;
 
     class VariableNameDeclaration : public AstNode {
      public:
         VariableNameDeclaration(TypeDeclarationPtr typeDeclaration, VariableNamePtr variableName);
 
-        explicit VariableNameDeclaration(MaikuroParser::VariableDeclarationNameContext* ctx);
+        explicit VariableNameDeclaration(MaikuroGrammar::MaikuroParser::VariableDeclarationNameContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TypeDeclarationPtr& getTypeDeclaration() const;
 
@@ -69,8 +69,8 @@ namespace MaikuroAst {
         VariableNamePtr    _variableName;
     };
 
-    typedef shared_ptr<VariableNameDeclaration> VariableNameDeclarationPtr;
-    typedef vector<VariableNameDeclarationPtr>  VariableNameDeclarationPtrVec;
+    typedef std::shared_ptr<VariableNameDeclaration> VariableNameDeclarationPtr;
+    typedef std::vector<VariableNameDeclarationPtr>  VariableNameDeclarationPtrVec;
 
     class VariableDeclarationExpression : public AstNode {
      public:
@@ -81,15 +81,17 @@ namespace MaikuroAst {
             TokenPtrVec commas
         );
 
-        explicit VariableDeclarationExpression(MaikuroParser::VariableDeclarationExpressionContext* ctx);
+        explicit VariableDeclarationExpression(MaikuroGrammar::MaikuroParser::VariableDeclarationExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getSemicolon() const;
 
@@ -106,8 +108,8 @@ namespace MaikuroAst {
         TokenPtrVec      _commas;
     };
 
-    typedef shared_ptr<VariableDeclarationExpression> VariableDeclarationExpressionPtr;
-    typedef vector<VariableDeclarationExpressionPtr>  VariableDeclarationExpressionPtrVec;
+    typedef std::shared_ptr<VariableDeclarationExpression> VariableDeclarationExpressionPtr;
+    typedef std::vector<VariableDeclarationExpressionPtr>  VariableDeclarationExpressionPtrVec;
 
     class VariableDeclaration : public Statement {
      public:
@@ -120,15 +122,17 @@ namespace MaikuroAst {
             TokenPtr semicolon
         );
 
-        explicit VariableDeclaration(MaikuroParser::VariableDeclarationContext* ctx);
+        explicit VariableDeclaration(MaikuroGrammar::MaikuroParser::VariableDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtrVec& getAnnotations() const;
 
@@ -148,7 +152,7 @@ namespace MaikuroAst {
         VariableDeclarationExpressionPtr _expressions;
     };
 
-    typedef shared_ptr<VariableDeclaration> VariableDeclarationPtr;
-    typedef vector<VariableDeclarationPtr>  VariableDeclarationPtrVec;
+    typedef std::shared_ptr<VariableDeclaration> VariableDeclarationPtr;
+    typedef std::vector<VariableDeclarationPtr>  VariableDeclarationPtrVec;
 }
 

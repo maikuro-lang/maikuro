@@ -2,6 +2,10 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     Literal::Literal(TokenPtr token) : _token(token) {
     }
@@ -33,6 +37,10 @@ namespace MaikuroAst {
         return NodeType::LITERAL;
     }
 
+    void Literal::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     NullLiteral::NullLiteral(TokenPtr token) : Literal(token) {
     }
 
@@ -41,6 +49,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType NullLiteral::getNodeType() {
         return NodeType::NULL_LITERAL;
+    }
+
+    void NullLiteral::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     BoolLiteral::BoolLiteral(TokenPtr token) : Literal(token) {
@@ -53,6 +65,10 @@ namespace MaikuroAst {
         return NodeType::BOOL_LITERAL;
     }
 
+    void BoolLiteral::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     NumberLiteral::NumberLiteral(TokenPtr token) : Literal(token) {
     }
 
@@ -61,6 +77,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType NumberLiteral::getNodeType() {
         return NodeType::NUMBER_LITERAL;
+    }
+
+    void NumberLiteral::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     CharLiteral::CharLiteral(TokenPtr token) : Literal(token) {
@@ -73,6 +93,10 @@ namespace MaikuroAst {
         return NodeType::CHAR_LITERAL;
     }
 
+    void CharLiteral::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     StringLiteral::StringLiteral(TokenPtr token) : Literal(token) {
     }
 
@@ -81,6 +105,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType StringLiteral::getNodeType() {
         return NodeType::STRING_LITERAL;
+    }
+
+    void StringLiteral::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     Identifier::Identifier(TokenPtr token) : Literal(token) {
@@ -93,6 +121,10 @@ namespace MaikuroAst {
         return NodeType::IDENTIFIER;
     }
 
+    void Identifier::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     TypeIdentifier::TypeIdentifier(TokenPtr token) : Literal(token) {
     }
 
@@ -101,6 +133,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType TypeIdentifier::getNodeType() {
         return NodeType::TYPE_IDENTIFIER;
+    }
+
+    void TypeIdentifier::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     VisibilityModifier::VisibilityModifier(TokenPtr token) : Literal(token) {
@@ -115,5 +151,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType VisibilityModifier::getNodeType() {
         return NodeType::VISIBILITY_MODIFIER;
+    }
+
+    void VisibilityModifier::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

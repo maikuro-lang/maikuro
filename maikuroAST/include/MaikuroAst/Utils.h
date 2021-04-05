@@ -4,15 +4,15 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
 
     class Utils {
      public:
         template<typename T>
-        static vector<shared_ptr<Token>> getTokens(vector<shared_ptr<T>> nodes) {
-            vector<shared_ptr<Token>> tokens;
+        static std::vector<std::shared_ptr < Token>> getTokens(
+        std::vector<std::shared_ptr<T>> nodes
+        ) {
+            std::vector<std::shared_ptr < Token>>
+            tokens;
 
             for (const auto& node : nodes) {
                 if (!node) { continue; }
@@ -24,9 +24,9 @@ namespace MaikuroAst {
         }
 
         template<typename T>
-        static string nodesToString(vector<shared_ptr<T>> nodes) {
-            string    out;
-            for (auto node : nodes) {
+        static std::string nodesToString(std::vector<std::shared_ptr<T>> nodes) {
+            std::string out;
+            for (auto   node : nodes) {
                 out += node->toString() + "\n";
             }
 
@@ -34,7 +34,7 @@ namespace MaikuroAst {
         }
 
         template<typename Node, typename... _Args>
-        static shared_ptr<Node> create(_Args&& ... __args) {
+        static std::shared_ptr<Node> create(_Args&& ... __args) {
             typedef typename std::remove_const<Node>::type _Tp_nc;
             return std::allocate_shared<Node>(
                 std::allocator<_Tp_nc>(),
@@ -43,9 +43,12 @@ namespace MaikuroAst {
         }
 
         template<typename T, typename C>
-        static vector<shared_ptr<T>> create(vector<C> contexts) {
-            vector<shared_ptr<T>> result;
-            for (auto             ctx : contexts) {
+        static std::vector<std::shared_ptr < T>> create(
+        std::vector<C> contexts
+        ) {
+            std::vector<std::shared_ptr<T>>
+            result;
+            for (auto ctx : contexts) {
                 result.push_back(create<T>(ctx));
             }
 

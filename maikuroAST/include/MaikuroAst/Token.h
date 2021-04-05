@@ -4,11 +4,11 @@
 #include "AstNode.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using antlr4::tree::ParseTree;
-    using antlr4::tree::TerminalNode;
+
+    class Token;
+
+    typedef std::shared_ptr<Token> TokenPtr;
+    typedef std::vector<TokenPtr>  TokenPtrVec;
 
     class Token : public AstNode, std::enable_shared_from_this<Token> {
      public:
@@ -134,7 +134,7 @@ namespace MaikuroAst {
 
         Token(
             Type type,
-            const string& text,
+            const std::string& text,
             int line,
             int position
         );
@@ -147,42 +147,42 @@ namespace MaikuroAst {
 
         NodeType getNodeType() override;
 
+        void accept(AstNodeVisitor* visitor) override;
+
         TokenType getTokenType();
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
-        const string& getValue() const;
+        const std::string& getValue() const;
 
         int getLine() override;
 
-        static void mergeTokens(vector<shared_ptr<Token>>* left, vector<shared_ptr<Token>> right);
+        static void mergeTokens(TokenPtrVec* left, TokenPtrVec right);
 
-        static shared_ptr<Token> createToken(TerminalNode* token);
+        static TokenPtr createToken(antlr4::tree::TerminalNode* token);
 
-        static shared_ptr<Token> createToken(antlr4::Token* token);
+        static TokenPtr createToken(antlr4::Token* token);
 
-        static shared_ptr<Token> createToken(ParseTree* token);
+        static TokenPtr createToken(antlr4::tree::ParseTree* token);
 
-        static vector<shared_ptr<Token>> createTokens(vector<TerminalNode*> tokens);
+        static TokenPtrVec createTokens(std::vector<antlr4::tree::TerminalNode*> tokens);
 
-        static vector<shared_ptr<Token>> createTokens(vector<antlr4::Token*> tokens);
+        static TokenPtrVec createTokens(std::vector<antlr4::Token*> tokens);
 
-        static vector<shared_ptr<Token>> createFromChildren(vector<ParseTree*> children);
+        static TokenPtrVec createFromChildren(std::vector<antlr4::tree::ParseTree*> children);
 
-        static string toString(std::initializer_list<shared_ptr<Token>> tokens);
+        static std::string toString(std::initializer_list<std::shared_ptr<Token>> tokens);
 
-        static string toString(vector<shared_ptr<Token>> tokens);
+        static std::string toString(TokenPtrVec tokens);
 
      private:
-        Type   _type;
-        string _text;
-        int    _line;
-        int    _position;
+        Type        _type;
+        std::string _text;
+        int         _line;
+        int         _position;
     };
 
-    typedef shared_ptr<Token> TokenPtr;
-    typedef vector<TokenPtr>  TokenPtrVec;
 }
 

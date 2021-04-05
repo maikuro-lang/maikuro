@@ -10,6 +10,8 @@
 #include "MaikuroAst/Statement.h"
 
 namespace MaikuroAst {
+    using MaikuroGrammar::MaikuroParser;
+
     StatementPtr sb_createStatement(MaikuroParser::StatementContext* ctx) {
         if (ctx->blockLabel) {
             return Utils::create<MaikuroAst::Block>(ctx->blockLabel);
@@ -94,7 +96,7 @@ namespace MaikuroAst {
         return nullptr;
     }
 
-    StatementPtrVec sb_createStatement(vector<MaikuroParser::StatementContext*> ctx) {
+    StatementPtrVec sb_createStatement(std::vector<MaikuroParser::StatementContext*> ctx) {
         StatementPtrVec statements;
 
         for (auto statement : ctx) {

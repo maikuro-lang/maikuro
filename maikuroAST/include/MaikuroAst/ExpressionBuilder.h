@@ -6,10 +6,7 @@
 #include "Utils.h"
 
 namespace MaikuroAst {
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
+    ExpressionPtr eb_createExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
-    ExpressionPtr eb_createExpression(MaikuroParser::ExpressionContext* ctx);
-
-    ExpressionPtrVec eb_createExpressions(vector<MaikuroParser::ExpressionContext*> ctxs);
+    ExpressionPtrVec eb_createExpressions(std::vector<MaikuroGrammar::MaikuroParser::ExpressionContext*> ctxs);
 }

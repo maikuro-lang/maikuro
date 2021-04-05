@@ -5,10 +5,6 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Literal : public AstNode {
      public:
@@ -22,18 +18,20 @@ namespace MaikuroAst {
 
         NodeType getNodeType() override;
 
-        string getValue();
+        void accept(AstNodeVisitor* visitor) override;
+
+        std::string getValue();
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
      private:
         TokenPtr _token;
     };
 
-    typedef shared_ptr<Literal> LiteralPtr;
-    typedef vector<LiteralPtr>  LiteralPtrVec;
+    typedef std::shared_ptr<Literal> LiteralPtr;
+    typedef std::vector<LiteralPtr>  LiteralPtrVec;
 
     class NullLiteral : public Literal {
      public:
@@ -42,9 +40,11 @@ namespace MaikuroAst {
         explicit NullLiteral(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<NullLiteral> NullLiteralPtr;
+    typedef std::shared_ptr<NullLiteral> NullLiteralPtr;
 
     class BoolLiteral : public Literal {
      public:
@@ -53,9 +53,11 @@ namespace MaikuroAst {
         explicit BoolLiteral(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<BoolLiteral> BoolLiteralPtr;
+    typedef std::shared_ptr<BoolLiteral> BoolLiteralPtr;
 
     class NumberLiteral : public Literal {
      public:
@@ -64,9 +66,11 @@ namespace MaikuroAst {
         explicit NumberLiteral(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<NumberLiteral> NumberLiteralPtr;
+    typedef std::shared_ptr<NumberLiteral> NumberLiteralPtr;
 
     class CharLiteral : public Literal {
      public:
@@ -75,9 +79,11 @@ namespace MaikuroAst {
         explicit CharLiteral(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<CharLiteral> CharLiteralPtr;
+    typedef std::shared_ptr<CharLiteral> CharLiteralPtr;
 
     class StringLiteral : public Literal {
      public:
@@ -86,9 +92,11 @@ namespace MaikuroAst {
         explicit StringLiteral(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<StringLiteral> StringLiteralPtr;
+    typedef std::shared_ptr<StringLiteral> StringLiteralPtr;
 
     class Identifier : public Literal {
      public:
@@ -97,10 +105,12 @@ namespace MaikuroAst {
         explicit Identifier(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<Identifier> IdentifierPtr;
-    typedef vector<IdentifierPtr>  IdentifierPtrVec;
+    typedef std::shared_ptr<Identifier> IdentifierPtr;
+    typedef std::vector<IdentifierPtr>  IdentifierPtrVec;
 
     class TypeIdentifier : public Literal {
      public:
@@ -109,22 +119,26 @@ namespace MaikuroAst {
         explicit TypeIdentifier(antlr4::tree::TerminalNode* node);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<TypeIdentifier> TypeIdentifierPtr;
-    typedef vector<TypeIdentifierPtr>  TypeIdentifierPtrVec;
+    typedef std::shared_ptr<TypeIdentifier> TypeIdentifierPtr;
+    typedef std::vector<TypeIdentifierPtr>  TypeIdentifierPtrVec;
 
     class VisibilityModifier : public Literal {
      public:
         explicit VisibilityModifier(TokenPtr token);
 
-        explicit VisibilityModifier(MaikuroParser::VisibilityModifierContext* ctx);
+        explicit VisibilityModifier(MaikuroGrammar::MaikuroParser::VisibilityModifierContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<VisibilityModifier> VisibilityModifierPtr;
-    typedef vector<VisibilityModifierPtr>  VisibilityModifierPtrVec;
+    typedef std::shared_ptr<VisibilityModifier> VisibilityModifierPtr;
+    typedef std::vector<VisibilityModifierPtr>  VisibilityModifierPtrVec;
 }
 
 

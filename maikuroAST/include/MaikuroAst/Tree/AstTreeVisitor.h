@@ -11,9 +11,9 @@ namespace MaikuroAst::Tree {
     class AstTreeVisitor {
      public:
         template<typename T>
-        vector<ReturnType> visit(vector<T> nodes) {
-            vector<ReturnType> results;
-            for (auto node : nodes) {
+        std::vector<ReturnType> visit(vector<T> nodes) {
+            std::vector<ReturnType> results;
+            for (auto               node : nodes) {
                 results.push_back(visit(node));
             }
 

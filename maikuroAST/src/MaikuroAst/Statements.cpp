@@ -10,6 +10,10 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     TokenExpressionStatement::TokenExpressionStatement(
         TokenPtr token,
@@ -51,6 +55,10 @@ namespace MaikuroAst {
         return NodeType::TOKEN_EXPRESSION_STATEMENT;
     }
 
+    void TokenExpressionStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     ReturnStatement::ReturnStatement(
         const TokenPtr& token,
         const ExpressionPtr& expression,
@@ -70,6 +78,10 @@ namespace MaikuroAst {
         return NodeType::RETURN_STATEMENT;
     }
 
+    void ReturnStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     ThrowStatement::ThrowStatement(
         const TokenPtr& token,
         const ExpressionPtr& expression,
@@ -87,6 +99,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType ThrowStatement::getNodeType() {
         return NodeType::THROW_STATEMENT;
+    }
+
+    void ThrowStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     TokenNumberLiteralStatement::TokenNumberLiteralStatement(
@@ -129,6 +145,10 @@ namespace MaikuroAst {
         return NodeType::TOKEN_NUMBER_LITERAL_STATEMENT;
     }
 
+    void TokenNumberLiteralStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     BreakStatement::BreakStatement(
         const TokenPtr& token,
         const NumberLiteralPtr& numberLiteral,
@@ -148,6 +168,10 @@ namespace MaikuroAst {
         return NodeType::BREAK_STATEMENT;
     }
 
+    void BreakStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     ContinueStatement::ContinueStatement(
         const TokenPtr& token,
         const NumberLiteralPtr& numberLiteral,
@@ -165,6 +189,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType ContinueStatement::getNodeType() {
         return NodeType::CONTINUE_STATEMENT;
+    }
+
+    void ContinueStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     IfStatement::IfStatement(
@@ -239,6 +267,10 @@ namespace MaikuroAst {
         return NodeType::IF_STATEMENT;
     }
 
+    void IfStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     UnlessStatement::UnlessStatement(
         const TokenPtr& token,
         const ParExpresionPtr& expresion,
@@ -259,6 +291,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType UnlessStatement::getNodeType() {
         return NodeType::UNLESS_STATEMENT;
+    }
+
+    void UnlessStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     WhileStatement::WhileStatement(
@@ -312,6 +348,10 @@ namespace MaikuroAst {
         return NodeType::WHILE_STATEMENT;
     }
 
+    void WhileStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     UntilStatement::UntilStatement(
         const TokenPtr& token,
         const ParExpresionPtr& expresion,
@@ -331,6 +371,10 @@ namespace MaikuroAst {
         return NodeType::UNTIL_STATEMENT;
     }
 
+    void UntilStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     LoopStatement::LoopStatement(
         const TokenPtr& token,
         const ParExpresionPtr& expresion,
@@ -348,6 +392,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType LoopStatement::getNodeType() {
         return NodeType::LOOP_STATEMENT;
+    }
+
+    void LoopStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     DoWhileStatement::DoWhileStatement(
@@ -392,6 +440,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType DoWhileStatement::getNodeType() {
         return NodeType::DO_WHILE_STATEMENT;
+    }
+
+    void DoWhileStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     ForControl::ForControl(
@@ -489,6 +541,10 @@ namespace MaikuroAst {
         return NodeType::FOR_CONTROL;
     }
 
+    void ForControl::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     ForStatement::ForStatement(
         const TokenPtr& forToken,
         const TokenPtr& leftPar,
@@ -558,6 +614,10 @@ namespace MaikuroAst {
         return NodeType::FOR_STATEMENT;
     }
 
+    void ForStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     ForeachControl::ForeachControl(
         const ExpressionPtr& expression,
         const TokenPtr& asToken,
@@ -615,6 +675,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType ForeachControl::getNodeType() {
         return NodeType::FOREACH_CONTROL;
+    }
+
+    void ForeachControl::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     ForeachStatement::ForeachStatement(
@@ -687,6 +751,10 @@ namespace MaikuroAst {
         return NodeType::FOREACH_STATEMENT;
     }
 
+    void ForeachStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     FinallyBlock::FinallyBlock(const TokenPtr& finallyToken, const BlockPtr& block)
         : _finallyToken(finallyToken), _block(block) {
     }
@@ -723,6 +791,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType FinallyBlock::getNodeType() {
         return NodeType::FINALLY_BLOCK;
+    }
+
+    void FinallyBlock::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     CatchClause::CatchClause(
@@ -817,6 +889,10 @@ namespace MaikuroAst {
         return NodeType::CATCH_CLAUSE;
     }
 
+    void CatchClause::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     TryStatement::TryStatement(
         const TokenPtr& tryToken,
         const BlockPtr& block,
@@ -871,6 +947,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType TryStatement::getNodeType() {
         return NodeType::TRY_STATEMENT;
+    }
+
+    void TryStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     SwitchLabel::SwitchLabel(
@@ -952,6 +1032,10 @@ namespace MaikuroAst {
         return NodeType::SWITCH_LABEL;
     }
 
+    void SwitchLabel::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     SwitchBlockStatementGroup::SwitchBlockStatementGroup(
         const SwitchLabelPtrVec& switchLabels,
         const StatementPtrVec& statements
@@ -992,6 +1076,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType SwitchBlockStatementGroup::getNodeType() {
         return NodeType::SWITCH_BLOCK_STATEMENT_GROUP;
+    }
+
+    void SwitchBlockStatementGroup::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     SwitchStatement::SwitchStatement(
@@ -1072,5 +1160,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType SwitchStatement::getNodeType() {
         return NodeType::SWITCH_STATEMENT;
+    }
+
+    void SwitchStatement::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

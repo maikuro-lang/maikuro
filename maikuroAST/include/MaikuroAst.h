@@ -25,12 +25,14 @@
 #include "MaikuroAst/Tree/AstTreeVisitor.h"
 #include "MaikuroAst/Tree/AstTreeBaseVisitor.h"
 #include "MaikuroAst/Tree/AstTreeCodeGenerator.h"
+#include "MaikuroAst/AstNodeVisitor.h"
+#include "MaikuroAst/AstTreeNodeVisitor.h"
 
 namespace MaikuroAst {
 
     class Parser {
      public:
-        static SourceFilePtr parse(const string& sourceCode);
+        static SourceFilePtr parse(const std::string& sourceCode);
     };
 
 }

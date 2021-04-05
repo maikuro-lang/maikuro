@@ -11,10 +11,6 @@
 #include "Variable.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class TokenExpressionStatement : public Statement {
      public:
@@ -24,11 +20,13 @@ namespace MaikuroAst {
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         const TokenPtr& getToken() const;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getExpression() const;
 
@@ -41,23 +39,27 @@ namespace MaikuroAst {
      public:
         ReturnStatement(const TokenPtr& token, const ExpressionPtr& expression, const TokenPtr& semicolon);
 
-        explicit ReturnStatement(MaikuroParser::StatementContext* ctx);
+        explicit ReturnStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<ReturnStatement> ReturnStatementPtr;
+    typedef std::shared_ptr<ReturnStatement> ReturnStatementPtr;
 
     class ThrowStatement : public TokenExpressionStatement {
      public:
         ThrowStatement(const TokenPtr& token, const ExpressionPtr& expression, const TokenPtr& semicolon);
 
-        explicit ThrowStatement(MaikuroParser::StatementContext* ctx);
+        explicit ThrowStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<ThrowStatement> ThrowStatementPtr;
+    typedef std::shared_ptr<ThrowStatement> ThrowStatementPtr;
 
     class TokenNumberLiteralStatement : public Statement {
      public:
@@ -67,11 +69,13 @@ namespace MaikuroAst {
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         const TokenPtr& getToken() const;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const NumberLiteralPtr& getNumberLiteral() const;
 
@@ -84,23 +88,27 @@ namespace MaikuroAst {
      public:
         BreakStatement(const TokenPtr& token, const NumberLiteralPtr& numberLiteral, const TokenPtr& semicolon);
 
-        explicit BreakStatement(MaikuroParser::StatementContext* ctx);
+        explicit BreakStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<BreakStatement> BreakStatementPtr;
+    typedef std::shared_ptr<BreakStatement> BreakStatementPtr;
 
     class ContinueStatement : public TokenNumberLiteralStatement {
      public:
         ContinueStatement(const TokenPtr& token, const NumberLiteralPtr& numberLiteral, const TokenPtr& semicolon);
 
-        explicit ContinueStatement(MaikuroParser::StatementContext* ctx);
+        explicit ContinueStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<ContinueStatement> ContinueStatementPtr;
+    typedef std::shared_ptr<ContinueStatement> ContinueStatementPtr;
 
     class IfStatement : public Statement {
      public:
@@ -112,15 +120,17 @@ namespace MaikuroAst {
             const StatementPtr& elseStatement
         );
 
-        explicit IfStatement(MaikuroParser::StatementContext* ctx);
+        explicit IfStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getToken() const;
 
@@ -140,7 +150,7 @@ namespace MaikuroAst {
         StatementPtr    _elseStatement;
     };
 
-    typedef shared_ptr<IfStatement> IfStatementPtr;
+    typedef std::shared_ptr<IfStatement> IfStatementPtr;
 
     class UnlessStatement : public IfStatement {
      public:
@@ -152,12 +162,14 @@ namespace MaikuroAst {
             const StatementPtr& elseStatement
         );
 
-        explicit UnlessStatement(MaikuroParser::StatementContext* ctx);
+        explicit UnlessStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<UnlessStatement> UnlessStatementPtr;
+    typedef std::shared_ptr<UnlessStatement> UnlessStatementPtr;
 
     class WhileStatement : public Statement {
      public:
@@ -167,15 +179,17 @@ namespace MaikuroAst {
             const BlockPtr& block
         );
 
-        explicit WhileStatement(MaikuroParser::StatementContext* ctx);
+        explicit WhileStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getToken() const;
 
@@ -189,29 +203,33 @@ namespace MaikuroAst {
         BlockPtr        _block;
     };
 
-    typedef shared_ptr<WhileStatement> WhileStatementPtr;
+    typedef std::shared_ptr<WhileStatement> WhileStatementPtr;
 
     class UntilStatement : public WhileStatement {
      public:
         UntilStatement(const TokenPtr& token, const ParExpresionPtr& expresion, const BlockPtr& block);
 
-        explicit UntilStatement(MaikuroParser::StatementContext* ctx);
+        explicit UntilStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<UntilStatement> UntilStatementPtr;
+    typedef std::shared_ptr<UntilStatement> UntilStatementPtr;
 
     class LoopStatement : public WhileStatement {
      public:
         LoopStatement(const TokenPtr& token, const ParExpresionPtr& expresion, const BlockPtr& block);
 
-        explicit LoopStatement(MaikuroParser::StatementContext* ctx);
+        explicit LoopStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
     };
 
-    typedef shared_ptr<LoopStatement> LoopStatementPtr;
+    typedef std::shared_ptr<LoopStatement> LoopStatementPtr;
 
     class DoWhileStatement : public WhileStatement {
      public:
@@ -223,7 +241,7 @@ namespace MaikuroAst {
             const TokenPtr& semicolon
         );
 
-        explicit DoWhileStatement(MaikuroParser::StatementContext* ctx);
+        explicit DoWhileStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
@@ -231,13 +249,15 @@ namespace MaikuroAst {
 
         NodeType getNodeType() override;
 
+        void accept(AstNodeVisitor* visitor) override;
+
         const TokenPtr& getDoToken() const;
 
      private:
         TokenPtr _doToken;
     };
 
-    typedef shared_ptr<DoWhileStatement> DoWhileStatementPtr;
+    typedef std::shared_ptr<DoWhileStatement> DoWhileStatementPtr;
 
     class ForControl : public AstNode {
      public:
@@ -249,15 +269,17 @@ namespace MaikuroAst {
             const TokenPtrVec& semicolons
         );
 
-        explicit ForControl(MaikuroParser::ForControlContext* ctx);
+        explicit ForControl(MaikuroGrammar::MaikuroParser::ForControlContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const VariableDeclarationPtr& getVariableDeclaration() const;
 
@@ -277,7 +299,7 @@ namespace MaikuroAst {
         TokenPtrVec            _semicolons;
     };
 
-    typedef shared_ptr<ForControl> ForControlPtr;
+    typedef std::shared_ptr<ForControl> ForControlPtr;
 
     class ForStatement : public Statement {
      public:
@@ -289,15 +311,17 @@ namespace MaikuroAst {
             const StatementPtr& statement
         );
 
-        explicit ForStatement(MaikuroParser::StatementContext* ctx);
+        explicit ForStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getForToken() const;
 
@@ -317,7 +341,7 @@ namespace MaikuroAst {
         StatementPtr  _statement;
     };
 
-    typedef shared_ptr<ForStatement> ForStatementPtr;
+    typedef std::shared_ptr<ForStatement> ForStatementPtr;
 
     class ForeachControl : public AstNode {
      public:
@@ -328,15 +352,17 @@ namespace MaikuroAst {
             const TokenPtr& doubleArrow
         );
 
-        explicit ForeachControl(MaikuroParser::ForeachControlContext* ctx);
+        explicit ForeachControl(MaikuroGrammar::MaikuroParser::ForeachControlContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getExpression() const;
 
@@ -353,7 +379,7 @@ namespace MaikuroAst {
         TokenPtr         _doubleArrow;
     };
 
-    typedef shared_ptr<ForeachControl> ForeachControlPtr;
+    typedef std::shared_ptr<ForeachControl> ForeachControlPtr;
 
     class ForeachStatement : public Statement {
      public:
@@ -365,15 +391,17 @@ namespace MaikuroAst {
             const StatementPtr& statement
         );
 
-        explicit ForeachStatement(MaikuroParser::StatementContext* ctx);
+        explicit ForeachStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getForeachToken() const;
 
@@ -393,7 +421,7 @@ namespace MaikuroAst {
         StatementPtr      _statement;
     };
 
-    typedef shared_ptr<ForeachStatement> ForeachStatementPtr;
+    typedef std::shared_ptr<ForeachStatement> ForeachStatementPtr;
 
     class CatchClause : public AstNode {
      public:
@@ -407,15 +435,17 @@ namespace MaikuroAst {
             const BlockPtr& block
         );
 
-        explicit CatchClause(MaikuroParser::CatchClauseContext* ctx);
+        explicit CatchClause(MaikuroGrammar::MaikuroParser::CatchClauseContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getCatchToken() const;
 
@@ -441,22 +471,24 @@ namespace MaikuroAst {
         BlockPtr             _block;
     };
 
-    typedef shared_ptr<CatchClause> CatchClausePtr;
-    typedef vector<CatchClausePtr>  CatchClausePtrVec;
+    typedef std::shared_ptr<CatchClause> CatchClausePtr;
+    typedef std::vector<CatchClausePtr>  CatchClausePtrVec;
 
     class FinallyBlock : public AstNode {
      public:
         FinallyBlock(const TokenPtr& finallyToken, const BlockPtr& block);
 
-        explicit FinallyBlock(MaikuroParser::FinallyBlockContext* ctx);
+        explicit FinallyBlock(MaikuroGrammar::MaikuroParser::FinallyBlockContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getFinallyToken() const;
 
@@ -467,8 +499,8 @@ namespace MaikuroAst {
         BlockPtr _block;
     };
 
-    typedef shared_ptr<FinallyBlock> FinallyBlockPtr;
-    typedef vector<FinallyBlockPtr>  FinallyBlockPtrVec;
+    typedef std::shared_ptr<FinallyBlock> FinallyBlockPtr;
+    typedef std::vector<FinallyBlockPtr>  FinallyBlockPtrVec;
 
     class TryStatement : public Statement {
      public:
@@ -479,15 +511,17 @@ namespace MaikuroAst {
             const FinallyBlockPtr& finallyBlock
         );
 
-        explicit TryStatement(MaikuroParser::StatementContext* ctx);
+        explicit TryStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getTryToken() const;
 
@@ -504,7 +538,7 @@ namespace MaikuroAst {
         FinallyBlockPtr   _finallyBlock;
     };
 
-    typedef shared_ptr<TryStatement> TryStatementPtr;
+    typedef std::shared_ptr<TryStatement> TryStatementPtr;
 
     class SwitchLabel : public AstNode {
      public:
@@ -516,15 +550,17 @@ namespace MaikuroAst {
             const TokenPtr& colon
         );
 
-        explicit SwitchLabel(MaikuroParser::SwitchLabelContext* ctx);
+        explicit SwitchLabel(MaikuroGrammar::MaikuroParser::SwitchLabelContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getCaseToken() const;
 
@@ -544,22 +580,24 @@ namespace MaikuroAst {
         TokenPtr      _colon;
     };
 
-    typedef shared_ptr<SwitchLabel> SwitchLabelPtr;
-    typedef vector<SwitchLabelPtr>  SwitchLabelPtrVec;
+    typedef std::shared_ptr<SwitchLabel> SwitchLabelPtr;
+    typedef std::vector<SwitchLabelPtr>  SwitchLabelPtrVec;
 
     class SwitchBlockStatementGroup : public AstNode {
      public:
         SwitchBlockStatementGroup(const SwitchLabelPtrVec& switchLabels, const StatementPtrVec& statements);
 
-        explicit SwitchBlockStatementGroup(MaikuroParser::SwitchBlockStatementGroupContext* ctx);
+        explicit SwitchBlockStatementGroup(MaikuroGrammar::MaikuroParser::SwitchBlockStatementGroupContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const SwitchLabelPtrVec& getSwitchLabels() const;
 
@@ -570,8 +608,8 @@ namespace MaikuroAst {
         StatementPtrVec   _statements;
     };
 
-    typedef shared_ptr<SwitchBlockStatementGroup> SwitchBlockStatementGroupPtr;
-    typedef vector<SwitchBlockStatementGroupPtr>  SwitchBlockStatementGroupPtrVec;
+    typedef std::shared_ptr<SwitchBlockStatementGroup> SwitchBlockStatementGroupPtr;
+    typedef std::vector<SwitchBlockStatementGroupPtr>  SwitchBlockStatementGroupPtrVec;
 
     class SwitchStatement : public Statement {
      public:
@@ -584,15 +622,17 @@ namespace MaikuroAst {
             const TokenPtr& rightBra
         );
 
-        explicit SwitchStatement(MaikuroParser::StatementContext* ctx);
+        explicit SwitchStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getSwitchToken() const;
 
@@ -615,6 +655,6 @@ namespace MaikuroAst {
         TokenPtr                        _rightBra;
     };
 
-    typedef shared_ptr<SwitchStatement> SwitchStatementPtr;
+    typedef std::shared_ptr<SwitchStatement> SwitchStatementPtr;
 }
 

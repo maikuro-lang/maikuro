@@ -5,6 +5,10 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     Annotation::Annotation(TypeIdentifierPtr typeIdentifier, ArgumentsPtr arguments)
         : _typeIdentifier(typeIdentifier), _arguments(arguments) {
@@ -46,6 +50,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType Annotation::getNodeType() {
         return NodeType::ANNOTATION;
+    }
+
+    void Annotation::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     Annotations::Annotations(
@@ -108,5 +116,22 @@ namespace MaikuroAst {
 
     AstNode::NodeType Annotations::getNodeType() {
         return NodeType::ANNOTATIONS;
+    }
+
+    void Annotations::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+
+        this->getPrefix()->accept(visitor);
+
+        int       i = 0;
+        for (const auto& annotation : this->getAnnotations()) {
+            annotation->accept(visitor);
+
+            if (this->getCommas().size() > i) {
+                this->getCommas()[i++]->accept(visitor);
+            }
+        }
+
+        this->getCloseBracket()->accept(visitor);
     }
 }

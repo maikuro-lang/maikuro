@@ -6,10 +6,8 @@
 #include "ExpressionBuilder.h"
 
 namespace MaikuroAst {
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
-    StatementPtr sb_createStatement(MaikuroParser::StatementContext* ctx);
+    StatementPtr sb_createStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
-    StatementPtrVec sb_createStatement(vector<MaikuroParser::StatementContext*> ctx);
+    StatementPtrVec sb_createStatement(std::vector<MaikuroGrammar::MaikuroParser::StatementContext*> ctx);
 }

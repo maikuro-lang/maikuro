@@ -1,6 +1,10 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     Token::Token(Token::Type type, const string& text, int line, int position) :
         _type(type), _text(text), _line(line), _position(position) {
@@ -479,5 +483,9 @@ namespace MaikuroAst {
             default:
                 return T_UNKNOWN;
         }
+    }
+
+    void Token::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

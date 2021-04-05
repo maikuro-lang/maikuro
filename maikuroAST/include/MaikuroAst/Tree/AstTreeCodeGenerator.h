@@ -9,12 +9,12 @@ namespace MaikuroAst::Tree {
     using std::string;
     using std::initializer_list;
 
-    typedef vector<string>        StringVec;
-    typedef shared_ptr<StringVec> StringVecPtr;
+    typedef std::vector<string>        StringVec;
+    typedef std::shared_ptr<StringVec> StringVecPtr;
 
     class AstTreeCodeGenerator : public AstTreeVisitor<StringVecPtr> {
      public:
-        static string build(MaikuroAst::SourceFilePtr sourceFile);
+        static std::string build(MaikuroAst::SourceFilePtr sourceFile);
 
         StringVecPtr visit(MaikuroAst::AliasDeclarationPtr node) override;
 

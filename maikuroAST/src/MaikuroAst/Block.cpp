@@ -5,6 +5,11 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
+
     Block::Block(TokenPtr leftBra, StatementPtrVec statements, TokenPtr rightBra)
         : _leftBra(leftBra), _statements(statements), _rightBra(rightBra), Statement(nullptr) {
     }
@@ -44,5 +49,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType Block::getNodeType() {
         return NodeType::BLOCK;
+    }
+
+    void Block::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

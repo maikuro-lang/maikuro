@@ -5,26 +5,24 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Block : public Statement {
      public:
         explicit Block(TokenPtr leftBra, StatementPtrVec statements, TokenPtr rightBra);
 
-        explicit Block(MaikuroParser::BlockContext* ctx);
+        explicit Block(MaikuroGrammar::MaikuroParser::BlockContext* ctx);
 
         int getLine() override {
             return _leftBra->getLine();
         }
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getLeftBra() const;
 
@@ -38,6 +36,6 @@ namespace MaikuroAst {
         TokenPtr        _rightBra;
     };
 
-    typedef shared_ptr<Block> BlockPtr;
+    typedef std::shared_ptr<Block> BlockPtr;
 }
 

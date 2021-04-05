@@ -2,6 +2,7 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+
     Statement::Statement(TokenPtr semicolon) : _semicolonToken(semicolon) {
     }
 
@@ -19,7 +20,7 @@ namespace MaikuroAst {
         return _semicolonToken->getLine();
     }
 
-    string Statement::toString() {
+    std::string Statement::toString() {
         return _semicolonToken->toString();
     }
 

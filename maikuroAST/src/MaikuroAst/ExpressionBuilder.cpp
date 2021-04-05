@@ -4,6 +4,8 @@
 #include "MaikuroAst/Expression.h"
 
 namespace MaikuroAst {
+    using MaikuroGrammar::MaikuroParser;
+
     ExpressionPtr eb_createExpression(MaikuroParser::ExpressionContext* ctx) {
         if (ctx->primary()) {
             return Utils::create<PrimaryExpression>(ctx->primary());
@@ -52,7 +54,7 @@ namespace MaikuroAst {
         return nullptr;
     }
 
-    ExpressionPtrVec eb_createExpressions(vector<MaikuroParser::ExpressionContext*> ctxs) {
+    ExpressionPtrVec eb_createExpressions(std::vector<MaikuroParser::ExpressionContext*> ctxs) {
         ExpressionPtrVec expressions;
 
         for (auto ctx : ctxs) {

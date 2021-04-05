@@ -7,24 +7,22 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class PackageName : public AstNode {
      public:
         PackageName(IdentifierPtrVec identifiers, TypeIdentifierPtr typeIdentifier, TokenPtrVec dots);
 
-        explicit PackageName(MaikuroParser::PackageNameContext* ctx);
+        explicit PackageName(MaikuroGrammar::MaikuroParser::PackageNameContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const IdentifierPtrVec& getIdentifiers() const;
 
@@ -38,21 +36,23 @@ namespace MaikuroAst {
         TokenPtrVec       _dots;
     };
 
-    typedef shared_ptr<PackageName> PackageNamePtr;
+    typedef std::shared_ptr<PackageName> PackageNamePtr;
 
     class PackageDeclaration : public Statement {
      public:
         PackageDeclaration(TokenPtr packageToken, PackageNamePtr packageName, TokenPtr semicolon);
 
-        PackageDeclaration(MaikuroParser::PackageDeclarationContext* ctx);
+        PackageDeclaration(MaikuroGrammar::MaikuroParser::PackageDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getPackageToken() const;
 
@@ -63,7 +63,7 @@ namespace MaikuroAst {
         PackageNamePtr _packageName;
     };
 
-    typedef shared_ptr<PackageDeclaration> PackageDeclarationPtr;
+    typedef std::shared_ptr<PackageDeclaration> PackageDeclarationPtr;
 
     class ImportDeclaration : public Statement {
      public:
@@ -75,11 +75,11 @@ namespace MaikuroAst {
             TokenPtr semicolon
         );
 
-        explicit ImportDeclaration(MaikuroParser::ImportDeclarationContext* ctx);
+        explicit ImportDeclaration(MaikuroGrammar::MaikuroParser::ImportDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
@@ -88,6 +88,8 @@ namespace MaikuroAst {
         const TokenPtr& getAsToken() const;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const PackageNamePtr& getPackageName() const;
 
@@ -100,7 +102,7 @@ namespace MaikuroAst {
         TypeIdentifierPtr _alias;
     };
 
-    typedef shared_ptr<ImportDeclaration> ImportDeclarationPtr;
-    typedef vector<ImportDeclarationPtr>  ImportDeclarationPtrVec;
+    typedef std::shared_ptr<ImportDeclaration> ImportDeclarationPtr;
+    typedef std::vector<ImportDeclarationPtr>  ImportDeclarationPtrVec;
 }
 

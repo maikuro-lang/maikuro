@@ -6,6 +6,10 @@
 #include "MaikuroAst/Type.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     AliasDeclaration::AliasDeclaration(
         AnnotationsPtrVec annotations,
@@ -80,5 +84,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType AliasDeclaration::getNodeType() {
         return NodeType::ALIAS_DECLARATION;
+    }
+
+    void AliasDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

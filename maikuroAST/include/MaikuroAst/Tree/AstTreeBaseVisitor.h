@@ -8,295 +8,295 @@ namespace MaikuroAst::Tree {
     template<typename ReturnType>
     class AstTreeBaseVisitor : public AstTreeVisitor<ReturnType> {
      public:
-        ReturnType visit(AliasDeclarationPtr node) override {
+        ReturnType visit(AliasDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(AnnotationPtr node) override {
+        ReturnType visit(AnnotationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(AnnotationsPtr node) override {
+        ReturnType visit(AnnotationsPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ArgumentPtr node) override {
+        ReturnType visit(ArgumentPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ArgumentsPtr node) override {
+        ReturnType visit(ArgumentsPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(BlockPtr node) override {
+        ReturnType visit(BlockPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SuperClassPtr node) override {
+        ReturnType visit(SuperClassPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SuperInterfacesPtr node) override {
+        ReturnType visit(SuperInterfacesPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ClassMemberPtr node) override {
+        ReturnType visit(ClassMemberPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(PropertyDeclarationPtr node) override {
+        ReturnType visit(PropertyDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(MethodDeclarationPtr node) override {
+        ReturnType visit(MethodDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(AnnotationMemberPtr node) override {
+        ReturnType visit(AnnotationMemberPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ClassBodyPtr node) override {
+        ReturnType visit(ClassBodyPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ClassDeclarationPtr node) override {
+        ReturnType visit(ClassDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ExpressionListPtr node) override {
+        ReturnType visit(ExpressionListPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(PrimaryExpressionPtr node) override {
+        ReturnType visit(PrimaryExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(VariableNameExpressionPtr node) override {
+        ReturnType visit(VariableNameExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ParExpresionPtr node) override {
+        ReturnType visit(ParExpresionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(MethodCallPtr node) override {
+        ReturnType visit(MethodCallPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(DotExpressionPtr node) override {
+        ReturnType visit(DotExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(MethodCallExpressionPtr node) override {
+        ReturnType visit(MethodCallExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(NewDeclaratorExpressionPtr node) override {
+        ReturnType visit(NewDeclaratorExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SuffixExpressionPtr node) override {
+        ReturnType visit(SuffixExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(PrefixExpressionPtr node) override {
+        ReturnType visit(PrefixExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(BopExpressionPtr node) override {
+        ReturnType visit(BopExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(TernaryExpressionPtr node) override {
+        ReturnType visit(TernaryExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(MatchExpressionCasePtr node) override {
+        ReturnType visit(MatchExpressionCasePtr) override {
             return nullptr;
         }
 
-        ReturnType visit(MatchExpressionPtr node) override {
+        ReturnType visit(MatchExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(FormalParameterPtr node) override {
+        ReturnType visit(FormalParameterPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(FormalParameterListPtr node) override {
+        ReturnType visit(FormalParameterListPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(FormalParametersPtr node) override {
+        ReturnType visit(FormalParametersPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(FunctionHeaderPtr node) override {
+        ReturnType visit(FunctionHeaderPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(FunctionDeclarationPtr node) override {
+        ReturnType visit(FunctionDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(NullLiteralPtr node) override {
+        ReturnType visit(NullLiteralPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(BoolLiteralPtr node) override {
+        ReturnType visit(BoolLiteralPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(NumberLiteralPtr node) override {
+        ReturnType visit(NumberLiteralPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(CharLiteralPtr node) override {
+        ReturnType visit(CharLiteralPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(StringLiteralPtr node) override {
+        ReturnType visit(StringLiteralPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(IdentifierPtr node) override {
+        ReturnType visit(IdentifierPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(TypeIdentifierPtr node) override {
+        ReturnType visit(TypeIdentifierPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(VisibilityModifierPtr node) override {
+        ReturnType visit(VisibilityModifierPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(PackageNamePtr node) override {
+        ReturnType visit(PackageNamePtr) override {
             return nullptr;
         }
 
-        ReturnType visit(PackageDeclarationPtr node) override {
+        ReturnType visit(PackageDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ImportDeclarationPtr node) override {
+        ReturnType visit(ImportDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SourceFilePtr node) override {
+        ReturnType visit(SourceFilePtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ReturnStatementPtr node) override {
+        ReturnType visit(ReturnStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ThrowStatementPtr node) override {
+        ReturnType visit(ThrowStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(BreakStatementPtr node) override {
+        ReturnType visit(BreakStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ContinueStatementPtr node) override {
+        ReturnType visit(ContinueStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(IfStatementPtr node) override {
+        ReturnType visit(IfStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(UnlessStatementPtr node) override {
+        ReturnType visit(UnlessStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(WhileStatementPtr node) override {
+        ReturnType visit(WhileStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(UntilStatementPtr node) override {
+        ReturnType visit(UntilStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(LoopStatementPtr node) override {
+        ReturnType visit(LoopStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(DoWhileStatementPtr node) override {
+        ReturnType visit(DoWhileStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ForControlPtr node) override {
+        ReturnType visit(ForControlPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ForStatementPtr node) override {
+        ReturnType visit(ForStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ForeachControlPtr node) override {
+        ReturnType visit(ForeachControlPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ForeachStatementPtr node) override {
+        ReturnType visit(ForeachStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(CatchClausePtr node) override {
+        ReturnType visit(CatchClausePtr) override {
             return nullptr;
         }
 
-        ReturnType visit(FinallyBlockPtr node) override {
+        ReturnType visit(FinallyBlockPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(TryStatementPtr node) override {
+        ReturnType visit(TryStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SwitchLabelPtr node) override {
+        ReturnType visit(SwitchLabelPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SwitchBlockStatementGroupPtr node) override {
+        ReturnType visit(SwitchBlockStatementGroupPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(SwitchStatementPtr node) override {
+        ReturnType visit(SwitchStatementPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(TokenPtr node) override {
+        ReturnType visit(TokenPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(TypePtr node) override {
+        ReturnType visit(TypePtr) override {
             return nullptr;
         }
 
-        ReturnType visit(TypeDeclarationPtr node) override {
+        ReturnType visit(TypeDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(VariableNamePtr node) override {
+        ReturnType visit(VariableNamePtr) override {
             return nullptr;
         }
 
-        ReturnType visit(VariableNameDeclarationPtr node) override {
+        ReturnType visit(VariableNameDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(VariableDeclarationExpressionPtr node) override {
+        ReturnType visit(VariableDeclarationExpressionPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(VariableDeclarationPtr node) override {
+        ReturnType visit(VariableDeclarationPtr) override {
             return nullptr;
         }
 
-        ReturnType visit(ExpressionStatementPtr node) override {
+        ReturnType visit(ExpressionStatementPtr) override {
             return nullptr;
         }
     };

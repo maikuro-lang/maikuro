@@ -10,10 +10,6 @@
 #include "Type.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Expression : public AstNode {
      public:
@@ -24,22 +20,24 @@ namespace MaikuroAst {
      private:
     };
 
-    typedef shared_ptr<Expression> ExpressionPtr;
-    typedef vector<ExpressionPtr>  ExpressionPtrVec;
+    typedef std::shared_ptr<Expression> ExpressionPtr;
+    typedef std::vector<ExpressionPtr>  ExpressionPtrVec;
 
     class ExpressionStatement : public Statement {
      public:
         ExpressionStatement(ExpressionPtr expression, TokenPtr semicolon);
 
-        explicit ExpressionStatement(MaikuroParser::StatementContext* ctx);
+        explicit ExpressionStatement(MaikuroGrammar::MaikuroParser::StatementContext* ctx);
 
         TokenPtrVec getTokens() override;
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getExpression() const;
 
@@ -47,21 +45,23 @@ namespace MaikuroAst {
         ExpressionPtr _expression;
     };
 
-    typedef shared_ptr<ExpressionStatement> ExpressionStatementPtr;
+    typedef std::shared_ptr<ExpressionStatement> ExpressionStatementPtr;
 
     class ExpressionList : public AstNode {
      public:
         ExpressionList(const ExpressionPtrVec& expressions, const TokenPtrVec& commas);
 
-        explicit ExpressionList(MaikuroParser::ExpressionListContext* ctx);
+        explicit ExpressionList(MaikuroGrammar::MaikuroParser::ExpressionListContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtrVec& getExpressions() const;
 
@@ -72,21 +72,23 @@ namespace MaikuroAst {
         TokenPtrVec      _commas;
     };
 
-    typedef shared_ptr<ExpressionList> ExpressionListPtr;
+    typedef std::shared_ptr<ExpressionList> ExpressionListPtr;
 
     class PrimaryExpression : public Expression {
      public:
         explicit PrimaryExpression(TokenPtr token);
 
-        explicit PrimaryExpression(MaikuroParser::PrimaryContext* ctx);
+        explicit PrimaryExpression(MaikuroGrammar::MaikuroParser::PrimaryContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getToken() const;
 
@@ -94,21 +96,23 @@ namespace MaikuroAst {
         TokenPtr _token;
     };
 
-    typedef shared_ptr<PrimaryExpression> PrimaryExpressionPtr;
+    typedef std::shared_ptr<PrimaryExpression> PrimaryExpressionPtr;
 
     class VariableNameExpression : public Expression {
      public:
         explicit VariableNameExpression(VariableNamePtr variableName);
 
-        explicit VariableNameExpression(MaikuroParser::VariableNameContext* ctx);
+        explicit VariableNameExpression(MaikuroGrammar::MaikuroParser::VariableNameContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const VariableNamePtr& getVariableName() const;
 
@@ -116,22 +120,24 @@ namespace MaikuroAst {
         VariableNamePtr _variableName;
     };
 
-    typedef shared_ptr<VariableNameExpression> VariableNameExpressionPtr;
-    typedef vector<VariableNameExpressionPtr>  VariableNameExpressionPtrVec;
+    typedef std::shared_ptr<VariableNameExpression> VariableNameExpressionPtr;
+    typedef std::vector<VariableNameExpressionPtr>  VariableNameExpressionPtrVec;
 
     class ParExpresion : public Expression {
      public:
         ParExpresion(TokenPtr leftPar, ExpressionPtr expression, TokenPtr rightPar);
 
-        explicit ParExpresion(MaikuroParser::ParExpressionContext* ctx);
+        explicit ParExpresion(MaikuroGrammar::MaikuroParser::ParExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getLeftPar() const;
 
@@ -145,21 +151,23 @@ namespace MaikuroAst {
         TokenPtr      _rightPar;
     };
 
-    typedef shared_ptr<ParExpresion> ParExpresionPtr;
+    typedef std::shared_ptr<ParExpresion> ParExpresionPtr;
 
     class MethodCall : public AstNode {
      public:
         MethodCall(TokenPtr identifier, ArgumentsPtr arguments);
 
-        explicit MethodCall(MaikuroParser::MethodCallContext* ctx);
+        explicit MethodCall(MaikuroGrammar::MaikuroParser::MethodCallContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getIdentifier() const;
 
@@ -170,7 +178,7 @@ namespace MaikuroAst {
         ArgumentsPtr _arguments;
     };
 
-    typedef shared_ptr<MethodCall> MethodCallPtr;
+    typedef std::shared_ptr<MethodCall> MethodCallPtr;
 
     class DotExpression : public Expression {
      public:
@@ -181,15 +189,17 @@ namespace MaikuroAst {
             const MethodCallPtr& methodCall
         );
 
-        explicit DotExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit DotExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getExpression() const;
 
@@ -206,21 +216,23 @@ namespace MaikuroAst {
         MethodCallPtr _methodCall;
     };
 
-    typedef shared_ptr<DotExpression> DotExpressionPtr;
+    typedef std::shared_ptr<DotExpression> DotExpressionPtr;
 
     class MethodCallExpression : public Expression {
      public:
         explicit MethodCallExpression(const MethodCallPtr& methodCall);
 
-        explicit MethodCallExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit MethodCallExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const MethodCallPtr& getMethodCall() const;
 
@@ -228,21 +240,23 @@ namespace MaikuroAst {
         MethodCallPtr _methodCall;
     };
 
-    typedef shared_ptr<MethodCallExpression> MethodCallExpressionPtr;
+    typedef std::shared_ptr<MethodCallExpression> MethodCallExpressionPtr;
 
     class NewDeclaratorExpression : public Expression {
      public:
         NewDeclaratorExpression(const TokenPtr& newToken, const TypePtr& type, const ArgumentsPtr& arguments);
 
-        explicit NewDeclaratorExpression(MaikuroParser::NewDeclaratorContext* ctx);
+        explicit NewDeclaratorExpression(MaikuroGrammar::MaikuroParser::NewDeclaratorContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getNewToken() const;
 
@@ -256,21 +270,23 @@ namespace MaikuroAst {
         ArgumentsPtr _arguments;
     };
 
-    typedef shared_ptr<NewDeclaratorExpression> NewDeclaratorExpressionPtr;
+    typedef std::shared_ptr<NewDeclaratorExpression> NewDeclaratorExpressionPtr;
 
     class SuffixExpression : public Expression {
      public:
         SuffixExpression(const ExpressionPtr& expression, const TokenPtr& suffix);
 
-        explicit SuffixExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit SuffixExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getExpression() const;
 
@@ -281,21 +297,23 @@ namespace MaikuroAst {
         TokenPtr      _suffix;
     };
 
-    typedef shared_ptr<SuffixExpression> SuffixExpressionPtr;
+    typedef std::shared_ptr<SuffixExpression> SuffixExpressionPtr;
 
     class PrefixExpression : public Expression {
      public:
         PrefixExpression(const TokenPtr& prefix, const ExpressionPtr& expression);
 
-        explicit PrefixExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit PrefixExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getPrefix() const;
 
@@ -306,21 +324,23 @@ namespace MaikuroAst {
         ExpressionPtr _expression;
     };
 
-    typedef shared_ptr<PrefixExpression> PrefixExpressionPtr;
+    typedef std::shared_ptr<PrefixExpression> PrefixExpressionPtr;
 
     class BopExpression : public Expression {
      public:
         BopExpression(const ExpressionPtr& leftExpresion, const TokenPtr& bop, const ExpressionPtr& rightExpresion);
 
-        explicit BopExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit BopExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getLeftExpresion() const;
 
@@ -334,7 +354,7 @@ namespace MaikuroAst {
         ExpressionPtr _rightExpresion;
     };
 
-    typedef shared_ptr<BopExpression> BopExpressionPtr;
+    typedef std::shared_ptr<BopExpression> BopExpressionPtr;
 
     class TernaryExpression : public Expression {
      public:
@@ -346,15 +366,17 @@ namespace MaikuroAst {
             const ExpressionPtr& falseExpression
         );
 
-        explicit TernaryExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit TernaryExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionPtr& getLeftExpression() const;
 
@@ -374,7 +396,7 @@ namespace MaikuroAst {
         ExpressionPtr _falseExpression;
     };
 
-    typedef shared_ptr<TernaryExpression> TernaryExpressionPtr;
+    typedef std::shared_ptr<TernaryExpression> TernaryExpressionPtr;
 
     class MatchExpressionCase : public AstNode {
      public:
@@ -385,15 +407,17 @@ namespace MaikuroAst {
             const ExpressionPtr& expression
         );
 
-        explicit MatchExpressionCase(MaikuroParser::MatchExpressionCaseContext* ctx);
+        explicit MatchExpressionCase(MaikuroGrammar::MaikuroParser::MatchExpressionCaseContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const ExpressionListPtr& getExpressionList() const;
 
@@ -410,8 +434,8 @@ namespace MaikuroAst {
         ExpressionPtr     _expression;
     };
 
-    typedef shared_ptr<MatchExpressionCase> MatchExpressionCasePtr;
-    typedef vector<MatchExpressionCasePtr>  MatchExpressionCasePtrVec;
+    typedef std::shared_ptr<MatchExpressionCase> MatchExpressionCasePtr;
+    typedef std::vector<MatchExpressionCasePtr>  MatchExpressionCasePtrVec;
 
     class MatchExpression : public Expression {
      public:
@@ -424,15 +448,17 @@ namespace MaikuroAst {
             const TokenPtr& rightBra
         );
 
-        explicit MatchExpression(MaikuroParser::ExpressionContext* ctx);
+        explicit MatchExpression(MaikuroGrammar::MaikuroParser::ExpressionContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getMatchToken() const;
 
@@ -455,6 +481,6 @@ namespace MaikuroAst {
         TokenPtr                  _rightBra;
     };
 
-    typedef shared_ptr<MatchExpression> MatchExpressionPtr;
+    typedef std::shared_ptr<MatchExpression> MatchExpressionPtr;
 }
 

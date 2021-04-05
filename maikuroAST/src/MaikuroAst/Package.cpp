@@ -5,6 +5,10 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
 
     PackageName::PackageName(
         IdentifierPtrVec identifiers,
@@ -64,6 +68,10 @@ namespace MaikuroAst {
         return NodeType::PACKAGE_NAME;
     }
 
+    void PackageName::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     PackageDeclaration::PackageDeclaration(
         TokenPtr packageToken,
         PackageNamePtr packageName,
@@ -108,6 +116,10 @@ namespace MaikuroAst {
 
     AstNode::NodeType PackageDeclaration::getNodeType() {
         return NodeType::PACKAGE_DECLARATION;
+    }
+
+    void PackageDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 
     ImportDeclaration::ImportDeclaration(
@@ -178,5 +190,9 @@ namespace MaikuroAst {
 
     const TokenPtr& ImportDeclaration::getAsToken() const {
         return _asToken;
+    }
+
+    void ImportDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

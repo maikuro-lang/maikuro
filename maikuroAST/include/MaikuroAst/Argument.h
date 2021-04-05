@@ -7,28 +7,25 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class Expression;
-
-    typedef shared_ptr<Expression> ExpressionPtr;
+    typedef std::shared_ptr<Expression> ExpressionPtr;
 
     class Argument : public AstNode {
      public:
         Argument(IdentifierPtr identifier, TokenPtr color, ExpressionPtr expression);
 
-        explicit Argument(MaikuroParser::ArgumentContext* ctx);
+        explicit Argument(MaikuroGrammar::MaikuroParser::ArgumentContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const IdentifierPtr& getIdentifier() const;
 
@@ -42,22 +39,24 @@ namespace MaikuroAst {
         ExpressionPtr _expression;
     };
 
-    typedef shared_ptr<Argument> ArgumentPtr;
-    typedef vector<ArgumentPtr>  ArgumentPtrVec;
+    typedef std::shared_ptr<Argument> ArgumentPtr;
+    typedef std::vector<ArgumentPtr>  ArgumentPtrVec;
 
     class Arguments : public AstNode {
      public:
         Arguments(TokenPtr openBrace, ArgumentPtrVec arguments, TokenPtrVec commas, TokenPtr closeBrace);
 
-        explicit Arguments(MaikuroParser::ArgumentsContext* ctx);
+        explicit Arguments(MaikuroGrammar::MaikuroParser::ArgumentsContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getOpenBrace() const;
 
@@ -74,6 +73,6 @@ namespace MaikuroAst {
         TokenPtr       _closeBrace;
     };
 
-    typedef shared_ptr<Arguments> ArgumentsPtr;
+    typedef std::shared_ptr<Arguments> ArgumentsPtr;
 }
 

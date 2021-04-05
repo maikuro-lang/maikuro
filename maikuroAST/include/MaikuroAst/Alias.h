@@ -7,11 +7,6 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
-
     class AliasDeclaration : public Statement {
      public:
         AliasDeclaration(
@@ -23,15 +18,17 @@ namespace MaikuroAst {
             TokenPtr semiColon
         );
 
-        explicit AliasDeclaration(MaikuroParser::AliasDeclarationContext* ctx);
+        explicit AliasDeclaration(MaikuroGrammar::MaikuroParser::AliasDeclarationContext* ctx);
 
         TokenPtrVec getTokens() override;
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtrVec& getAnnotations() const;
 
@@ -51,6 +48,6 @@ namespace MaikuroAst {
         TypeDeclarationPtr _typeDeclaration;
     };
 
-    typedef shared_ptr<AliasDeclaration> AliasDeclarationPtr;
-    typedef vector<AliasDeclarationPtr>  AliasDeclarationPtrVec;
+    typedef std::shared_ptr<AliasDeclaration> AliasDeclarationPtr;
+    typedef std::vector<AliasDeclarationPtr>  AliasDeclarationPtrVec;
 }

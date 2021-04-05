@@ -4,6 +4,11 @@
 #include "MaikuroAst/Token.h"
 
 namespace MaikuroAst {
+    using std::string;
+    using std::vector;
+    using std::shared_ptr;
+    using MaikuroGrammar::MaikuroParser;
+
     Type::Type(
         TypeIdentifierPtr typeIdentifier,
         TokenPtr openBrace,
@@ -118,6 +123,10 @@ namespace MaikuroAst {
         return NodeType::TYPE;
     }
 
+    void Type::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
+    }
+
     TypeDeclaration::TypeDeclaration(TypePtrVec types, TokenPtrVec pipes) : _types(
         types
     ), _pipes(pipes) {
@@ -162,5 +171,9 @@ namespace MaikuroAst {
 
     AstNode::NodeType TypeDeclaration::getNodeType() {
         return NodeType::TYPE_DECLARATION;
+    }
+
+    void TypeDeclaration::accept(AstNodeVisitor* visitor) {
+        visitor->visit(this);
     }
 }

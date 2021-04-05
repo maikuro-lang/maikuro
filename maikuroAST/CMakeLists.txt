@@ -91,6 +91,9 @@ add_library(
         include/MaikuroAst/Tree/AstTreeBaseVisitor.h
         include/MaikuroAst/Tree/AstTreeCodeGenerator.h
         src/MaikuroAst/Tree/AstTreeCodeGenerator.cpp
+        include/MaikuroAst/AstNodeVisitor.h
+        src/MaikuroAst/AstTreeNodeVisitor.cpp
+        include/MaikuroAst/AstTreeNodeVisitor.h
 )
 
 target_include_directories(maikuroAST PUBLIC ${ANTLR4_INCLUDE_DIRS} ${ANTLR_MaikuroLexer_OUTPUT_DIR} ${ANTLR_MaikuroParser_OUTPUT_DIR} ${PROJECT_SOURCE_DIR}/include)

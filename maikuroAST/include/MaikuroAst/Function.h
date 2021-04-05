@@ -10,26 +10,24 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    using std::string;
-    using std::shared_ptr;
-    using std::vector;
-    using MaikuroGrammar::MaikuroParser;
 
     class FormalParameter : public AstNode {
      public:
         FormalParameter(TypePtr type, TokenPtr variadic, IdentifierPtr identifier);
 
-        explicit FormalParameter(MaikuroParser::FormalParameterContext* ctx);
+        explicit FormalParameter(MaikuroGrammar::MaikuroParser::FormalParameterContext* ctx);
 
-        explicit FormalParameter(MaikuroParser::LastFormalParameterContext* ctx);
+        explicit FormalParameter(MaikuroGrammar::MaikuroParser::LastFormalParameterContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TypePtr& getType() const;
 
@@ -43,24 +41,26 @@ namespace MaikuroAst {
         IdentifierPtr _identifier;
     };
 
-    typedef shared_ptr<FormalParameter> FormalParameterPtr;
-    typedef vector<FormalParameterPtr>  FormalParameterPtrVec;
+    typedef std::shared_ptr<FormalParameter> FormalParameterPtr;
+    typedef std::vector<FormalParameterPtr>  FormalParameterPtrVec;
 
     class FormalParameterList : public AstNode {
      public:
         FormalParameterList(FormalParameterPtrVec parameters, TokenPtrVec commas);
 
-        explicit FormalParameterList(MaikuroParser::FormalParameterListContext* ctx);
+        explicit FormalParameterList(MaikuroGrammar::MaikuroParser::FormalParameterListContext* ctx);
 
         int getLine() override {
             return _parameters[0]->getLine();
         }
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const FormalParameterPtrVec& getParameters() const;
 
@@ -71,24 +71,26 @@ namespace MaikuroAst {
         TokenPtrVec           _commas;
     };
 
-    typedef shared_ptr<FormalParameterList> FormalParameterListPtr;
-    typedef vector<FormalParameterListPtr>  FormalParameterListPtrVec;
+    typedef std::shared_ptr<FormalParameterList> FormalParameterListPtr;
+    typedef std::vector<FormalParameterListPtr>  FormalParameterListPtrVec;
 
     class FormalParameters : public AstNode {
      public:
         FormalParameters(TokenPtr leftPar, FormalParameterListPtr parameters, TokenPtr rightPar);
 
-        explicit FormalParameters(MaikuroParser::FormalParametersContext* ctx);
+        explicit FormalParameters(MaikuroGrammar::MaikuroParser::FormalParametersContext* ctx);
 
         int getLine() override {
             return _leftPar->getLine();
         }
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getLeftPar() const;
 
@@ -102,8 +104,8 @@ namespace MaikuroAst {
         TokenPtr               _rightPar;
     };
 
-    typedef shared_ptr<FormalParameters> FormalParametersPtr;
-    typedef vector<FormalParametersPtr>  FormalParametersPtrVec;
+    typedef std::shared_ptr<FormalParameters> FormalParametersPtr;
+    typedef std::vector<FormalParametersPtr>  FormalParametersPtrVec;
 
     class FunctionHeader : public AstNode {
      public:
@@ -115,15 +117,17 @@ namespace MaikuroAst {
             TypePtr returnType
         );
 
-        explicit FunctionHeader(MaikuroParser::FunctionHeaderContext* ctx);
+        explicit FunctionHeader(MaikuroGrammar::MaikuroParser::FunctionHeaderContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const TokenPtr& getFun() const;
 
@@ -143,22 +147,24 @@ namespace MaikuroAst {
         TypePtr             _returnType;
     };
 
-    typedef shared_ptr<FunctionHeader> FunctionHeaderPtr;
-    typedef vector<FunctionHeaderPtr>  FunctionHeaderPtrVec;
+    typedef std::shared_ptr<FunctionHeader> FunctionHeaderPtr;
+    typedef std::vector<FunctionHeaderPtr>  FunctionHeaderPtrVec;
 
     class FunctionDeclaration : public Statement {
      public:
         FunctionDeclaration(AnnotationsPtrVec annotations, FunctionHeaderPtr functionHeader, BlockPtr block);
 
-        explicit FunctionDeclaration(MaikuroParser::FunctionDeclarationContext* ctx);
+        explicit FunctionDeclaration(MaikuroGrammar::MaikuroParser::FunctionDeclarationContext* ctx);
 
         int getLine() override;
 
-        string toString() override;
+        std::string toString() override;
 
         TokenPtrVec getTokens() override;
 
         NodeType getNodeType() override;
+
+        void accept(AstNodeVisitor* visitor) override;
 
         const AnnotationsPtrVec& getAnnotations() const;
 
@@ -172,7 +178,7 @@ namespace MaikuroAst {
         BlockPtr          _block;
     };
 
-    typedef shared_ptr<FunctionDeclaration> FunctionDeclarationPtr;
-    typedef vector<FunctionDeclarationPtr>  FunctionDeclarationPtrVec;
+    typedef std::shared_ptr<FunctionDeclaration> FunctionDeclarationPtr;
+    typedef std::vector<FunctionDeclarationPtr>  FunctionDeclarationPtrVec;
 }
 
