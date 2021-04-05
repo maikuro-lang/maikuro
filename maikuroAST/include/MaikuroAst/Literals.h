@@ -6,7 +6,7 @@
 
 namespace MaikuroAst {
 
-    class Literal : public AstNode {
+    class Literal : public AstNode, public EnableSharedFromThisVirtual<Literal> {
      public:
         explicit Literal(TokenPtr token);
 
@@ -33,7 +33,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Literal> LiteralPtr;
     typedef std::vector<LiteralPtr>  LiteralPtrVec;
 
-    class NullLiteral : public Literal {
+    class NullLiteral : public Literal, public EnableSharedFromThisVirtual<NullLiteral> {
      public:
         explicit NullLiteral(TokenPtr token);
 
@@ -46,7 +46,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<NullLiteral> NullLiteralPtr;
 
-    class BoolLiteral : public Literal {
+    class BoolLiteral : public Literal, public EnableSharedFromThisVirtual<BoolLiteral> {
      public:
         explicit BoolLiteral(TokenPtr token);
 
@@ -59,7 +59,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<BoolLiteral> BoolLiteralPtr;
 
-    class NumberLiteral : public Literal {
+    class NumberLiteral : public Literal, public EnableSharedFromThisVirtual<NumberLiteral> {
      public:
         explicit NumberLiteral(TokenPtr token);
 
@@ -72,7 +72,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<NumberLiteral> NumberLiteralPtr;
 
-    class CharLiteral : public Literal {
+    class CharLiteral : public Literal, public EnableSharedFromThisVirtual<CharLiteral> {
      public:
         explicit CharLiteral(TokenPtr token);
 
@@ -85,7 +85,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<CharLiteral> CharLiteralPtr;
 
-    class StringLiteral : public Literal {
+    class StringLiteral : public Literal, public EnableSharedFromThisVirtual<StringLiteral> {
      public:
         explicit StringLiteral(TokenPtr token);
 
@@ -98,7 +98,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<StringLiteral> StringLiteralPtr;
 
-    class Identifier : public Literal {
+    class Identifier : public Literal, public EnableSharedFromThisVirtual<Identifier> {
      public:
         explicit Identifier(TokenPtr token);
 
@@ -112,7 +112,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Identifier> IdentifierPtr;
     typedef std::vector<IdentifierPtr>  IdentifierPtrVec;
 
-    class TypeIdentifier : public Literal {
+    class TypeIdentifier : public Literal, public EnableSharedFromThisVirtual<TypeIdentifier> {
      public:
         explicit TypeIdentifier(TokenPtr token);
 
@@ -126,7 +126,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<TypeIdentifier> TypeIdentifierPtr;
     typedef std::vector<TypeIdentifierPtr>  TypeIdentifierPtrVec;
 
-    class VisibilityModifier : public Literal {
+    class VisibilityModifier : public Literal, public EnableSharedFromThisVirtual<VisibilityModifier> {
      public:
         explicit VisibilityModifier(TokenPtr token);
 

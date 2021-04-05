@@ -72,7 +72,7 @@ namespace MaikuroAst {
     }
 
     void FormalParameter::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<FormalParameter>::shared_from_this());
     }
 
     FormalParameterList::FormalParameterList(
@@ -126,7 +126,7 @@ namespace MaikuroAst {
     }
 
     void FormalParameterList::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<FormalParameterList>::shared_from_this());
     }
 
     FormalParameters::FormalParameters(
@@ -180,7 +180,7 @@ namespace MaikuroAst {
     }
 
     void FormalParameters::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<FormalParameters>::shared_from_this());
     }
 
     FunctionHeader::FunctionHeader(
@@ -248,7 +248,7 @@ namespace MaikuroAst {
     }
 
     void FunctionHeader::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<FunctionHeader>::shared_from_this());
     }
 
     FunctionDeclaration::FunctionDeclaration(
@@ -302,6 +302,6 @@ namespace MaikuroAst {
     }
 
     void FunctionDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<FunctionDeclaration>::shared_from_this());
     }
 }

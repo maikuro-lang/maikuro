@@ -9,7 +9,7 @@
 
 namespace MaikuroAst {
 
-    class SourceFile : public AstNode {
+    class SourceFile : public AstNode, public EnableSharedFromThisVirtual<SourceFile> {
      public:
         SourceFile(
             AnnotationsPtrVec annotations,

@@ -69,7 +69,7 @@ namespace MaikuroAst {
     }
 
     void PackageName::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<PackageName>::shared_from_this());
     }
 
     PackageDeclaration::PackageDeclaration(
@@ -119,7 +119,8 @@ namespace MaikuroAst {
     }
 
     void PackageDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<PackageDeclaration>::shared_from_this());
+//        visitor->visit(static_pointer_cast<PackageDeclaration>(this->getSharedPtr()));
     }
 
     ImportDeclaration::ImportDeclaration(
@@ -193,6 +194,6 @@ namespace MaikuroAst {
     }
 
     void ImportDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ImportDeclaration>::shared_from_this());
     }
 }

@@ -14,7 +14,7 @@
 
 namespace MaikuroAst {
 
-    class SuperClass : public AstNode {
+    class SuperClass : public AstNode, public EnableSharedFromThisVirtual<SuperClass> {
      public:
         SuperClass(TokenPtr extendsToken, TypeIdentifierPtr className);
 
@@ -41,7 +41,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<SuperClass> SuperClassPtr;
 
-    class SuperInterfaces : public AstNode {
+    class SuperInterfaces : public AstNode, public EnableSharedFromThisVirtual<SuperInterfaces> {
      public:
         SuperInterfaces(
             TokenPtr implementsToken,
@@ -75,7 +75,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<SuperInterfaces> SuperInterfacesPtr;
 
-    class ClassMember : public AstNode {
+    class ClassMember : public AstNode, public EnableSharedFromThisVirtual<ClassMember> {
      public:
         void accept(AstNodeVisitor* visitor) override;
     };
@@ -83,7 +83,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<ClassMember> ClassMemberPtr;
     typedef std::vector<ClassMemberPtr>  ClassMemberPtrVec;
 
-    class PropertyDeclaration : public ClassMember {
+    class PropertyDeclaration : public ClassMember, public EnableSharedFromThisVirtual<PropertyDeclaration> {
      public:
         PropertyDeclaration(
             AnnotationsPtrVec annotations,
@@ -133,7 +133,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<PropertyDeclaration> PropertyDeclarationPtr;
 
-    class MethodDeclaration : public ClassMember {
+    class MethodDeclaration : public ClassMember, public EnableSharedFromThisVirtual<MethodDeclaration> {
      public:
         MethodDeclaration(
             AnnotationsPtrVec annotations,
@@ -171,7 +171,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<MethodDeclaration> MethodDeclarationPtr;
 
-    class AnnotationMember : public ClassMember {
+    class AnnotationMember : public ClassMember, public EnableSharedFromThisVirtual<AnnotationMember> {
      public:
         explicit AnnotationMember(AnnotationsPtr annotations);
 
@@ -195,7 +195,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<AnnotationMember> AnnotationMemberPtr;
 
-    class ClassBody : public AstNode {
+    class ClassBody : public AstNode, public EnableSharedFromThisVirtual<ClassBody> {
      public:
         ClassBody(TokenPtr leftBra, ClassMemberPtrVec classMembers, TokenPtr rightBra);
 
@@ -225,7 +225,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ClassBody> ClassBodyPtr;
 
-    class ClassDeclaration : public Statement {
+    class ClassDeclaration : public Statement, public EnableSharedFromThisVirtual<ClassDeclaration> {
      public:
         ClassDeclaration(
             AnnotationsPtrVec annotations,

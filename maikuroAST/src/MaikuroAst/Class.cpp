@@ -53,7 +53,7 @@ namespace MaikuroAst {
     }
 
     void SuperClass::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SuperClass>::shared_from_this());
     }
 
     SuperInterfaces::SuperInterfaces(
@@ -112,7 +112,7 @@ namespace MaikuroAst {
     }
 
     void SuperInterfaces::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SuperInterfaces>::shared_from_this());
     }
 
     PropertyDeclaration::PropertyDeclaration(
@@ -212,7 +212,7 @@ namespace MaikuroAst {
     }
 
     void PropertyDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<PropertyDeclaration>::shared_from_this());
     }
 
     MethodDeclaration::MethodDeclaration(
@@ -281,7 +281,7 @@ namespace MaikuroAst {
     }
 
     void MethodDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<MethodDeclaration>::shared_from_this());
     }
 
     AnnotationMember::AnnotationMember(AnnotationsPtr annotations)
@@ -315,7 +315,7 @@ namespace MaikuroAst {
     }
 
     void AnnotationMember::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<AnnotationMember>::shared_from_this());
     }
 
     ClassBody::ClassBody(TokenPtr leftBra, ClassMemberPtrVec classMembers, TokenPtr rightBra)
@@ -383,7 +383,7 @@ namespace MaikuroAst {
     }
 
     void ClassBody::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ClassBody>::shared_from_this());
     }
 
     ClassDeclaration::ClassDeclaration(
@@ -475,10 +475,10 @@ namespace MaikuroAst {
     }
 
     void ClassDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ClassDeclaration>::shared_from_this());
     }
 
     void ClassMember::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ClassMember>::shared_from_this());
     }
 }

@@ -10,7 +10,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Token> TokenPtr;
     typedef std::vector<TokenPtr>  TokenPtrVec;
 
-    class Token : public AstNode, std::enable_shared_from_this<Token> {
+    class Token : public AstNode, public EnableSharedFromThisVirtual<Token> {
      public:
         enum Type {
             PACKAGE                = 1,

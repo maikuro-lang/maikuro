@@ -11,7 +11,7 @@
 
 namespace MaikuroAst {
 
-    class Expression : public AstNode {
+    class Expression : public AstNode, public EnableSharedFromThisVirtual<Expression> {
      public:
         Expression();
 
@@ -23,7 +23,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Expression> ExpressionPtr;
     typedef std::vector<ExpressionPtr>  ExpressionPtrVec;
 
-    class ExpressionStatement : public Statement {
+    class ExpressionStatement : public Statement, public EnableSharedFromThisVirtual<ExpressionStatement> {
      public:
         ExpressionStatement(ExpressionPtr expression, TokenPtr semicolon);
 
@@ -47,7 +47,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ExpressionStatement> ExpressionStatementPtr;
 
-    class ExpressionList : public AstNode {
+    class ExpressionList : public AstNode, public EnableSharedFromThisVirtual<ExpressionList> {
      public:
         ExpressionList(const ExpressionPtrVec& expressions, const TokenPtrVec& commas);
 
@@ -74,7 +74,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ExpressionList> ExpressionListPtr;
 
-    class PrimaryExpression : public Expression {
+    class PrimaryExpression : public Expression, public EnableSharedFromThisVirtual<PrimaryExpression> {
      public:
         explicit PrimaryExpression(TokenPtr token);
 
@@ -98,7 +98,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<PrimaryExpression> PrimaryExpressionPtr;
 
-    class VariableNameExpression : public Expression {
+    class VariableNameExpression : public Expression, public EnableSharedFromThisVirtual<VariableNameExpression> {
      public:
         explicit VariableNameExpression(VariableNamePtr variableName);
 
@@ -123,7 +123,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<VariableNameExpression> VariableNameExpressionPtr;
     typedef std::vector<VariableNameExpressionPtr>  VariableNameExpressionPtrVec;
 
-    class ParExpresion : public Expression {
+    class ParExpresion : public Expression, public EnableSharedFromThisVirtual<ParExpresion> {
      public:
         ParExpresion(TokenPtr leftPar, ExpressionPtr expression, TokenPtr rightPar);
 
@@ -153,7 +153,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ParExpresion> ParExpresionPtr;
 
-    class MethodCall : public AstNode {
+    class MethodCall : public AstNode, public EnableSharedFromThisVirtual<MethodCall> {
      public:
         MethodCall(TokenPtr identifier, ArgumentsPtr arguments);
 
@@ -180,7 +180,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<MethodCall> MethodCallPtr;
 
-    class DotExpression : public Expression {
+    class DotExpression : public Expression, public EnableSharedFromThisVirtual<DotExpression> {
      public:
         DotExpression(
             const ExpressionPtr& expression,
@@ -218,7 +218,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<DotExpression> DotExpressionPtr;
 
-    class MethodCallExpression : public Expression {
+    class MethodCallExpression : public Expression, public EnableSharedFromThisVirtual<MethodCallExpression> {
      public:
         explicit MethodCallExpression(const MethodCallPtr& methodCall);
 
@@ -242,7 +242,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<MethodCallExpression> MethodCallExpressionPtr;
 
-    class NewDeclaratorExpression : public Expression {
+    class NewDeclaratorExpression : public Expression, public EnableSharedFromThisVirtual<NewDeclaratorExpression> {
      public:
         NewDeclaratorExpression(const TokenPtr& newToken, const TypePtr& type, const ArgumentsPtr& arguments);
 
@@ -272,7 +272,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<NewDeclaratorExpression> NewDeclaratorExpressionPtr;
 
-    class SuffixExpression : public Expression {
+    class SuffixExpression : public Expression, public EnableSharedFromThisVirtual<SuffixExpression> {
      public:
         SuffixExpression(const ExpressionPtr& expression, const TokenPtr& suffix);
 
@@ -299,7 +299,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<SuffixExpression> SuffixExpressionPtr;
 
-    class PrefixExpression : public Expression {
+    class PrefixExpression : public Expression, public EnableSharedFromThisVirtual<PrefixExpression> {
      public:
         PrefixExpression(const TokenPtr& prefix, const ExpressionPtr& expression);
 
@@ -326,7 +326,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<PrefixExpression> PrefixExpressionPtr;
 
-    class BopExpression : public Expression {
+    class BopExpression : public Expression, public EnableSharedFromThisVirtual<BopExpression> {
      public:
         BopExpression(const ExpressionPtr& leftExpresion, const TokenPtr& bop, const ExpressionPtr& rightExpresion);
 
@@ -356,7 +356,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<BopExpression> BopExpressionPtr;
 
-    class TernaryExpression : public Expression {
+    class TernaryExpression : public Expression, public EnableSharedFromThisVirtual<TernaryExpression> {
      public:
         TernaryExpression(
             const ExpressionPtr& leftExpression,
@@ -398,7 +398,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<TernaryExpression> TernaryExpressionPtr;
 
-    class MatchExpressionCase : public AstNode {
+    class MatchExpressionCase : public AstNode, public EnableSharedFromThisVirtual<MatchExpressionCase> {
      public:
         MatchExpressionCase(
             const ExpressionListPtr& expressionList,
@@ -437,7 +437,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<MatchExpressionCase> MatchExpressionCasePtr;
     typedef std::vector<MatchExpressionCasePtr>  MatchExpressionCasePtrVec;
 
-    class MatchExpression : public Expression {
+    class MatchExpression : public Expression, public EnableSharedFromThisVirtual<MatchExpression> {
      public:
         MatchExpression(
             const TokenPtr& matchToken,

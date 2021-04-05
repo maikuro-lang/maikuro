@@ -87,6 +87,6 @@ namespace MaikuroAst {
     }
 
     void AliasDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<AliasDeclaration>::shared_from_this());
     }
 }

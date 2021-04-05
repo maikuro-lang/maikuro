@@ -2,7 +2,7 @@
 
 namespace MaikuroAst {
 
-    void AstTreeNodeVisitor::visit(AliasDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<AliasDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         node->getAliasToken()->accept(this->getChildVisitor(node));
@@ -12,7 +12,7 @@ namespace MaikuroAst {
         node->getSemicolonToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(Annotation* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Annotation> node) {
         this->getVisitor(node)->visit(node);
 
         node->getTypeIdentifier()->accept(this->getChildVisitor(node));
@@ -22,7 +22,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(Annotations* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Annotations> node) {
         this->getVisitor(node)->visit(node);
 
         node->getPrefix()->accept(this->getChildVisitor(node));
@@ -39,7 +39,7 @@ namespace MaikuroAst {
         node->getCloseBracket()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(Argument* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Argument> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getIdentifier()) {
@@ -51,7 +51,7 @@ namespace MaikuroAst {
 
     }
 
-    void AstTreeNodeVisitor::visit(Arguments* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Arguments> node) {
         this->getVisitor(node)->visit(node);
 
         node->getOpenBrace()->accept(this->getChildVisitor(node));
@@ -69,7 +69,7 @@ namespace MaikuroAst {
 
     }
 
-    void AstTreeNodeVisitor::visit(Block* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Block> node) {
         this->getVisitor(node)->visit(node);
 
         node->getLeftBra()->accept(this->getChildVisitor(node));
@@ -83,14 +83,14 @@ namespace MaikuroAst {
         node->getRightBra()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(SuperClass* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SuperClass> node) {
         this->getVisitor(node)->visit(node);
 
         node->getExtendsToken()->accept(this->getChildVisitor(node));
         node->getClassName()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(SuperInterfaces* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SuperInterfaces> node) {
         this->getVisitor(node)->visit(node);
 
         node->getImplementsToken()->accept(this->getChildVisitor(node));
@@ -105,7 +105,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(PropertyDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<PropertyDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -125,7 +125,7 @@ namespace MaikuroAst {
         node->getColon()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(MethodDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<MethodDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -142,13 +142,13 @@ namespace MaikuroAst {
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(AnnotationMember* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<AnnotationMember> node) {
         this->getVisitor(node)->visit(node);
 
         node->getAnnotations()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ClassBody* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ClassBody> node) {
         this->getVisitor(node)->visit(node);
 
         node->getLeftBra()->accept(this->getChildVisitor(node));
@@ -162,7 +162,7 @@ namespace MaikuroAst {
         node->getRightBra()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ClassDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ClassDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -185,7 +185,7 @@ namespace MaikuroAst {
         node->getClassBody()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ExpressionList* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ExpressionList> node) {
         this->getVisitor(node)->visit(node);
 
         int i = 0;
@@ -198,19 +198,19 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(PrimaryExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<PrimaryExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(VariableNameExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<VariableNameExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getVariableName()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ParExpresion* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ParExpresion> node) {
         this->getVisitor(node)->visit(node);
 
         node->getLeftPar()->accept(this->getChildVisitor(node));
@@ -218,14 +218,14 @@ namespace MaikuroAst {
         node->getRightPar()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(MethodCall* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<MethodCall> node) {
         this->getVisitor(node)->visit(node);
 
         node->getIdentifier()->accept(this->getChildVisitor(node));
         node->getArguments()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(DotExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<DotExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getExpression()->accept(this->getChildVisitor(node));
@@ -240,13 +240,13 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(MethodCallExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<MethodCallExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getMethodCall()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(NewDeclaratorExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<NewDeclaratorExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getNewToken()->accept(this->getChildVisitor(node));
@@ -254,21 +254,21 @@ namespace MaikuroAst {
         node->getArguments()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(SuffixExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SuffixExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getExpression()->accept(this->getChildVisitor(node));
         node->getSuffix()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(PrefixExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<PrefixExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getPrefix()->accept(this->getChildVisitor(node));
         node->getExpression()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(BopExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<BopExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getLeftExpresion()->accept(this->getChildVisitor(node));
@@ -276,7 +276,7 @@ namespace MaikuroAst {
         node->getRightExpresion()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(TernaryExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<TernaryExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getLeftExpression()->accept(this->getChildVisitor(node));
@@ -290,7 +290,7 @@ namespace MaikuroAst {
         node->getFalseExpression()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(MatchExpressionCase* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<MatchExpressionCase> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getExpressionList()) {
@@ -305,7 +305,7 @@ namespace MaikuroAst {
         node->getExpression()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(MatchExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<MatchExpression> node) {
         this->getVisitor(node)->visit(node);
 
         node->getMatchToken()->accept(this->getChildVisitor(node));
@@ -324,7 +324,7 @@ namespace MaikuroAst {
         node->getRightBra()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(FormalParameter* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<FormalParameter> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getType()) {
@@ -338,7 +338,7 @@ namespace MaikuroAst {
         node->getIdentifier()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(FormalParameterList* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<FormalParameterList> node) {
         this->getVisitor(node)->visit(node);
 
         int       i = 0;
@@ -351,7 +351,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(FormalParameters* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<FormalParameters> node) {
         this->getVisitor(node)->visit(node);
 
         node->getLeftPar()->accept(this->getChildVisitor(node));
@@ -363,7 +363,7 @@ namespace MaikuroAst {
         node->getRightPar()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(FunctionHeader* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<FunctionHeader> node) {
         this->getVisitor(node)->visit(node);
 
         node->getFun()->accept(this->getChildVisitor(node));
@@ -376,7 +376,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(FunctionDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<FunctionDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -389,55 +389,55 @@ namespace MaikuroAst {
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(NullLiteral* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<NullLiteral> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(BoolLiteral* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<BoolLiteral> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(NumberLiteral* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<NumberLiteral> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(CharLiteral* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<CharLiteral> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(StringLiteral* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<StringLiteral> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(Identifier* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Identifier> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(TypeIdentifier* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<TypeIdentifier> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(VisibilityModifier* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<VisibilityModifier> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(PackageName* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<PackageName> node) {
         this->getVisitor(node)->visit(node);
 
         int       i = 0;
@@ -454,7 +454,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(PackageDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<PackageDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         node->getPackageToken()->accept(this->getChildVisitor(node));
@@ -462,7 +462,7 @@ namespace MaikuroAst {
         node->getSemicolonToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ImportDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ImportDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         node->getImportToken()->accept(this->getChildVisitor(node));
@@ -476,7 +476,7 @@ namespace MaikuroAst {
         node->getSemicolonToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(SourceFile* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SourceFile> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -502,21 +502,21 @@ namespace MaikuroAst {
         );
     }
 
-    void AstTreeNodeVisitor::visit(ReturnStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ReturnStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
         node->getExpression()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ThrowStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ThrowStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
         node->getExpression()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(BreakStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<BreakStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -526,7 +526,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(ContinueStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ContinueStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -536,7 +536,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(IfStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<IfStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -549,7 +549,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(UnlessStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<UnlessStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -562,7 +562,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(WhileStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<WhileStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -570,7 +570,7 @@ namespace MaikuroAst {
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(UntilStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<UntilStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -578,7 +578,7 @@ namespace MaikuroAst {
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(LoopStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<LoopStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getToken()->accept(this->getChildVisitor(node));
@@ -590,7 +590,7 @@ namespace MaikuroAst {
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(DoWhileStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<DoWhileStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getDoToken()->accept(this->getChildVisitor(node));
@@ -600,7 +600,7 @@ namespace MaikuroAst {
         node->getSemicolonToken()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ForControl* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ForControl> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getVariableDeclaration()) {
@@ -624,7 +624,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(ForStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ForStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getForToken()->accept(this->getChildVisitor(node));
@@ -634,7 +634,7 @@ namespace MaikuroAst {
         node->getStatement()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ForeachControl* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ForeachControl> node) {
         this->getVisitor(node)->visit(node);
 
         node->getExpression()->accept(this->getChildVisitor(node));
@@ -647,7 +647,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(ForeachStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ForeachStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getForeachToken()->accept(this->getChildVisitor(node));
@@ -657,7 +657,7 @@ namespace MaikuroAst {
         node->getStatement()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(CatchClause* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<CatchClause> node) {
         this->getVisitor(node)->visit(node);
 
         node->getCatchToken()->accept(this->getChildVisitor(node));
@@ -677,14 +677,14 @@ namespace MaikuroAst {
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(FinallyBlock* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<FinallyBlock> node) {
         this->getVisitor(node)->visit(node);
 
         node->getFinallyToken()->accept(this->getChildVisitor(node));
         node->getBlock()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(TryStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<TryStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getTryToken()->accept(this->getChildVisitor(node));
@@ -701,7 +701,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(SwitchLabel* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SwitchLabel> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getDefaultToken()) {
@@ -723,7 +723,7 @@ namespace MaikuroAst {
         node->getColon()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(SwitchBlockStatementGroup* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SwitchBlockStatementGroup> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -739,7 +739,7 @@ namespace MaikuroAst {
         );
     }
 
-    void AstTreeNodeVisitor::visit(SwitchStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<SwitchStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getSwitchToken()->accept(this->getChildVisitor(node));
@@ -761,11 +761,11 @@ namespace MaikuroAst {
         node->getRightBra()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(Token* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Token> node) {
         this->getVisitor(node)->visit(node);
     }
 
-    void AstTreeNodeVisitor::visit(Type* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Type> node) {
         this->getVisitor(node)->visit(node);
 
         node->getTypeIdentifier()->accept(this->getChildVisitor(node));
@@ -785,7 +785,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(TypeDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<TypeDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         int       i = 0;
@@ -798,7 +798,7 @@ namespace MaikuroAst {
         }
     }
 
-    void AstTreeNodeVisitor::visit(VariableName* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<VariableName> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getAtSign()) {
@@ -808,7 +808,7 @@ namespace MaikuroAst {
         node->getIdentifier()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(VariableNameDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<VariableNameDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getTypeDeclaration()) {
@@ -818,7 +818,7 @@ namespace MaikuroAst {
         node->getVariableName()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(VariableDeclarationExpression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<VariableDeclarationExpression> node) {
         this->getVisitor(node)->visit(node);
 
         if (node->getAssign()) {
@@ -837,7 +837,7 @@ namespace MaikuroAst {
         node->getSemicolon()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(VariableDeclaration* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<VariableDeclaration> node) {
         this->getVisitor(node)->visit(node);
 
         std::for_each(
@@ -860,37 +860,37 @@ namespace MaikuroAst {
         node->getExpressions()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ExpressionStatement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ExpressionStatement> node) {
         this->getVisitor(node)->visit(node);
 
         node->getExpression()->accept(this->getChildVisitor(node));
     }
 
-    void AstTreeNodeVisitor::visit(ClassMember* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<ClassMember> node) {
         this->getVisitor(node)->visit(node);
     }
 
-    void AstTreeNodeVisitor::visit(Expression* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Expression> node) {
         this->getVisitor(node)->visit(node);
     }
 
-    void AstTreeNodeVisitor::visit(Statement* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Statement> node) {
         this->getVisitor(node)->visit(node);
     }
 
-    void AstTreeNodeVisitor::visit(Literal* node) {
+    void AstTreeNodeVisitor::visit(std::shared_ptr<Literal> node) {
         this->getVisitor(node)->visit(node);
-    }
-
-    AstNodeVisitor* SimpleAstTreeNodeVisitor::getVisitor(AstNode* node) {
-        return _visitor;
     }
 
     SimpleAstTreeNodeVisitor::SimpleAstTreeNodeVisitor(AstNodeVisitor* visitor)
         : _visitor(visitor) {
     }
 
-    AstNodeVisitor* SimpleAstTreeNodeVisitor::getChildVisitor(AstNode* node) {
+    AstNodeVisitor* SimpleAstTreeNodeVisitor::getVisitor(std::shared_ptr<AstNode> node) {
+        return _visitor;
+    }
+
+    AstNodeVisitor* SimpleAstTreeNodeVisitor::getChildVisitor(std::shared_ptr<AstNode> node) {
         return _visitor;
     }
 }

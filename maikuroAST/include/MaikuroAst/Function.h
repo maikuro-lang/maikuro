@@ -11,7 +11,7 @@
 
 namespace MaikuroAst {
 
-    class FormalParameter : public AstNode {
+    class FormalParameter : public AstNode, public EnableSharedFromThisVirtual<FormalParameter> {
      public:
         FormalParameter(TypePtr type, TokenPtr variadic, IdentifierPtr identifier);
 
@@ -44,7 +44,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<FormalParameter> FormalParameterPtr;
     typedef std::vector<FormalParameterPtr>  FormalParameterPtrVec;
 
-    class FormalParameterList : public AstNode {
+    class FormalParameterList : public AstNode, public EnableSharedFromThisVirtual<FormalParameterList> {
      public:
         FormalParameterList(FormalParameterPtrVec parameters, TokenPtrVec commas);
 
@@ -74,7 +74,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<FormalParameterList> FormalParameterListPtr;
     typedef std::vector<FormalParameterListPtr>  FormalParameterListPtrVec;
 
-    class FormalParameters : public AstNode {
+    class FormalParameters : public AstNode, public EnableSharedFromThisVirtual<FormalParameters> {
      public:
         FormalParameters(TokenPtr leftPar, FormalParameterListPtr parameters, TokenPtr rightPar);
 
@@ -107,7 +107,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<FormalParameters> FormalParametersPtr;
     typedef std::vector<FormalParametersPtr>  FormalParametersPtrVec;
 
-    class FunctionHeader : public AstNode {
+    class FunctionHeader : public AstNode, public EnableSharedFromThisVirtual<FunctionHeader> {
      public:
         FunctionHeader(
             TokenPtr fun,
@@ -150,7 +150,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<FunctionHeader> FunctionHeaderPtr;
     typedef std::vector<FunctionHeaderPtr>  FunctionHeaderPtrVec;
 
-    class FunctionDeclaration : public Statement {
+    class FunctionDeclaration : public Statement, public EnableSharedFromThisVirtual<FunctionDeclaration> {
      public:
         FunctionDeclaration(AnnotationsPtrVec annotations, FunctionHeaderPtr functionHeader, BlockPtr block);
 

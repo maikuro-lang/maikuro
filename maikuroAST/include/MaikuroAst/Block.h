@@ -6,7 +6,7 @@
 
 namespace MaikuroAst {
 
-    class Block : public Statement {
+    class Block : public Statement, public EnableSharedFromThisVirtual<Block> {
      public:
         explicit Block(TokenPtr leftBra, StatementPtrVec statements, TokenPtr rightBra);
 

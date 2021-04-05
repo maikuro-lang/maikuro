@@ -59,7 +59,7 @@ namespace MaikuroAst {
     }
 
     void Argument::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Argument>::shared_from_this());
     }
 
     Arguments::Arguments(
@@ -127,6 +127,6 @@ namespace MaikuroAst {
     }
 
     void Arguments::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Arguments>::shared_from_this());
     }
 }

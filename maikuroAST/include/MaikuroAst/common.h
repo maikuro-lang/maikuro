@@ -9,3 +9,5 @@
 #include "MaikuroParser.h"
 #include "antlr4-runtime.h"
 #include "AstNodeVisitor.h"
+#include "EnableSharedFromThisVirtual.h"
+

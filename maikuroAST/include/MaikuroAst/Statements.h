@@ -12,7 +12,7 @@
 
 namespace MaikuroAst {
 
-    class TokenExpressionStatement : public Statement {
+    class TokenExpressionStatement : public Statement, public EnableSharedFromThisVirtual<TokenExpressionStatement> {
      public:
         TokenExpressionStatement(TokenPtr token, ExpressionPtr expression, TokenPtr semicolon);
 
@@ -35,7 +35,7 @@ namespace MaikuroAst {
         ExpressionPtr _expression;
     };
 
-    class ReturnStatement : public TokenExpressionStatement {
+    class ReturnStatement : public TokenExpressionStatement, public EnableSharedFromThisVirtual<ReturnStatement> {
      public:
         ReturnStatement(const TokenPtr& token, const ExpressionPtr& expression, const TokenPtr& semicolon);
 
@@ -48,7 +48,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ReturnStatement> ReturnStatementPtr;
 
-    class ThrowStatement : public TokenExpressionStatement {
+    class ThrowStatement : public TokenExpressionStatement, public EnableSharedFromThisVirtual<ThrowStatement> {
      public:
         ThrowStatement(const TokenPtr& token, const ExpressionPtr& expression, const TokenPtr& semicolon);
 
@@ -61,7 +61,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ThrowStatement> ThrowStatementPtr;
 
-    class TokenNumberLiteralStatement : public Statement {
+    class TokenNumberLiteralStatement : public Statement, public EnableSharedFromThisVirtual<TokenNumberLiteralStatement> {
      public:
         TokenNumberLiteralStatement(TokenPtr token, NumberLiteralPtr numberLiteral, TokenPtr semicolon);
 
@@ -84,7 +84,7 @@ namespace MaikuroAst {
         NumberLiteralPtr _numberLiteral;
     };
 
-    class BreakStatement : public TokenNumberLiteralStatement {
+    class BreakStatement : public TokenNumberLiteralStatement, public EnableSharedFromThisVirtual<BreakStatement> {
      public:
         BreakStatement(const TokenPtr& token, const NumberLiteralPtr& numberLiteral, const TokenPtr& semicolon);
 
@@ -97,7 +97,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<BreakStatement> BreakStatementPtr;
 
-    class ContinueStatement : public TokenNumberLiteralStatement {
+    class ContinueStatement : public TokenNumberLiteralStatement, public EnableSharedFromThisVirtual<ContinueStatement> {
      public:
         ContinueStatement(const TokenPtr& token, const NumberLiteralPtr& numberLiteral, const TokenPtr& semicolon);
 
@@ -110,7 +110,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ContinueStatement> ContinueStatementPtr;
 
-    class IfStatement : public Statement {
+    class IfStatement : public Statement, public EnableSharedFromThisVirtual<IfStatement> {
      public:
         IfStatement(
             const TokenPtr& token,
@@ -152,7 +152,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<IfStatement> IfStatementPtr;
 
-    class UnlessStatement : public IfStatement {
+    class UnlessStatement : public IfStatement, public EnableSharedFromThisVirtual<UnlessStatement> {
      public:
         UnlessStatement(
             const TokenPtr& token,
@@ -171,7 +171,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<UnlessStatement> UnlessStatementPtr;
 
-    class WhileStatement : public Statement {
+    class WhileStatement : public Statement, public EnableSharedFromThisVirtual<WhileStatement> {
      public:
         WhileStatement(
             const TokenPtr& token,
@@ -205,7 +205,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<WhileStatement> WhileStatementPtr;
 
-    class UntilStatement : public WhileStatement {
+    class UntilStatement : public WhileStatement, public EnableSharedFromThisVirtual<UntilStatement> {
      public:
         UntilStatement(const TokenPtr& token, const ParExpresionPtr& expresion, const BlockPtr& block);
 
@@ -218,7 +218,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<UntilStatement> UntilStatementPtr;
 
-    class LoopStatement : public WhileStatement {
+    class LoopStatement : public WhileStatement, public EnableSharedFromThisVirtual<LoopStatement> {
      public:
         LoopStatement(const TokenPtr& token, const ParExpresionPtr& expresion, const BlockPtr& block);
 
@@ -231,7 +231,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<LoopStatement> LoopStatementPtr;
 
-    class DoWhileStatement : public WhileStatement {
+    class DoWhileStatement : public WhileStatement, public EnableSharedFromThisVirtual<DoWhileStatement> {
      public:
         DoWhileStatement(
             const TokenPtr& doToken,
@@ -259,7 +259,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<DoWhileStatement> DoWhileStatementPtr;
 
-    class ForControl : public AstNode {
+    class ForControl : public AstNode, public EnableSharedFromThisVirtual<ForControl> {
      public:
         ForControl(
             const VariableDeclarationPtr& variableDeclaration,
@@ -301,7 +301,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ForControl> ForControlPtr;
 
-    class ForStatement : public Statement {
+    class ForStatement : public Statement, public EnableSharedFromThisVirtual<ForStatement> {
      public:
         ForStatement(
             const TokenPtr& forToken,
@@ -343,7 +343,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ForStatement> ForStatementPtr;
 
-    class ForeachControl : public AstNode {
+    class ForeachControl : public AstNode, public EnableSharedFromThisVirtual<ForeachControl> {
      public:
         ForeachControl(
             const ExpressionPtr& expression,
@@ -381,7 +381,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ForeachControl> ForeachControlPtr;
 
-    class ForeachStatement : public Statement {
+    class ForeachStatement : public Statement, public EnableSharedFromThisVirtual<ForeachStatement> {
      public:
         ForeachStatement(
             const TokenPtr& foreachToken,
@@ -423,7 +423,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<ForeachStatement> ForeachStatementPtr;
 
-    class CatchClause : public AstNode {
+    class CatchClause : public AstNode, public EnableSharedFromThisVirtual<CatchClause> {
      public:
         CatchClause(
             const TokenPtr& catchToken,
@@ -474,7 +474,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<CatchClause> CatchClausePtr;
     typedef std::vector<CatchClausePtr>  CatchClausePtrVec;
 
-    class FinallyBlock : public AstNode {
+    class FinallyBlock : public AstNode, public EnableSharedFromThisVirtual<FinallyBlock> {
      public:
         FinallyBlock(const TokenPtr& finallyToken, const BlockPtr& block);
 
@@ -502,7 +502,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<FinallyBlock> FinallyBlockPtr;
     typedef std::vector<FinallyBlockPtr>  FinallyBlockPtrVec;
 
-    class TryStatement : public Statement {
+    class TryStatement : public Statement, public EnableSharedFromThisVirtual<TryStatement> {
      public:
         TryStatement(
             const TokenPtr& tryToken,
@@ -540,7 +540,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<TryStatement> TryStatementPtr;
 
-    class SwitchLabel : public AstNode {
+    class SwitchLabel : public AstNode, public EnableSharedFromThisVirtual<SwitchLabel> {
      public:
         SwitchLabel(
             const TokenPtr& caseToken,
@@ -583,7 +583,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<SwitchLabel> SwitchLabelPtr;
     typedef std::vector<SwitchLabelPtr>  SwitchLabelPtrVec;
 
-    class SwitchBlockStatementGroup : public AstNode {
+    class SwitchBlockStatementGroup : public AstNode, public EnableSharedFromThisVirtual<SwitchBlockStatementGroup> {
      public:
         SwitchBlockStatementGroup(const SwitchLabelPtrVec& switchLabels, const StatementPtrVec& statements);
 
@@ -611,7 +611,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<SwitchBlockStatementGroup> SwitchBlockStatementGroupPtr;
     typedef std::vector<SwitchBlockStatementGroupPtr>  SwitchBlockStatementGroupPtrVec;
 
-    class SwitchStatement : public Statement {
+    class SwitchStatement : public Statement, public EnableSharedFromThisVirtual<SwitchStatement> {
      public:
         SwitchStatement(
             const TokenPtr& switchToken,

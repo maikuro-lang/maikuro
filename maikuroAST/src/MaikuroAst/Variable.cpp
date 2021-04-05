@@ -57,7 +57,7 @@ namespace MaikuroAst {
     }
 
     void VariableName::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<VariableName>::shared_from_this());
     }
 
     VariableNameDeclaration::VariableNameDeclaration(
@@ -110,7 +110,7 @@ namespace MaikuroAst {
     }
 
     void VariableNameDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<VariableNameDeclaration>::shared_from_this());
     }
 
     VariableDeclarationExpression::VariableDeclarationExpression(
@@ -179,7 +179,7 @@ namespace MaikuroAst {
     }
 
     void VariableDeclarationExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<VariableDeclarationExpression>::shared_from_this());
     }
 
     VariableDeclaration::VariableDeclaration(
@@ -264,6 +264,6 @@ namespace MaikuroAst {
     }
 
     void VariableDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<VariableDeclaration>::shared_from_this());
     }
 }

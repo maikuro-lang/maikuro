@@ -11,7 +11,7 @@ namespace MaikuroAst {
     class Expression;
     typedef std::shared_ptr<Expression> ExpressionPtr;
 
-    class Argument : public AstNode {
+    class Argument : public AstNode, public EnableSharedFromThisVirtual<Argument> {
      public:
         Argument(IdentifierPtr identifier, TokenPtr color, ExpressionPtr expression);
 
@@ -42,7 +42,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Argument> ArgumentPtr;
     typedef std::vector<ArgumentPtr>  ArgumentPtrVec;
 
-    class Arguments : public AstNode {
+    class Arguments : public AstNode, public EnableSharedFromThisVirtual<Arguments> {
      public:
         Arguments(TokenPtr openBrace, ArgumentPtrVec arguments, TokenPtrVec commas, TokenPtr closeBrace);
 

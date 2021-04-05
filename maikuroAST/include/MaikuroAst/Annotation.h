@@ -10,7 +10,7 @@ namespace MaikuroAst {
     class Arguments;
     typedef std::shared_ptr<Arguments> ArgumentsPtr;
 
-    class Annotation : public AstNode {
+    class Annotation : public AstNode, public EnableSharedFromThisVirtual<Annotation> {
      public:
         Annotation(TypeIdentifierPtr typeIdentifier, ArgumentsPtr arguments);
 
@@ -38,7 +38,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Annotation> AnnotationPtr;
     typedef std::vector<AnnotationPtr>  AnnotationPtrVec;
 
-    class Annotations : public AstNode {
+    class Annotations : public AstNode, public EnableSharedFromThisVirtual<Annotations> {
      public:
         Annotations(TokenPtr prefix, AnnotationPtrVec annotations, TokenPtrVec commas, TokenPtr closeBracket);
 

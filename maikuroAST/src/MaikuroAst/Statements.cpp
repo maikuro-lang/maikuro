@@ -56,7 +56,7 @@ namespace MaikuroAst {
     }
 
     void TokenExpressionStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<TokenExpressionStatement>::shared_from_this());
     }
 
     ReturnStatement::ReturnStatement(
@@ -79,7 +79,7 @@ namespace MaikuroAst {
     }
 
     void ReturnStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ReturnStatement>::shared_from_this());
     }
 
     ThrowStatement::ThrowStatement(
@@ -102,7 +102,7 @@ namespace MaikuroAst {
     }
 
     void ThrowStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ThrowStatement>::shared_from_this());
     }
 
     TokenNumberLiteralStatement::TokenNumberLiteralStatement(
@@ -146,7 +146,7 @@ namespace MaikuroAst {
     }
 
     void TokenNumberLiteralStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<TokenNumberLiteralStatement>::shared_from_this());
     }
 
     BreakStatement::BreakStatement(
@@ -169,7 +169,7 @@ namespace MaikuroAst {
     }
 
     void BreakStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<BreakStatement>::shared_from_this());
     }
 
     ContinueStatement::ContinueStatement(
@@ -192,7 +192,7 @@ namespace MaikuroAst {
     }
 
     void ContinueStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ContinueStatement>::shared_from_this());
     }
 
     IfStatement::IfStatement(
@@ -268,7 +268,7 @@ namespace MaikuroAst {
     }
 
     void IfStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<IfStatement>::shared_from_this());
     }
 
     UnlessStatement::UnlessStatement(
@@ -294,7 +294,7 @@ namespace MaikuroAst {
     }
 
     void UnlessStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<UnlessStatement>::shared_from_this());
     }
 
     WhileStatement::WhileStatement(
@@ -349,7 +349,7 @@ namespace MaikuroAst {
     }
 
     void WhileStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<WhileStatement>::shared_from_this());
     }
 
     UntilStatement::UntilStatement(
@@ -372,7 +372,7 @@ namespace MaikuroAst {
     }
 
     void UntilStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<UntilStatement>::shared_from_this());
     }
 
     LoopStatement::LoopStatement(
@@ -395,7 +395,7 @@ namespace MaikuroAst {
     }
 
     void LoopStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<LoopStatement>::shared_from_this());
     }
 
     DoWhileStatement::DoWhileStatement(
@@ -443,7 +443,7 @@ namespace MaikuroAst {
     }
 
     void DoWhileStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<DoWhileStatement>::shared_from_this());
     }
 
     ForControl::ForControl(
@@ -542,7 +542,7 @@ namespace MaikuroAst {
     }
 
     void ForControl::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ForControl>::shared_from_this());
     }
 
     ForStatement::ForStatement(
@@ -615,7 +615,7 @@ namespace MaikuroAst {
     }
 
     void ForStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ForStatement>::shared_from_this());
     }
 
     ForeachControl::ForeachControl(
@@ -678,7 +678,7 @@ namespace MaikuroAst {
     }
 
     void ForeachControl::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ForeachControl>::shared_from_this());
     }
 
     ForeachStatement::ForeachStatement(
@@ -752,7 +752,7 @@ namespace MaikuroAst {
     }
 
     void ForeachStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ForeachStatement>::shared_from_this());
     }
 
     FinallyBlock::FinallyBlock(const TokenPtr& finallyToken, const BlockPtr& block)
@@ -794,7 +794,7 @@ namespace MaikuroAst {
     }
 
     void FinallyBlock::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<FinallyBlock>::shared_from_this());
     }
 
     CatchClause::CatchClause(
@@ -890,7 +890,7 @@ namespace MaikuroAst {
     }
 
     void CatchClause::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<CatchClause>::shared_from_this());
     }
 
     TryStatement::TryStatement(
@@ -950,7 +950,7 @@ namespace MaikuroAst {
     }
 
     void TryStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<TryStatement>::shared_from_this());
     }
 
     SwitchLabel::SwitchLabel(
@@ -1033,7 +1033,7 @@ namespace MaikuroAst {
     }
 
     void SwitchLabel::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SwitchLabel>::shared_from_this());
     }
 
     SwitchBlockStatementGroup::SwitchBlockStatementGroup(
@@ -1079,7 +1079,7 @@ namespace MaikuroAst {
     }
 
     void SwitchBlockStatementGroup::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SwitchBlockStatementGroup>::shared_from_this());
     }
 
     SwitchStatement::SwitchStatement(
@@ -1163,6 +1163,6 @@ namespace MaikuroAst {
     }
 
     void SwitchStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SwitchStatement>::shared_from_this());
     }
 }

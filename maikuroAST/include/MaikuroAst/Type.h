@@ -7,7 +7,7 @@
 
 namespace MaikuroAst {
 
-    class Type : public AstNode {
+    class Type : public AstNode, public EnableSharedFromThisVirtual<Type> {
      public:
         Type(
             TypeIdentifierPtr typeIdentifier,
@@ -56,7 +56,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Type> TypePtr;
     typedef std::vector<TypePtr>  TypePtrVec;
 
-    class TypeDeclaration : public AstNode {
+    class TypeDeclaration : public AstNode, public EnableSharedFromThisVirtual<TypeDeclaration> {
      public:
         TypeDeclaration(TypePtrVec types, TokenPtrVec pipes);
 

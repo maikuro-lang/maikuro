@@ -16,7 +16,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<Expression> ExpressionPtr;
     typedef std::vector<ExpressionPtr>  ExpressionPtrVec;
 
-    class VariableName : public AstNode {
+    class VariableName : public AstNode, public EnableSharedFromThisVirtual<VariableName> {
      public:
         VariableName(TokenPtr atSign, IdentifierPtr identifier);
 
@@ -44,7 +44,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<VariableName> VariableNamePtr;
     typedef std::vector<VariableNamePtr>  VariableNamePtrVec;
 
-    class VariableNameDeclaration : public AstNode {
+    class VariableNameDeclaration : public AstNode, public EnableSharedFromThisVirtual<VariableNameDeclaration> {
      public:
         VariableNameDeclaration(TypeDeclarationPtr typeDeclaration, VariableNamePtr variableName);
 
@@ -72,7 +72,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<VariableNameDeclaration> VariableNameDeclarationPtr;
     typedef std::vector<VariableNameDeclarationPtr>  VariableNameDeclarationPtrVec;
 
-    class VariableDeclarationExpression : public AstNode {
+    class VariableDeclarationExpression : public AstNode, public EnableSharedFromThisVirtual<VariableDeclarationExpression> {
      public:
         VariableDeclarationExpression(
             TokenPtr semicolon,
@@ -111,7 +111,7 @@ namespace MaikuroAst {
     typedef std::shared_ptr<VariableDeclarationExpression> VariableDeclarationExpressionPtr;
     typedef std::vector<VariableDeclarationExpressionPtr>  VariableDeclarationExpressionPtrVec;
 
-    class VariableDeclaration : public Statement {
+    class VariableDeclaration : public Statement, public EnableSharedFromThisVirtual<VariableDeclaration> {
      public:
         VariableDeclaration(
             AnnotationsPtrVec annotations,

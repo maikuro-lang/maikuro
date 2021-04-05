@@ -68,7 +68,7 @@ namespace MaikuroAst {
     }
 
     void ExpressionList::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ExpressionList>::shared_from_this());
     }
 
     PrimaryExpression::PrimaryExpression(TokenPtr token) : _token(token) {
@@ -100,7 +100,7 @@ namespace MaikuroAst {
     }
 
     void PrimaryExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<PrimaryExpression>::shared_from_this());
     }
 
     VariableNameExpression::VariableNameExpression(VariableNamePtr variableName) : _variableName(
@@ -135,7 +135,7 @@ namespace MaikuroAst {
     }
 
     void VariableNameExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<VariableNameExpression>::shared_from_this());
     }
 
     ParExpresion::ParExpresion(TokenPtr leftPar, ExpressionPtr expression, TokenPtr rightPar)
@@ -184,7 +184,7 @@ namespace MaikuroAst {
     }
 
     void ParExpresion::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ParExpresion>::shared_from_this());
     }
 
     MethodCall::MethodCall(TokenPtr identifier, ArgumentsPtr arguments)
@@ -226,7 +226,7 @@ namespace MaikuroAst {
     }
 
     void MethodCall::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<MethodCall>::shared_from_this());
     }
 
     DotExpression::DotExpression(
@@ -291,7 +291,7 @@ namespace MaikuroAst {
     }
 
     void DotExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<DotExpression>::shared_from_this());
     }
 
     MethodCallExpression::MethodCallExpression(const MethodCallPtr& methodCall) : _methodCall(methodCall) {
@@ -324,7 +324,7 @@ namespace MaikuroAst {
     }
 
     void MethodCallExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<MethodCallExpression>::shared_from_this());
     }
 
     NewDeclaratorExpression::NewDeclaratorExpression(
@@ -378,7 +378,7 @@ namespace MaikuroAst {
     }
 
     void NewDeclaratorExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<NewDeclaratorExpression>::shared_from_this());
     }
 
     SuffixExpression::SuffixExpression(const ExpressionPtr& expression, const TokenPtr& suffix)
@@ -420,7 +420,7 @@ namespace MaikuroAst {
     }
 
     void SuffixExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SuffixExpression>::shared_from_this());
     }
 
     PrefixExpression::PrefixExpression(const TokenPtr& prefix, const ExpressionPtr& expression)
@@ -462,7 +462,7 @@ namespace MaikuroAst {
     }
 
     void PrefixExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<PrefixExpression>::shared_from_this());
     }
 
     BopExpression::BopExpression(
@@ -515,7 +515,7 @@ namespace MaikuroAst {
     }
 
     void BopExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<BopExpression>::shared_from_this());
     }
 
     TernaryExpression::TernaryExpression(
@@ -597,7 +597,7 @@ namespace MaikuroAst {
     }
 
     void TernaryExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<TernaryExpression>::shared_from_this());
     }
 
     MatchExpressionCase::MatchExpressionCase(
@@ -667,7 +667,7 @@ namespace MaikuroAst {
     }
 
     void MatchExpressionCase::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<MatchExpressionCase>::shared_from_this());
     }
 
     MatchExpression::MatchExpression(
@@ -747,7 +747,7 @@ namespace MaikuroAst {
     }
 
     void MatchExpression::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<MatchExpression>::shared_from_this());
     }
 
     ExpressionStatement::ExpressionStatement(ExpressionPtr expression, TokenPtr semicolon) : _expression(expression),
@@ -785,6 +785,6 @@ namespace MaikuroAst {
     }
 
     void ExpressionStatement::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<ExpressionStatement>::shared_from_this());
     }
 }

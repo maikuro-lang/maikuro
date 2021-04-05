@@ -5,7 +5,7 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class Statement : public AstNode {
+    class Statement : public AstNode, public EnableSharedFromThisVirtual<Statement> {
      public:
         explicit Statement(TokenPtr semicolon);
 

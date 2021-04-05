@@ -8,7 +8,7 @@
 
 namespace MaikuroAst {
 
-    class PackageName : public AstNode {
+    class PackageName : public AstNode, public EnableSharedFromThisVirtual<PackageName> {
      public:
         PackageName(IdentifierPtrVec identifiers, TypeIdentifierPtr typeIdentifier, TokenPtrVec dots);
 
@@ -38,7 +38,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<PackageName> PackageNamePtr;
 
-    class PackageDeclaration : public Statement {
+    class PackageDeclaration : public Statement, public EnableSharedFromThisVirtual<PackageDeclaration> {
      public:
         PackageDeclaration(TokenPtr packageToken, PackageNamePtr packageName, TokenPtr semicolon);
 
@@ -65,7 +65,7 @@ namespace MaikuroAst {
 
     typedef std::shared_ptr<PackageDeclaration> PackageDeclarationPtr;
 
-    class ImportDeclaration : public Statement {
+    class ImportDeclaration : public Statement, public EnableSharedFromThisVirtual<ImportDeclaration> {
      public:
         ImportDeclaration(
             TokenPtr importToken,

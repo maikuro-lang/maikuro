@@ -7,7 +7,7 @@ namespace MaikuroAst {
     class Token;
     typedef std::vector<std::shared_ptr<Token>> TokenPtrVec;
 
-    class AstNode {
+    class AstNode : public EnableSharedFromThisVirtual<AstNode> {
      public:
         enum NodeType {
             ANNOTATION,
@@ -261,7 +261,7 @@ namespace MaikuroAst {
 
         virtual TokenPtrVec getTokens() = 0;
 
-        virtual void accept(AstNodeVisitor *visitor) = 0;
+        virtual void accept(AstNodeVisitor* visitor) = 0;
     };
 
     typedef std::shared_ptr<AstNode> AstNodePtr;

@@ -87,6 +87,6 @@ namespace MaikuroAst {
     }
 
     void SourceFile::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<SourceFile>::shared_from_this());
     }
 }

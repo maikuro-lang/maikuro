@@ -7,7 +7,7 @@
 #include "Token.h"
 
 namespace MaikuroAst {
-    class AliasDeclaration : public Statement {
+    class AliasDeclaration : public Statement, public EnableSharedFromThisVirtual<AliasDeclaration> {
      public:
         AliasDeclaration(
             AnnotationsPtrVec annotations,

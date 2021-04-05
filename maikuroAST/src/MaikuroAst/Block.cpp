@@ -52,6 +52,6 @@ namespace MaikuroAst {
     }
 
     void Block::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Block>::shared_from_this());
     }
 }

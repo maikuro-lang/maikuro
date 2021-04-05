@@ -124,7 +124,7 @@ namespace MaikuroAst {
     }
 
     void Type::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Type>::shared_from_this());
     }
 
     TypeDeclaration::TypeDeclaration(TypePtrVec types, TokenPtrVec pipes) : _types(
@@ -174,6 +174,6 @@ namespace MaikuroAst {
     }
 
     void TypeDeclaration::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<TypeDeclaration>::shared_from_this());
     }
 }

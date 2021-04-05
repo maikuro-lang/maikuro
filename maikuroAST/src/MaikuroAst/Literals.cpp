@@ -38,7 +38,7 @@ namespace MaikuroAst {
     }
 
     void Literal::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Literal>::shared_from_this());
     }
 
     NullLiteral::NullLiteral(TokenPtr token) : Literal(token) {
@@ -52,7 +52,7 @@ namespace MaikuroAst {
     }
 
     void NullLiteral::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<NullLiteral>::shared_from_this());
     }
 
     BoolLiteral::BoolLiteral(TokenPtr token) : Literal(token) {
@@ -66,7 +66,7 @@ namespace MaikuroAst {
     }
 
     void BoolLiteral::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<BoolLiteral>::shared_from_this());
     }
 
     NumberLiteral::NumberLiteral(TokenPtr token) : Literal(token) {
@@ -80,7 +80,7 @@ namespace MaikuroAst {
     }
 
     void NumberLiteral::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<NumberLiteral>::shared_from_this());
     }
 
     CharLiteral::CharLiteral(TokenPtr token) : Literal(token) {
@@ -94,7 +94,7 @@ namespace MaikuroAst {
     }
 
     void CharLiteral::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<CharLiteral>::shared_from_this());
     }
 
     StringLiteral::StringLiteral(TokenPtr token) : Literal(token) {
@@ -108,7 +108,7 @@ namespace MaikuroAst {
     }
 
     void StringLiteral::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<StringLiteral>::shared_from_this());
     }
 
     Identifier::Identifier(TokenPtr token) : Literal(token) {
@@ -122,7 +122,7 @@ namespace MaikuroAst {
     }
 
     void Identifier::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Identifier>::shared_from_this());
     }
 
     TypeIdentifier::TypeIdentifier(TokenPtr token) : Literal(token) {
@@ -136,7 +136,7 @@ namespace MaikuroAst {
     }
 
     void TypeIdentifier::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<TypeIdentifier>::shared_from_this());
     }
 
     VisibilityModifier::VisibilityModifier(TokenPtr token) : Literal(token) {
@@ -154,6 +154,6 @@ namespace MaikuroAst {
     }
 
     void VisibilityModifier::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<VisibilityModifier>::shared_from_this());
     }
 }

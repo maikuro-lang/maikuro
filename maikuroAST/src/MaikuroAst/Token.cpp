@@ -356,7 +356,7 @@ namespace MaikuroAst {
     }
 
     TokenPtrVec Token::getTokens() {
-        return TokenPtrVec({ shared_from_this() });
+        return TokenPtrVec({ EnableSharedFromThisVirtual<Token>::shared_from_this() });
     }
 
     Token::TokenType Token::getTokenType() {
@@ -486,6 +486,6 @@ namespace MaikuroAst {
     }
 
     void Token::accept(AstNodeVisitor* visitor) {
-        visitor->visit(this);
+        visitor->visit(EnableSharedFromThisVirtual<Token>::shared_from_this());
     }
 }
